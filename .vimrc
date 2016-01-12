@@ -2,6 +2,7 @@
 source ~/.vim/plugins.vim
 
 " color scheme
+set t_Co=256
 colorscheme xoria256
 
 " syntax highlighting
@@ -27,16 +28,17 @@ let mapleader = ','
 map <C-\> :NERDTreeToggle<CR>
 :inoremap jk <esc>
 
-" plugins
+" PLUGINS
+
 " airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='dark'
+
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
