@@ -21,13 +21,13 @@
   </action>
   <action id="ReformatCode">
     <keyboard-shortcut first-keystroke="control alt L" />
-    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="R" />
+    <keyboard-shortcut first-keystroke="shift control BACK_SLASH" second-keystroke="R" />
   </action>
   <action id="SplitHorizontally">
-    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="H" />
+    <keyboard-shortcut first-keystroke="H" />
   </action>
   <action id="SplitVertically">
-    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="V" />
+    <keyboard-shortcut first-keystroke="shift control BACK_SLASH" second-keystroke="V" />
   </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="shift alt ENTER" />
