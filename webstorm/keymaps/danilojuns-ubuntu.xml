@@ -1,0 +1,47 @@
+<keymap version="1" name="danilojuns-ubuntu" parent="Default for XWin">
+  <action id="Back">
+    <keyboard-shortcut first-keystroke="control alt LEFT" />
+    <mouse-shortcut keystroke="button4" />
+    <mouse-shortcut keystroke="shift control button1" />
+  </action>
+  <action id="CloseContent">
+    <keyboard-shortcut first-keystroke="control F4" />
+    <keyboard-shortcut first-keystroke="control alt W" />
+  </action>
+  <action id="GotoTypeDeclaration">
+    <keyboard-shortcut first-keystroke="shift control B" />
+  </action>
+  <action id="NextTab">
+    <keyboard-shortcut first-keystroke="alt RIGHT" />
+    <keyboard-shortcut first-keystroke="alt H" />
+  </action>
+  <action id="PreviousTab">
+    <keyboard-shortcut first-keystroke="alt LEFT" />
+    <keyboard-shortcut first-keystroke="alt L" />
+  </action>
+  <action id="ReformatCode">
+    <keyboard-shortcut first-keystroke="control alt L" />
+    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="R" />
+  </action>
+  <action id="SplitHorizontally">
+    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="H" />
+  </action>
+  <action id="SplitVertically">
+    <keyboard-shortcut first-keystroke="shift control Q" second-keystroke="V" />
+  </action>
+  <action id="SwitchApply">
+    <keyboard-shortcut first-keystroke="shift alt ENTER" />
+  </action>
+  <action id="SwitchDown">
+    <keyboard-shortcut first-keystroke="shift alt DOWN" />
+  </action>
+  <action id="SwitchLeft">
+    <keyboard-shortcut first-keystroke="shift alt LEFT" />
+  </action>
+  <action id="SwitchRight">
+    <keyboard-shortcut first-keystroke="shift alt RIGHT" />
+  </action>
+  <action id="SwitchUp">
+    <keyboard-shortcut first-keystroke="shift alt UP" />
+  </action>
+</keymap>
