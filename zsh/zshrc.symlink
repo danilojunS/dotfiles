@@ -1,3 +1,6 @@
+# Source common SHELL scripts and aliases
+source $HOME/.dotfiles/shell/common.sh
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/danilojun/.oh-my-zsh
 
@@ -48,10 +51,7 @@ ZSH_THEME="agnoster"
 plugins=(git extract node npm bower brew zsh-syntax-highlighting)
 
 # User configuration
-
-export PATH="/Users/danilojun/.bin:/Users/danilojun/.npm-packages/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Volumes/HDD/Servers/glassfish4/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-export JAVA_HOME=$(/usr/libexec/java_home)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,11 +87,5 @@ source $ZSH/oh-my-zsh.sh
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey ‘^R’ history-incremental-search-backward
-
-# My commands
-alias blender="/Applications/Blender/blender.app/Contents/MacOS/blender"
-alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl" 
-
-alias rs='reset'
 
 alias src='source ~/.zshrc'
