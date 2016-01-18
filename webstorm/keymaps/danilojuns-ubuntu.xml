@@ -24,7 +24,7 @@
     <keyboard-shortcut first-keystroke="shift control BACK_SLASH" second-keystroke="R" />
   </action>
   <action id="SplitHorizontally">
-    <keyboard-shortcut first-keystroke="H" />
+    <keyboard-shortcut first-keystroke="shift control BACK_SLASH" second-keystroke="H" />
   </action>
   <action id="SplitVertically">
     <keyboard-shortcut first-keystroke="shift control BACK_SLASH" second-keystroke="V" />
