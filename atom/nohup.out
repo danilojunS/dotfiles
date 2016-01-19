@@ -1,0 +1,18 @@
+[24902:0111/215843:ERROR:browser_main_loop.cc(173)] Running without the SUID sandbox! See https://code.google.com/p/chromium/wiki/LinuxSUIDSandboxDevelopment for more information on developing with the sandbox on.
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24934:0111/215843:INFO:renderer_main.cc(200)] Renderer process started
+App load time: 220ms
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215843:WARNING:accelerator_util.cc(185)] Invalid accelerator token: command
+[24902:0111/215844:INFO:CONSOLE(46)] "Window load time: 819ms", source: file:///usr/share/atom/resources/app.asar/static/index.js (46)
+[24922:0111/215844:ERROR:gles2_cmd_decoder.cc(11539)] [GroupMarkerNotSet(crbug.com/242999)!:D08C7144C9300000]GL ERROR :GL_INVALID_OPERATION : glTexStorage2DEXT: <- error from previous GL command
+[24902:0111/215847:INFO:CONSOLE(141)] "Uncaught Error: write EPIPE", source: events.js (141)
+[25031:0111/215847:INFO:renderer_main.cc(200)] Renderer process started
+[24902:0111/215847:INFO:CONSOLE(260)] "Uncaught BufferedProcessError: Failed to spawn command `shellcheck`. Make sure `shellcheck` is installed and on your PATH", source: /usr/share/atom/resources/app.asar/src/buffered-process.js (260)
+[24922:0111/215847:ERROR:gles2_cmd_decoder.cc(11539)] [GroupMarkerNotSet(crbug.com/242999)!:D0564147C9300000]GL ERROR :GL_INVALID_OPERATION : glTexStorage2DEXT: <- error from previous GL command
+[24934:0111/220043:WARNING:channel.cc(549)] Failed to send message to ack remove remote endpoint (local ID 2147483648, remote ID 2)

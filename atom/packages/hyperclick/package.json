@@ -1,0 +1,562 @@
+{
+  "consumedServices": {
+    "hyperclick.provider": {
+      "versions": {
+        "0.0.0": "consumeProvider"
+      }
+    }
+  },
+  "dependencies": {
+    "nuclide-commons": "0.0.32",
+    "react-for-atom": "0.13.6"
+  },
+  "description": "Hyperclick UI",
+  "devDependencies": {
+    "hyperclick-interfaces": "0.0.32",
+    "nuclide-external-interfaces": "0.0.32"
+  },
+  "engines": {
+    "atom": ">=1.0.9"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "./lib/main",
+  "name": "hyperclick",
+  "nuclide": {
+    "packageType": "Atom",
+    "testRunner": "apm"
+  },
+  "providedServices": {
+    "hyperclick.observeTextEditor": {
+      "versions": {
+        "0.0.0": "observeTextEditor"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facebooknuclideapm/hyperclick.git"
+  },
+  "version": "0.0.32",
+  "readme": "**NOTE:** The official repository for this package is https://github.com/facebook/nuclide.\nPlease file all issues and pull requests there.\n\n# Hyperclick\n\nPluggable text-clicking UI for [Atom](https://atom.io/).\n\nHyperclick is triggered by two events:\n- `<alt>` or `<alt-mousemove>` underlines clickable text under the mouse.\n- `<alt-mousedown>` performs the action associated with the clickable text.\n- `<cmd-alt-enter>` performs the action on the text under the cursor.\n\n## Demo\n\nInstall `hyperclick` with this [demo package](https://github.com/oclbdk/hyperclick-provider-demo)\nto recreate the screencast below.\n\n![hyperclick-demo](http://i.imgur.com/364jzWO.gif)\n\n\n## Provider API\n\n### Example\n\nDeclare the provider callback in the `package.json` (e.g. `getProvider`).\n\n```js\n\"providedServices\": {\n  \"hyperclick.provider\": {\n    \"versions\": {\n      \"0.0.0\": \"getProvider\"\n    }\n  }\n}\n```\n\nDefine the provider callback in `lib/main.js`.\n\n```js\nmodule.exports = {\n  getProvider() {\n    return {\n      getSuggestionForWord(textEditor: TextEditor, text: string, range: Range):\n          ?HyperclickSuggestion {\n        return {\n          // The range(s) to underline as a visual cue for clicking.\n          range,\n          // The function to call when the underlined text is clicked.\n          callback() {},\n        };\n      },\n    };\n  },\n};\n\n```\n\n### Details\n\nYou must define one of these methods on the provider:\n\n- `getSuggestionForWord(textEditor: TextEditor, text: string, range: Range)`\n\n  Use this to provide a suggestion for single-word matches.\n  Optionally set `wordRegExp` on the provider to adjust word-matching.\n\n  - `textEditor`: The text editor the event originated from.\n  - `text`: The string containing the word under the mouse.\n  - `range`: The buffer position of `text` in the text editor.\n\n- `getSuggestion(textEditor: TextEditor, position: Point)`\n\n  Use this to provide a suggestion if it can have non-contiguous ranges.\n  A primary use-case for this is Objective-C methods.\n\n  - `textEditor`: The text editor the event originated from.\n  - `position`: The buffer position of the mouse in the text editor.\n\nThe methods return a suggestion or a `Promise` that resolves to a suggestion:\n\n- `range`: A range or array of ranges to underline as a visual cue for clicking.\n\n  To distinguish ranges and arrays, this can't be a Range-compatible array.\n  For example, use `new Range([0, 0], [0, 10])` instead of `[[0, 0], [0, 10]]`.\n\n- `callback`: The function to call when the underlined text is clicked.\n\n  If there are multiple possibilities, this can be an array of objects with:\n\n    - `title`: A string to present in the UI for the user to select.\n    - `callback`: The function to call when the user selects this object.\n\nAdditional properties:\n\n- `priority`: The higher this is, the more precedence the provider gets.\n\n  Hyperclick only returns suggestions from a single provider, so this is a\n  workaround for providers to override others. `priority` defaults to 0.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/facebooknuclideapm/hyperclick/issues"
+  },
+  "homepage": "https://github.com/facebooknuclideapm/hyperclick#readme",
+  "_id": "hyperclick@0.0.32",
+  "_shasum": "a0436e5c4474e8acc4b0a75be1d3575845887e87",
+  "_resolved": "file:../d-1151024-8824-dnttu0/package.tgz",
+  "_from": "../d-1151024-8824-dnttu0/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "nuclide-commons",
+        "version": "0.0.32",
+        "path": "node_modules/nuclide-commons/lib/main.js"
+      },
+      {
+        "name": "dequeue",
+        "version": "1.0.5",
+        "path": "node_modules/nuclide-commons/node_modules/dequeue/lib/index.js"
+      },
+      {
+        "name": "mkdirp",
+        "version": "0.5.0",
+        "path": "node_modules/nuclide-commons/node_modules/mkdirp/index.js"
+      },
+      {
+        "name": "minimist",
+        "version": "0.0.8",
+        "path": "node_modules/nuclide-commons/node_modules/mkdirp/node_modules/minimist/index.js"
+      },
+      {
+        "name": "rimraf",
+        "version": "2.2.8",
+        "path": "node_modules/nuclide-commons/node_modules/rimraf/rimraf.js"
+      },
+      {
+        "name": "temp",
+        "version": "0.8.1",
+        "path": "node_modules/nuclide-commons/node_modules/temp/lib/temp.js"
+      },
+      {
+        "name": "uuid",
+        "version": "2.0.1",
+        "path": "node_modules/nuclide-commons/node_modules/uuid/uuid.js"
+      },
+      {
+        "name": "react-for-atom",
+        "version": "0.13.6",
+        "path": "node_modules/react-for-atom/main.js"
+      },
+      {
+        "name": "react",
+        "version": "0.13.2",
+        "path": "node_modules/react-for-atom/node_modules/react/react.js"
+      },
+      {
+        "name": "envify",
+        "version": "3.4.0",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/index.js"
+      },
+      {
+        "name": "jstransform",
+        "version": "10.1.0",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/jstransform.js"
+      },
+      {
+        "name": "base62",
+        "version": "0.1.1",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/base62/base62.js"
+      },
+      {
+        "name": "esprima-fb",
+        "version": "13001.1001.0-dev-harmony-fb",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/esprima-fb/esprima.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.1.31",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map.js"
+      },
+      {
+        "name": "amdefine",
+        "version": "1.0.0",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/node_modules/amdefine/amdefine.js"
+      },
+      {
+        "name": "through",
+        "version": "2.3.8",
+        "path": "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/through/index.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib/Hyperclick.js",
+        "lib/HyperclickForTextEditor.js",
+        "lib/SuggestionList.js",
+        "lib/SuggestionListElement.js",
+        "lib/get-word-text-and-range.js",
+        "lib/hyperclick-utils.js",
+        "lib/main.js",
+        "node_modules/nuclide-commons/lib/PromiseExecutors.js",
+        "node_modules/nuclide-commons/lib/array.js",
+        "node_modules/nuclide-commons/lib/clientInfo.js",
+        "node_modules/nuclide-commons/lib/debounce.js",
+        "node_modules/nuclide-commons/lib/dns_utils.js",
+        "node_modules/nuclide-commons/lib/environment.js",
+        "node_modules/nuclide-commons/lib/error.js",
+        "node_modules/nuclide-commons/lib/event.js",
+        "node_modules/nuclide-commons/lib/extend.js",
+        "node_modules/nuclide-commons/lib/filesystem.js",
+        "node_modules/nuclide-commons/lib/http.js",
+        "node_modules/nuclide-commons/lib/main.js",
+        "node_modules/nuclide-commons/lib/object.js",
+        "node_modules/nuclide-commons/lib/paths.js",
+        "node_modules/nuclide-commons/lib/process.js",
+        "node_modules/nuclide-commons/lib/promises.js",
+        "node_modules/nuclide-commons/lib/runtimeInfo.js",
+        "node_modules/nuclide-commons/lib/session.js",
+        "node_modules/nuclide-commons/lib/singleton.js",
+        "node_modules/nuclide-commons/lib/strings.js",
+        "node_modules/nuclide-commons/lib/systemInfo.js",
+        "node_modules/nuclide-commons/lib/url.js",
+        "node_modules/nuclide-commons/lib/vcs.js",
+        "node_modules/nuclide-commons/node_modules/dequeue/lib/dequeue.js",
+        "node_modules/nuclide-commons/node_modules/dequeue/lib/index.js",
+        "node_modules/nuclide-commons/node_modules/mkdirp/bin/cmd.js",
+        "node_modules/nuclide-commons/node_modules/mkdirp/examples/pow.js",
+        "node_modules/nuclide-commons/node_modules/mkdirp/index.js",
+        "node_modules/nuclide-commons/node_modules/mkdirp/node_modules/minimist/example/parse.js",
+        "node_modules/nuclide-commons/node_modules/mkdirp/node_modules/minimist/index.js",
+        "node_modules/nuclide-commons/node_modules/rimraf/bin.js",
+        "node_modules/nuclide-commons/node_modules/rimraf/rimraf.js",
+        "node_modules/nuclide-commons/node_modules/temp/examples/grepcount.js",
+        "node_modules/nuclide-commons/node_modules/temp/examples/pdfcreator.js",
+        "node_modules/nuclide-commons/node_modules/temp/lib/temp.js",
+        "node_modules/nuclide-commons/node_modules/temp/no_cleanup.js",
+        "node_modules/nuclide-commons/node_modules/temp/no_cleanup_on_exit.js",
+        "node_modules/nuclide-commons/node_modules/temp/no_cleanup_on_exit.spec.js",
+        "node_modules/nuclide-commons/node_modules/uuid/benchmark/benchmark.js",
+        "node_modules/nuclide-commons/node_modules/uuid/misc/compare.js",
+        "node_modules/nuclide-commons/node_modules/uuid/misc/perf.js",
+        "node_modules/nuclide-commons/node_modules/uuid/rng-browser.js",
+        "node_modules/nuclide-commons/node_modules/uuid/rng.js",
+        "node_modules/nuclide-commons/node_modules/uuid/uuid.js",
+        "node_modules/react-for-atom/main.js",
+        "node_modules/react-for-atom/node_modules/react/addons.js",
+        "node_modules/react-for-atom/node_modules/react/dist/JSXTransformer.js",
+        "node_modules/react-for-atom/node_modules/react/dist/react-with-addons.js",
+        "node_modules/react-for-atom/node_modules/react/dist/react-with-addons.min.js",
+        "node_modules/react-for-atom/node_modules/react/dist/react.js",
+        "node_modules/react-for-atom/node_modules/react/dist/react.min.js",
+        "node_modules/react-for-atom/node_modules/react/lib/AutoFocusMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/BeforeInputEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/CSSCore.js",
+        "node_modules/react-for-atom/node_modules/react/lib/CSSProperty.js",
+        "node_modules/react-for-atom/node_modules/react/lib/CSSPropertyOperations.js",
+        "node_modules/react-for-atom/node_modules/react/lib/CallbackQueue.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ChangeEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ClientReactRootIndex.js",
+        "node_modules/react-for-atom/node_modules/react/lib/DOMChildrenOperations.js",
+        "node_modules/react-for-atom/node_modules/react/lib/DOMProperty.js",
+        "node_modules/react-for-atom/node_modules/react/lib/DOMPropertyOperations.js",
+        "node_modules/react-for-atom/node_modules/react/lib/Danger.js",
+        "node_modules/react-for-atom/node_modules/react/lib/DefaultEventPluginOrder.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EnterLeaveEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventConstants.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventListener.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventPluginHub.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventPluginRegistry.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventPluginUtils.js",
+        "node_modules/react-for-atom/node_modules/react/lib/EventPropagators.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ExecutionEnvironment.js",
+        "node_modules/react-for-atom/node_modules/react/lib/FallbackCompositionState.js",
+        "node_modules/react-for-atom/node_modules/react/lib/HTMLDOMPropertyConfig.js",
+        "node_modules/react-for-atom/node_modules/react/lib/LinkedStateMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/LinkedValueUtils.js",
+        "node_modules/react-for-atom/node_modules/react/lib/LocalEventTrapMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/MobileSafariClickEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/Object.assign.js",
+        "node_modules/react-for-atom/node_modules/react/lib/PooledClass.js",
+        "node_modules/react-for-atom/node_modules/react/lib/React.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactBrowserComponentMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactBrowserEventEmitter.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactCSSTransitionGroup.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactCSSTransitionGroupChild.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactChildReconciler.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactChildren.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactClass.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactComponentBrowserEnvironment.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactComponentEnvironment.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactComponentWithPureRenderMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactCompositeComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactContext.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactCurrentOwner.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOM.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMButton.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMForm.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMIDOperations.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMIframe.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMImg.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMInput.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMOption.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMSelect.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMSelection.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMTextComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDOMTextarea.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDefaultBatchingStrategy.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDefaultInjection.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDefaultPerf.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactDefaultPerfAnalysis.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactElement.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactElementValidator.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactEmptyComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactErrorUtils.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactEventEmitterMixin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactEventListener.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactFragment.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactInjection.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactInputSelection.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactInstanceHandles.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactInstanceMap.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactLifeCycle.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactLink.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactMarkupChecksum.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactMount.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactMultiChild.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactMultiChildUpdateTypes.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactNativeComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactOwner.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPerf.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPropTransferer.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPropTypeLocationNames.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPropTypeLocations.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPropTypes.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactPutListenerQueue.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactReconcileTransaction.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactReconciler.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactRef.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactRootIndex.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactServerRendering.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactServerRenderingTransaction.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactStateSetters.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactTestUtils.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactTransitionChildMapping.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactTransitionEvents.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactTransitionGroup.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactUpdateQueue.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactUpdates.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ReactWithAddons.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SVGDOMPropertyConfig.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SelectEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ServerReactRootIndex.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SimpleEventPlugin.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticClipboardEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticCompositionEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticDragEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticFocusEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticInputEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticKeyboardEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticMouseEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticTouchEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticUIEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/SyntheticWheelEvent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/Transaction.js",
+        "node_modules/react-for-atom/node_modules/react/lib/ViewportMetrics.js",
+        "node_modules/react-for-atom/node_modules/react/lib/accumulateInto.js",
+        "node_modules/react-for-atom/node_modules/react/lib/adler32.js",
+        "node_modules/react-for-atom/node_modules/react/lib/camelize.js",
+        "node_modules/react-for-atom/node_modules/react/lib/camelizeStyleName.js",
+        "node_modules/react-for-atom/node_modules/react/lib/cloneWithProps.js",
+        "node_modules/react-for-atom/node_modules/react/lib/containsNode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/createArrayFromMixed.js",
+        "node_modules/react-for-atom/node_modules/react/lib/createFullPageComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/createNodesFromMarkup.js",
+        "node_modules/react-for-atom/node_modules/react/lib/cx.js",
+        "node_modules/react-for-atom/node_modules/react/lib/dangerousStyleValue.js",
+        "node_modules/react-for-atom/node_modules/react/lib/emptyFunction.js",
+        "node_modules/react-for-atom/node_modules/react/lib/emptyObject.js",
+        "node_modules/react-for-atom/node_modules/react/lib/escapeTextContentForBrowser.js",
+        "node_modules/react-for-atom/node_modules/react/lib/findDOMNode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/flattenChildren.js",
+        "node_modules/react-for-atom/node_modules/react/lib/focusNode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/forEachAccumulated.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getActiveElement.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getEventCharCode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getEventKey.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getEventModifierState.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getEventTarget.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getIteratorFn.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getMarkupWrap.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getNodeForCharacterOffset.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getReactRootElementInContainer.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getTextContentAccessor.js",
+        "node_modules/react-for-atom/node_modules/react/lib/getUnboundedScrollPosition.js",
+        "node_modules/react-for-atom/node_modules/react/lib/hyphenate.js",
+        "node_modules/react-for-atom/node_modules/react/lib/hyphenateStyleName.js",
+        "node_modules/react-for-atom/node_modules/react/lib/instantiateReactComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/invariant.js",
+        "node_modules/react-for-atom/node_modules/react/lib/isEventSupported.js",
+        "node_modules/react-for-atom/node_modules/react/lib/isNode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/isTextInputElement.js",
+        "node_modules/react-for-atom/node_modules/react/lib/isTextNode.js",
+        "node_modules/react-for-atom/node_modules/react/lib/joinClasses.js",
+        "node_modules/react-for-atom/node_modules/react/lib/keyMirror.js",
+        "node_modules/react-for-atom/node_modules/react/lib/keyOf.js",
+        "node_modules/react-for-atom/node_modules/react/lib/mapObject.js",
+        "node_modules/react-for-atom/node_modules/react/lib/memoizeStringOnly.js",
+        "node_modules/react-for-atom/node_modules/react/lib/onlyChild.js",
+        "node_modules/react-for-atom/node_modules/react/lib/performance.js",
+        "node_modules/react-for-atom/node_modules/react/lib/performanceNow.js",
+        "node_modules/react-for-atom/node_modules/react/lib/quoteAttributeValueForBrowser.js",
+        "node_modules/react-for-atom/node_modules/react/lib/setInnerHTML.js",
+        "node_modules/react-for-atom/node_modules/react/lib/setTextContent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/shallowEqual.js",
+        "node_modules/react-for-atom/node_modules/react/lib/shouldUpdateReactComponent.js",
+        "node_modules/react-for-atom/node_modules/react/lib/toArray.js",
+        "node_modules/react-for-atom/node_modules/react/lib/traverseAllChildren.js",
+        "node_modules/react-for-atom/node_modules/react/lib/update.js",
+        "node_modules/react-for-atom/node_modules/react/lib/warning.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/custom.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/index.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/jestEnvironment.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/jestPreprocessor.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/base62/base62.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/esprima-fb/bin/esparse.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/esprima-fb/bin/esvalidate.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/esprima-fb/esprima.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/Makefile.dryice.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build/assert-shim.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build/mini-require.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build/suffix-browser.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build/test-prefix.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build/test-suffix.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/array-set.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/base64-vlq.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/base64.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/binary-search.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/source-map-consumer.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/source-map-generator.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/source-node.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map/util.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/node_modules/amdefine/amdefine.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/node_modules/amdefine/intercept.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/polyfill/Object.es6.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/__tests__/jstransform-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/__tests__/jstransform-utils-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/docblock.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/jstransform.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/utils.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-arrow-function-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-call-spread-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-class-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-destructuring-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-es7-object-integration-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-object-concise-method-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-object-short-notation-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-rest-param-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es6-template-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es7-rest-property-helpers-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/es7-spread-property-visitors-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/gen/generate-type-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/gen/type-syntax-test.rec.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/reserved-words-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-alias-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-class-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-function-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-interface-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-object-method-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-pattern-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/type-variable-declaration-syntax-test.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-arrow-function-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-call-spread-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-class-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-destructuring-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-object-concise-method-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-object-short-notation-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-rest-param-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es6-template-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es7-rest-property-helpers.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/es7-spread-property-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/reserved-words-helper.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/reserved-words-visitors.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/type-syntax.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/through/index.js",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/visitors.js",
+        "node_modules/react-for-atom/node_modules/react/react.js"
+      ],
+      ".json": [
+        "node_modules/nuclide-commons/node_modules/dequeue/package.json",
+        "node_modules/nuclide-commons/node_modules/mkdirp/node_modules/minimist/package.json",
+        "node_modules/nuclide-commons/node_modules/mkdirp/package.json",
+        "node_modules/nuclide-commons/node_modules/rimraf/package.json",
+        "node_modules/nuclide-commons/node_modules/temp/package.json",
+        "node_modules/nuclide-commons/node_modules/uuid/benchmark/package.json",
+        "node_modules/nuclide-commons/node_modules/uuid/package.json",
+        "node_modules/nuclide-commons/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/base62/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/esprima-fb/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/node_modules/amdefine/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/through/package.json",
+        "node_modules/react-for-atom/node_modules/react/node_modules/envify/package.json",
+        "node_modules/react-for-atom/node_modules/react/package.json",
+        "node_modules/react-for-atom/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          "",
+          "spec"
+        ],
+        "dependencies": {
+          "nuclide-commons": "0.0.32",
+          "react-for-atom": "0.13.6"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/nuclide-commons/lib",
+          "node_modules/nuclide-commons",
+          "node_modules/nuclide-commons/spec"
+        ],
+        "dependencies": {
+          "dequeue": "1.0.5",
+          "mkdirp": "0.5.0",
+          "rimraf": "2.2.8",
+          "temp": "0.8.1",
+          "uuid": "2.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/nuclide-commons/node_modules/mkdirp/bin",
+          "node_modules/nuclide-commons/node_modules/mkdirp/examples",
+          "node_modules/nuclide-commons/node_modules/mkdirp",
+          "node_modules/nuclide-commons/node_modules/mkdirp/test"
+        ],
+        "dependencies": {
+          "minimist": "0.0.8"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/nuclide-commons/node_modules/temp/examples",
+          "node_modules/nuclide-commons/node_modules/temp/lib",
+          "node_modules/nuclide-commons/node_modules/temp",
+          "node_modules/nuclide-commons/node_modules/temp/test"
+        ],
+        "dependencies": {
+          "rimraf": "~2.2.6"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/react-for-atom"
+        ],
+        "dependencies": {
+          "react": "0.13.2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/react-for-atom/node_modules/react",
+          "node_modules/react-for-atom/node_modules/react/dist",
+          "node_modules/react-for-atom/node_modules/react/lib"
+        ],
+        "dependencies": {
+          "envify": "^3.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify"
+        ],
+        "dependencies": {
+          "through": "~2.3.4",
+          "jstransform": "^10.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/polyfill",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src/__tests__",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/src",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors/__tests__/gen",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/visitors"
+        ],
+        "dependencies": {
+          "base62": "0.1.1",
+          "esprima-fb": "13001.1001.0-dev-harmony-fb",
+          "source-map": "0.1.31"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/build",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib/source-map",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/lib",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/test",
+          "node_modules/react-for-atom/node_modules/react/node_modules/envify/node_modules/jstransform/node_modules/source-map/test/source-map"
+        ],
+        "dependencies": {
+          "amdefine": ">=0.0.4"
+        }
+      }
+    ]
+  }
+}

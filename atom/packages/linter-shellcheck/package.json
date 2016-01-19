@@ -1,0 +1,136 @@
+{
+  "name": "linter-shellcheck",
+  "linter-package": true,
+  "main": "./lib/main",
+  "version": "1.1.0",
+  "description": "Lint Bash on the fly, using shellcheck",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtomLinter/linter-shellcheck.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.180.0"
+  },
+  "dependencies": {
+    "atom-linter": "^4.2.0"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "readme": "# linter-shellcheck\n\nThis linter plugin for [Linter][linter] provides an interface to\n[shellcheck][shellcheck]. It will be used with files that have the \"Shell\"\nsyntax.\n\n## Installation\n\nLinter package must be installed in order to use this plugin. If Linter is not\ninstalled, please follow the instructions [here][linter].\n\n### `shellcheck` installation\n\nBefore using this plugin, you must ensure that `shellcheck` is installed on\nyour system. To install `shellcheck`, follow the guide on\n[shellcheck github][shellcheck]\n\n### Plugin installation\n\n```ShellSession\napm install linter-shellcheck\n```\n\n## Settings\n\nYou can configure linter-shellcheck through Atom's Settings menu. If you\ninstead prefer editing the configuration by hand you can get to that by editing\n`~/.atom/config.cson` (choose Open Your Config in Atom menu). The settings\navailable are:\n\n*   `shellcheckExecutablePath`: The full path to the `shellcheck` executable.\nRun `which shellcheck` to find where it is installed on your system.\n\n*   `userParameters`: Any additional executable parameters to pass to\n`shellcheck` when linting your files.\n\n[linter]: https://github.com/atom-community/linter \"Linter\"\n[shellcheck]: https://github.com/koalaman/shellcheck \"ShellCheck\"\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-shellcheck/issues"
+  },
+  "homepage": "https://github.com/AtomLinter/linter-shellcheck#readme",
+  "_id": "linter-shellcheck@1.1.0",
+  "_shasum": "1b3074bd15b30ea44634c443ee69b98cb5b00e21",
+  "_resolved": "file:../d-116011-6338-1q5904j/package.tgz",
+  "_from": "../d-116011-6338-1q5904j/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "atom-linter",
+        "version": "4.3.1",
+        "path": "node_modules/atom-linter/lib/helpers.js"
+      },
+      {
+        "name": "consistent-path",
+        "version": "1.0.3",
+        "path": "node_modules/atom-linter/node_modules/consistent-path/lib/index.js"
+      },
+      {
+        "name": "shell-path",
+        "version": "1.0.4",
+        "path": "node_modules/atom-linter/node_modules/consistent-path/node_modules/shell-path/index.js"
+      },
+      {
+        "name": "tmp",
+        "version": "0.0.28",
+        "path": "node_modules/atom-linter/node_modules/tmp/lib/tmp.js"
+      },
+      {
+        "name": "os-tmpdir",
+        "version": "1.0.1",
+        "path": "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js"
+      },
+      {
+        "name": "xregexp",
+        "version": "3.0.0",
+        "path": "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
+      }
+    ],
+    "extensions": {
+      ".coffee": [
+        "lib/main.coffee"
+      ],
+      ".js": [
+        "node_modules/atom-linter/lib/helpers.js",
+        "node_modules/atom-linter/node_modules/consistent-path/lib/index.js",
+        "node_modules/atom-linter/node_modules/consistent-path/node_modules/shell-path/index.js",
+        "node_modules/atom-linter/node_modules/consistent-path/src/index.js",
+        "node_modules/atom-linter/node_modules/tmp/Gruntfile.js",
+        "node_modules/atom-linter/node_modules/tmp/lib/tmp.js",
+        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js",
+        "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
+      ],
+      ".json": [
+        "node_modules/atom-linter/node_modules/consistent-path/node_modules/shell-path/package.json",
+        "node_modules/atom-linter/node_modules/consistent-path/package.json",
+        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/package.json",
+        "node_modules/atom-linter/node_modules/tmp/package.json",
+        "node_modules/atom-linter/node_modules/xregexp/package.json",
+        "node_modules/atom-linter/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          ""
+        ],
+        "dependencies": {
+          "atom-linter": "^4.2.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/lib",
+          "node_modules/atom-linter"
+        ],
+        "dependencies": {
+          "xregexp": "^3.0.0",
+          "consistent-path": "^1.0.2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/node_modules/consistent-path/lib",
+          "node_modules/atom-linter/node_modules/consistent-path",
+          "node_modules/atom-linter/node_modules/consistent-path/src"
+        ],
+        "dependencies": {
+          "shell-path": "^1.0.4"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/node_modules/tmp",
+          "node_modules/atom-linter/node_modules/tmp/lib",
+          "node_modules/atom-linter/node_modules/tmp/test",
+          "node_modules/atom-linter/node_modules/tmp/test/symlinkme"
+        ],
+        "dependencies": {
+          "os-tmpdir": "~1.0.1"
+        }
+      }
+    ]
+  }
+}
