@@ -3,7 +3,7 @@
     <keyboard-shortcut first-keystroke="meta open_bracket" />
     <keyboard-shortcut first-keystroke="meta alt left" />
     <mouse-shortcut keystroke="button4" />
-    <keyboard-shortcut first-keystroke="ctrl page_up" />
+    <keyboard-shortcut first-keystroke="alt up" />
   </action>
   <action id="DomCollectionControl.Edit">
     <keyboard-shortcut first-keystroke="f4" />
@@ -13,7 +13,7 @@
   </action>
   <action id="EditSource">
     <keyboard-shortcut first-keystroke="f4" />
-    <keyboard-shortcut first-keystroke="ctrl page_down" />
+    <keyboard-shortcut first-keystroke="alt down" />
   </action>
   <action id="EditorLineEnd">
     <keyboard-shortcut first-keystroke="end" />
@@ -24,6 +24,9 @@
   </action>
   <action id="EditorScrollUp">
     <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
+  <action id="EditorSelectWord">
+    <keyboard-shortcut first-keystroke="ctrl w" />
   </action>
   <action id="EditorTextEnd">
     <keyboard-shortcut first-keystroke="meta end" />
@@ -40,6 +43,13 @@
   <action id="EditorTextStartWithSelection">
     <keyboard-shortcut first-keystroke="shift meta home" />
     <keyboard-shortcut first-keystroke="shift meta up" />
+  </action>
+  <action id="EditorUnSelectWord">
+    <keyboard-shortcut first-keystroke="shift ctrl w" />
+  </action>
+  <action id="FindUsages">
+    <keyboard-shortcut first-keystroke="alt f7" />
+    <keyboard-shortcut first-keystroke="ctrl u" />
   </action>
   <action id="MoveStatementDown" />
   <action id="MoveStatementUp" />

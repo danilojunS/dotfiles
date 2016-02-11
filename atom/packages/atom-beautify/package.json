@@ -1,7 +1,7 @@
 {
   "name": "atom-beautify",
   "main": "./src/beautify",
-  "version": "0.28.21",
+  "version": "0.28.22",
   "private": true,
   "description": "Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, and SQL in Atom",
   "repository": {
@@ -176,10 +176,10 @@
   "readme": "# [atom-beautify](https://github.com/Glavin001/atom-beautify)\n\n[![Build Status](https://travis-ci.org/Glavin001/atom-beautify.svg?branch=master)](https://travis-ci.org/Glavin001/atom-beautify)\n[![Build status](https://ci.appveyor.com/api/projects/status/himnq7tjxl2fdc8u?svg=true)](https://ci.appveyor.com/project/Glavin001/atom-beautify)\n[![Gitter chat](https://img.shields.io/badge/gitter-Glavin001%2Fatom--beautify-1dce73.svg)](https://gitter.im/Glavin001/atom-beautify)\n[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X2RK5DKN6YXPJ&lc=CA&item_name=Atom%2dBeautify&item_number=atom%2dbeautify&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)\n\n[![Throughput Graph](https://graphs.waffle.io/Glavin001/atom-beautify/throughput.svg)](https://waffle.io/Glavin001/atom-beautify/metrics)\n\n> [Beautify](https://github.com/beautify-web/js-beautify)\nHTML (including [Handlebars](http://handlebarsjs.com/)),\nCSS (including [Sass](http://sass-lang.com/) and [Less](http://lesscss.org/)),\nJavaScript, and much more in Atom.\n\nAtom Package: https://atom.io/packages/atom-beautify\n\n```bash\napm install atom-beautify\n```\n\nOr Settings/Preferences ➔ Packages ➔ Search for `atom-beautify`\n\n## Language Support\n\n- [x] JavaScript and JSON\n- [x] HTML, including\n  - [x] [Handlebars](http://handlebarsjs.com/)\n  - [x] [Mustache](http://mustache.github.io)\n  - [x] [Embedded Ruby (ERB)](https://github.com/Glavin001/atom-beautify/issues/80)\n    - Requires [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier)\n  - [x] XML\n  - [x] SVG\n  - [x] [Marko](https://github.com/marko-js/marko)\n    - Requires [language-marko](https://github.com/marko-js/atom-language-marko)\n- [x] CSS, including\n  - [Sass](http://sass-lang.com/)\n  - [Less](http://lesscss.org/)\n- [x] [SQL](https://github.com/Glavin001/atom-beautify/pull/67)\n  - Requires [python-sqlparse](https://github.com/andialbrecht/sqlparse)\n- [x] [Markdown](https://github.com/Glavin001/atom-beautify/issues/292)\n- [x] [Perl](https://github.com/Glavin001/atom-beautify/issues/33)\n  - Requires [perltidy](http://perltidy.sourceforge.net/)\n- [x] [PHP](https://github.com/Glavin001/atom-beautify/issues/26)  \n  - Requires [php-cs-fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to be already installed.\n- [x] [Python](https://github.com/Glavin001/atom-beautify/issues/24)\n  - Requires [autopep8](https://github.com/hhatto/autopep8) or [YAPF](https://github.com/google/yapf) to be already installed.\n  - Beautifies to [PEP 8](https://www.python.org/dev/peps/pep-0008/).\n- [x] [Ruby](https://github.com/Glavin001/atom-beautify/issues/25)\n  - Requires [Ruby Beautify](https://github.com/erniebrodeur/ruby-beautify)\n- [x] [CoffeeScript](https://github.com/Glavin001/atom-beautify/issues/31)\n- [x] [Golang](https://github.com/Glavin001/atom-beautify/issues/176)\n- [x] [Java](https://github.com/Glavin001/atom-beautify/issues/45)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C++](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [C#](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Objective-C](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [D](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Fortran](https://github.com/Glavin001/atom-beautify/issues/300)\n  - Requires [GNU Emacs](http://www.gnu.org/software/emacs/)\n- [x] [Pawn](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [Vala](https://github.com/Glavin001/atom-beautify/issues/57)\n  - Requires [Uncrustify](http://sourceforge.net/projects/uncrustify/)\n- [x] [TypeScript](https://github.com/Glavin001/atom-beautify/issues/49)\n- [x] [Haskell](https://github.com/Glavin001/atom-beautify/issues/628)\n  - Requires [stylish-haskell](https://github.com/jaspervdj/stylish-haskell)\n- [x] [Elm](https://github.com/Glavin001/atom-beautify/pull/700)\n  - Requires [Elm-Format](https://github.com/avh4/elm-format)\n\n## Usage\n\nOpen the [Command Palette](https://github.com/atom/command-palette), and type `Beautify`.\n\nIt will only beautify selected text if a selection is found -- if not, the whole file will be beautified.\n\n### Shortcut\n\nYou can also type `ctrl-alt-b` as a shortcut or click `Packages > Beautify` in the menu.\n\n#### Custom Keyboard Shortcuts\n\nSee [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.\n\nFor example:\n\n```coffeescript\n'.editor':\n  'ctrl-alt-b': 'atom-beautify:beautify-editor'\n```\n\n## Configuration\n\nEdit your `.jsbeautifyrc` file in any of the following locations:\n\n- Atom Package Settings  \n  `Atom` ➔ `Preferences` ➔ Search for `atom-beautify`\n- Same directory as current file\n- Project root  \n`atom-beautify` will recursively look up from the current file's directory to find `.jsbeautifyrc`.\n- Your user's home directory\n\n**Note**: *Comments are supported in `.jsbeautifyrc` thanks to [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).*\n\nSee examples of both ways inside [`examples/`](https://github.com/donaldpipowitch/atom-beautify/tree/master/examples)\n\nSee [all supported options in the documentation at  `docs/options.md`](https://github.com/Glavin001/atom-beautify/blob/master/docs/options.md).\n\n### Simple\n\nSee [examples/simple-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/simple-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"indent_size\": 2,\n  \"indent_char\": \" \",\n  \"other\": \" \",\n  \"indent_level\": 0,\n  \"indent_with_tabs\": false,\n  \"preserve_newlines\": true,\n  \"max_preserve_newlines\": 2,\n  \"jslint_happy\": true,\n  \"indent_handlebars\": true\n}\n```\n\n### Nested\n\nSee [examples/nested-jsbeautifyrc/.jsbeautifyrc](https://github.com/donaldpipowitch/atom-beautify/blob/master/examples/nested-jsbeautifyrc/.jsbeautifyrc).\n\n```json\n{\n  \"html\": {\n    \"brace_style\": \"collapse\",\n    \"indent_char\": \" \",\n    \"indent_scripts\": \"normal\",\n    \"indent_size\": 6,\n    \"max_preserve_newlines\": 1,\n    \"preserve_newlines\": true,\n    \"unformatted\": [\"a\", \"sub\", \"sup\", \"b\", \"i\", \"u\"],\n    \"wrap_line_length\": 0\n  },\n  \"css\": {\n    \"indent_char\": \" \",\n    \"indent_size\": 4\n  },\n  \"js\": {\n    \"indent_size\": 2,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false,\n    \"preserve_newlines\": true,\n    \"max_preserve_newlines\": 2,\n    \"jslint_happy\": true\n  },\n  \"sql\": {\n    \"indent_size\": 4,\n    \"indent_char\": \" \",\n    \"indent_level\": 0,\n    \"indent_with_tabs\": false\n  }\n}\n```\n\n## Contributing\n\n[See all contributors on GitHub](https://github.com/donaldpipowitch/atom-beautify/graphs/contributors).\n\nPlease update the [CHANGELOG.md](https://github.com/donaldpipowitch/atom-beautify/blob/master/CHANGELOG.md),\nadd yourself as a contributor to the [package.json](https://github.com/donaldpipowitch/atom-beautify/blob/master/package.json),\nand submit a [Pull Request on GitHub](https://help.github.com/articles/using-pull-requests/).\n\n## License\n\n[MIT](https://github.com/donaldpipowitch/atom-beautify/blob/master/LICENSE.md) © [Glavin Wiechert](https://github.com/Glavin001)\n",
   "readmeFilename": "README.md",
   "homepage": "https://github.com/Glavin001/atom-beautify#readme",
-  "_id": "atom-beautify@0.28.21",
-  "_shasum": "505d34547306d454892a2ad6fabea536a353b0a5",
-  "_resolved": "file:../d-116015-29419-e0eqci/package.tgz",
-  "_from": "../d-116015-29419-e0eqci/package.tgz",
+  "_id": "atom-beautify@0.28.22",
+  "_shasum": "5f3c09fbcf7dc1708d7b573559ae7083de50fada",
+  "_resolved": "file:../d-116111-729-1mkb37h/package.tgz",
+  "_from": "../d-116111-729-1mkb37h/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -615,7 +615,7 @@
       },
       {
         "name": "graceful-fs",
-        "version": "4.1.2",
+        "version": "4.1.3",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js"
       },
       {
@@ -705,22 +705,22 @@
       },
       {
         "name": "center-align",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/index.js"
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -735,7 +735,7 @@
       },
       {
         "name": "lazy-cache",
-        "version": "0.2.7",
+        "version": "1.0.3",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/lazy-cache/index.js"
       },
       {
@@ -745,17 +745,17 @@
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -1015,12 +1015,12 @@
       },
       {
         "name": "cross-spawn",
-        "version": "2.1.4",
+        "version": "2.1.5",
         "path": "node_modules/cross-spawn/index.js"
       },
       {
         "name": "cross-spawn-async",
-        "version": "2.1.6",
+        "version": "2.1.8",
         "path": "node_modules/cross-spawn/node_modules/cross-spawn-async/index.js"
       },
       {
@@ -1335,22 +1335,22 @@
       },
       {
         "name": "center-align",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/index.js"
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -1365,7 +1365,7 @@
       },
       {
         "name": "lazy-cache",
-        "version": "0.2.7",
+        "version": "1.0.3",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/lazy-cache/index.js"
       },
       {
@@ -1375,17 +1375,17 @@
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -1420,12 +1420,12 @@
       },
       {
         "name": "js-beautify",
-        "version": "1.5.10",
+        "version": "1.6.2",
         "path": "node_modules/js-beautify/js/index.js"
       },
       {
         "name": "config-chain",
-        "version": "1.1.9",
+        "version": "1.1.10",
         "path": "node_modules/js-beautify/node_modules/config-chain/index.js"
       },
       {
@@ -1460,7 +1460,7 @@
       },
       {
         "name": "jscs",
-        "version": "2.8.0",
+        "version": "2.9.0",
         "path": "node_modules/jscs/lib/checker.js"
       },
       {
@@ -1470,7 +1470,7 @@
       },
       {
         "name": "babel-core",
-        "version": "5.8.34",
+        "version": "5.8.35",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/index.js"
       },
       {
@@ -1555,7 +1555,7 @@
       },
       {
         "name": "babylon",
-        "version": "5.8.34",
+        "version": "5.8.35",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/babylon/lib/index.js"
       },
       {
@@ -1740,7 +1740,7 @@
       },
       {
         "name": "graceful-fs",
-        "version": "4.1.2",
+        "version": "4.1.3",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/commoner/node_modules/graceful-fs/graceful-fs.js"
       },
       {
@@ -1830,22 +1830,22 @@
       },
       {
         "name": "center-align",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/index.js"
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -1860,7 +1860,7 @@
       },
       {
         "name": "lazy-cache",
-        "version": "0.2.7",
+        "version": "1.0.3",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/lazy-cache/index.js"
       },
       {
@@ -1870,17 +1870,17 @@
       },
       {
         "name": "align-text",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/index.js"
       },
       {
         "name": "kind-of",
-        "version": "2.0.1",
+        "version": "3.0.2",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/index.js"
       },
       {
         "name": "is-buffer",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text/node_modules/kind-of/node_modules/is-buffer/index.js"
       },
       {
@@ -2100,7 +2100,7 @@
       },
       {
         "name": "lodash.isarguments",
-        "version": "3.0.5",
+        "version": "3.0.6",
         "path": "node_modules/jscs/node_modules/babel-jscs/node_modules/lodash.assign/node_modules/lodash.keys/node_modules/lodash.isarguments/index.js"
       },
       {
@@ -2170,7 +2170,7 @@
       },
       {
         "name": "escope",
-        "version": "3.3.0",
+        "version": "3.4.0",
         "path": "node_modules/jscs/node_modules/escope/lib/index.js"
       },
       {
@@ -2195,7 +2195,7 @@
       },
       {
         "name": "es6-set",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "path": "node_modules/jscs/node_modules/escope/node_modules/es6-map/node_modules/es6-set/index.js"
       },
       {
@@ -2245,7 +2245,7 @@
       },
       {
         "name": "esprima",
-        "version": "2.7.1",
+        "version": "2.7.2",
         "path": "node_modules/jscs/node_modules/esprima/esprima.js"
       },
       {
@@ -2365,7 +2365,7 @@
       },
       {
         "name": "argparse",
-        "version": "1.0.3",
+        "version": "1.0.6",
         "path": "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/index.js"
       },
       {
@@ -2565,7 +2565,7 @@
       },
       {
         "name": "rimraf",
-        "version": "2.5.0",
+        "version": "2.5.1",
         "path": "node_modules/jscs/node_modules/prompt/node_modules/utile/node_modules/rimraf/rimraf.js"
       },
       {
@@ -2645,7 +2645,7 @@
       },
       {
         "name": "resolve",
-        "version": "1.1.6",
+        "version": "1.1.7",
         "path": "node_modules/jscs/node_modules/resolve/index.js"
       },
       {
@@ -2780,7 +2780,7 @@
       },
       {
         "name": "prettydiff",
-        "version": "1.16.10",
+        "version": "1.16.14",
         "path": "node_modules/prettydiff/prettydiff.js"
       },
       {
@@ -2920,7 +2920,7 @@
       },
       {
         "name": "argparse",
-        "version": "1.0.3",
+        "version": "1.0.6",
         "path": "node_modules/tidy-markdown/node_modules/argparse/index.js"
       },
       {
@@ -2950,12 +2950,12 @@
       },
       {
         "name": "js-yaml",
-        "version": "3.5.2",
+        "version": "3.5.3",
         "path": "node_modules/tidy-markdown/node_modules/js-yaml/index.js"
       },
       {
         "name": "esprima",
-        "version": "2.7.1",
+        "version": "2.7.2",
         "path": "node_modules/tidy-markdown/node_modules/js-yaml/node_modules/esprima/esprima.js"
       },
       {
@@ -3005,7 +3005,7 @@
       },
       {
         "name": "which",
-        "version": "1.2.1",
+        "version": "1.2.4",
         "path": "node_modules/which/which.js"
       },
       {
@@ -3017,6 +3017,11 @@
         "name": "is-relative",
         "version": "0.1.3",
         "path": "node_modules/which/node_modules/is-absolute/node_modules/is-relative/index.js"
+      },
+      {
+        "name": "isexe",
+        "version": "1.1.2",
+        "path": "node_modules/which/node_modules/isexe/index.js"
       },
       {
         "name": "winston",
@@ -3060,7 +3065,7 @@
       },
       {
         "name": "yaml-front-matter",
-        "version": "3.2.3",
+        "version": "3.3.0",
         "path": "node_modules/yaml-front-matter/index.js"
       },
       {
@@ -3069,18 +3074,13 @@
         "path": "node_modules/yaml-front-matter/node_modules/commander/index.js"
       },
       {
-        "name": "is-browser",
-        "version": "2.0.1",
-        "path": "node_modules/yaml-front-matter/node_modules/is-browser/server.js"
-      },
-      {
         "name": "js-yaml",
-        "version": "3.2.7",
+        "version": "3.5.3",
         "path": "node_modules/yaml-front-matter/node_modules/js-yaml/index.js"
       },
       {
         "name": "argparse",
-        "version": "1.0.3",
+        "version": "1.0.6",
         "path": "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/index.js"
       },
       {
@@ -3090,7 +3090,7 @@
       },
       {
         "name": "esprima",
-        "version": "2.0.0",
+        "version": "2.7.2",
         "path": "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/esprima/esprima.js"
       }
     ],
@@ -3816,6 +3816,7 @@
         "node_modules/underscore-plus/package.json",
         "node_modules/which/node_modules/is-absolute/node_modules/is-relative/package.json",
         "node_modules/which/node_modules/is-absolute/package.json",
+        "node_modules/which/node_modules/isexe/package.json",
         "node_modules/which/package.json",
         "node_modules/winston/node_modules/async/bower.json",
         "node_modules/winston/node_modules/async/component.json",
@@ -3829,11 +3830,7 @@
         "node_modules/winston/node_modules/pkginfo/package.json",
         "node_modules/winston/node_modules/stack-trace/package.json",
         "node_modules/winston/package.json",
-        "node_modules/yaml-front-matter/component.json",
         "node_modules/yaml-front-matter/node_modules/commander/package.json",
-        "node_modules/yaml-front-matter/node_modules/is-browser/package.json",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/bower.json",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/examples/dumper.json",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/bower.json",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/package.json",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/package.json",
@@ -5860,6 +5857,7 @@
         "node_modules/jscs/lib/rules/require-blocks-on-newline.js",
         "node_modules/jscs/lib/rules/require-camelcase-or-uppercase-identifiers.js",
         "node_modules/jscs/lib/rules/require-capitalized-comments.js",
+        "node_modules/jscs/lib/rules/require-capitalized-constructors-new.js",
         "node_modules/jscs/lib/rules/require-capitalized-constructors.js",
         "node_modules/jscs/lib/rules/require-comma-before-line-break.js",
         "node_modules/jscs/lib/rules/require-curly-braces.js",
@@ -8327,16 +8325,6 @@
         "node_modules/jscs/node_modules/js-yaml/lib/js-yaml/type/timestamp.js",
         "node_modules/jscs/node_modules/js-yaml/lib/js-yaml/type.js",
         "node_modules/jscs/node_modules/js-yaml/lib/js-yaml.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/arguments.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/choice.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/constants.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/help.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/nargs.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/parents.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/prefix_chars.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/sub_commands.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/sum.js",
-        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples/testformatters.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/index.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/action/append/constant.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/action/append.js",
@@ -8359,6 +8347,7 @@
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/help/added_formatters.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/help/formatter.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/namespace.js",
+        "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/utils.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/dist/angular-sprintf.min.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/dist/sprintf.min.js",
         "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/gruntfile.js",
@@ -9685,16 +9674,6 @@
         "node_modules/tidy-markdown/lib/preprocess.js",
         "node_modules/tidy-markdown/lib/tidy-inline-markdown.js",
         "node_modules/tidy-markdown/lib/utils.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/arguments.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/choice.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/constants.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/help.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/nargs.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/parents.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/prefix_chars.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/sub_commands.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/sum.js",
-        "node_modules/tidy-markdown/node_modules/argparse/examples/testformatters.js",
         "node_modules/tidy-markdown/node_modules/argparse/index.js",
         "node_modules/tidy-markdown/node_modules/argparse/lib/action/append/constant.js",
         "node_modules/tidy-markdown/node_modules/argparse/lib/action/append.js",
@@ -9717,6 +9696,7 @@
         "node_modules/tidy-markdown/node_modules/argparse/lib/help/added_formatters.js",
         "node_modules/tidy-markdown/node_modules/argparse/lib/help/formatter.js",
         "node_modules/tidy-markdown/node_modules/argparse/lib/namespace.js",
+        "node_modules/tidy-markdown/node_modules/argparse/lib/utils.js",
         "node_modules/tidy-markdown/node_modules/argparse/node_modules/sprintf-js/dist/angular-sprintf.min.js",
         "node_modules/tidy-markdown/node_modules/argparse/node_modules/sprintf-js/dist/sprintf.min.js",
         "node_modules/tidy-markdown/node_modules/argparse/node_modules/sprintf-js/gruntfile.js",
@@ -9843,6 +9823,10 @@
         "node_modules/underscore-plus/node_modules/underscore/underscore.js",
         "node_modules/which/node_modules/is-absolute/index.js",
         "node_modules/which/node_modules/is-absolute/node_modules/is-relative/index.js",
+        "node_modules/which/node_modules/isexe/access.js",
+        "node_modules/which/node_modules/isexe/index.js",
+        "node_modules/which/node_modules/isexe/mode.js",
+        "node_modules/which/node_modules/isexe/windows.js",
         "node_modules/which/which.js",
         "node_modules/winston/examples/color-message.js",
         "node_modules/winston/examples/couchdb.js",
@@ -9901,21 +9885,19 @@
         "node_modules/winston/node_modules/pkginfo/lib/pkginfo.js",
         "node_modules/winston/node_modules/stack-trace/lib/stack-trace.js",
         "node_modules/yaml-front-matter/bin/js-yaml-front.js",
-        "node_modules/yaml-front-matter/build.js",
+        "node_modules/yaml-front-matter/dist/js-yaml-front-client.js",
+        "node_modules/yaml-front-matter/dist/js-yaml-front-client.min.js",
+        "node_modules/yaml-front-matter/examples/js-yaml-front-client.min.js",
+        "node_modules/yaml-front-matter/gulpfile.js",
         "node_modules/yaml-front-matter/index.js",
-        "node_modules/yaml-front-matter/js-yaml-for-browser.js",
-        "node_modules/yaml-front-matter/lib/browser.js",
+        "node_modules/yaml-front-matter/lib/browser/index.js",
+        "node_modules/yaml-front-matter/lib/browser/js-yaml.js",
         "node_modules/yaml-front-matter/lib/js-yaml-front.js",
         "node_modules/yaml-front-matter/node_modules/commander/index.js",
         "node_modules/yaml-front-matter/node_modules/commander/lib/commander.js",
-        "node_modules/yaml-front-matter/node_modules/is-browser/client.js",
-        "node_modules/yaml-front-matter/node_modules/is-browser/server.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/bin/js-yaml.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/dist/js-yaml.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/dist/js-yaml.min.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/examples/custom_types.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/examples/dumper.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/examples/sample_document.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/index.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/common.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/dumper.js",
@@ -9946,16 +9928,6 @@
         "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/type/timestamp.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/type.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/arguments.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/choice.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/constants.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/help.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/nargs.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/parents.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/prefix_chars.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/sub_commands.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/sum.js",
-        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples/testformatters.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/index.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/action/append/constant.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/action/append.js",
@@ -9978,6 +9950,7 @@
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/help/added_formatters.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/help/formatter.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/namespace.js",
+        "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/utils.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/dist/angular-sprintf.min.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/dist/sprintf.min.js",
         "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/node_modules/sprintf-js/gruntfile.js",
@@ -10075,6 +10048,7 @@
         "src/languages/php.coffee",
         "src/languages/puppet.coffee",
         "src/languages/python.coffee",
+        "src/languages/riotjs.coffee",
         "src/languages/ruby.coffee",
         "src/languages/rust.coffee",
         "src/languages/sass.coffee",
@@ -10089,6 +10063,7 @@
         "src/languages/vala.coffee",
         "src/languages/visualforce.coffee",
         "src/languages/xml.coffee",
+        "src/languages/xtemplate.coffee",
         "src/logger.coffee",
         "src/views/loading-view.coffee",
         "src/views/message-view.coffee"
@@ -10582,8 +10557,8 @@
           "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align"
         ],
         "dependencies": {
-          "align-text": "^0.1.0",
-          "lazy-cache": "^0.2.4"
+          "align-text": "^0.1.3",
+          "lazy-cache": "^1.0.3"
         }
       },
       {
@@ -10591,7 +10566,7 @@
           "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -10617,7 +10592,7 @@
           "node_modules/analytics-node/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -11034,7 +11009,7 @@
         ],
         "dependencies": {
           "lru-cache": "^4.0.0",
-          "which": "^1.2.0"
+          "which": "^1.2.4"
         }
       },
       {
@@ -11543,8 +11518,8 @@
           "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align"
         ],
         "dependencies": {
-          "align-text": "^0.1.0",
-          "lazy-cache": "^0.2.4"
+          "align-text": "^0.1.3",
+          "lazy-cache": "^1.0.3"
         }
       },
       {
@@ -11552,7 +11527,7 @@
           "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -11578,7 +11553,7 @@
           "node_modules/handlebars/node_modules/uglify-js/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -11608,8 +11583,11 @@
           "node_modules/js-beautify/js/lib",
           "node_modules/js-beautify/js/lib/unpackers",
           "node_modules/js-beautify/js/test",
+          "node_modules/js-beautify/js/test/generated",
           "node_modules/js-beautify/js/test/resources",
-          "node_modules/js-beautify/test/data",
+          "node_modules/js-beautify/test/data/css",
+          "node_modules/js-beautify/test/data/html",
+          "node_modules/js-beautify/test/data/javascript",
           "node_modules/js-beautify/test"
         ],
         "dependencies": {
@@ -11625,7 +11603,7 @@
         ],
         "dependencies": {
           "proto-list": "~1.2.1",
-          "ini": "1"
+          "ini": "^1.3.4"
         }
       },
       {
@@ -11755,7 +11733,7 @@
           "babel-plugin-runtime": "^1.0.7",
           "babel-plugin-undeclared-variables-check": "^1.0.2",
           "babel-plugin-undefined-to-void": "^1.1.6",
-          "babylon": "^5.8.34",
+          "babylon": "^5.8.35",
           "bluebird": "^2.9.33",
           "chalk": "^1.0.0",
           "convert-source-map": "^1.1.0",
@@ -12014,8 +11992,8 @@
           "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align"
         ],
         "dependencies": {
-          "align-text": "^0.1.0",
-          "lazy-cache": "^0.2.4"
+          "align-text": "^0.1.3",
+          "lazy-cache": "^1.0.3"
         }
       },
       {
@@ -12023,7 +12001,7 @@
           "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/center-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -12049,7 +12027,7 @@
           "node_modules/jscs/node_modules/babel-jscs/node_modules/babel-core/node_modules/regenerator/node_modules/defs/node_modules/yargs/node_modules/cliui/node_modules/right-align/node_modules/align-text"
         ],
         "dependencies": {
-          "kind-of": "^2.0.0",
+          "kind-of": "^3.0.2",
           "longest": "^1.0.1",
           "repeat-string": "^1.5.2"
         }
@@ -12263,7 +12241,7 @@
           "node_modules/jscs/node_modules/escope/third_party"
         ],
         "dependencies": {
-          "es6-map": "^0.1.2",
+          "es6-map": "^0.1.3",
           "es6-weak-map": "^2.0.1",
           "esrecurse": "^3.1.1",
           "estraverse": "^4.1.1"
@@ -12482,7 +12460,7 @@
         ],
         "dependencies": {
           "d": "~0.1.1",
-          "es5-ext": "~0.10.8",
+          "es5-ext": "~0.10.11",
           "es6-iterator": "2",
           "es6-symbol": "3",
           "event-emitter": "~0.3.4"
@@ -12830,7 +12808,6 @@
       },
       {
         "paths": [
-          "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/examples",
           "node_modules/jscs/node_modules/js-yaml/node_modules/argparse",
           "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/action/append",
           "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/action",
@@ -12840,7 +12817,6 @@
           "node_modules/jscs/node_modules/js-yaml/node_modules/argparse/lib/help"
         ],
         "dependencies": {
-          "lodash": ">= 3.2.0 < 4.0.0",
           "sprintf-js": "~1.0.2"
         }
       },
@@ -13511,7 +13487,6 @@
       },
       {
         "paths": [
-          "node_modules/tidy-markdown/node_modules/argparse/examples",
           "node_modules/tidy-markdown/node_modules/argparse",
           "node_modules/tidy-markdown/node_modules/argparse/lib/action/append",
           "node_modules/tidy-markdown/node_modules/argparse/lib/action",
@@ -13521,7 +13496,6 @@
           "node_modules/tidy-markdown/node_modules/argparse/lib/help"
         ],
         "dependencies": {
-          "lodash": ">= 3.2.0 < 4.0.0",
           "sprintf-js": "~1.0.2"
         }
       },
@@ -13588,7 +13562,8 @@
           "node_modules/which/test"
         ],
         "dependencies": {
-          "is-absolute": "^0.1.7"
+          "is-absolute": "^0.1.7",
+          "isexe": "^1.1.1"
         }
       },
       {
@@ -13625,22 +13600,23 @@
       {
         "paths": [
           "node_modules/yaml-front-matter/bin",
+          "node_modules/yaml-front-matter/dist",
+          "node_modules/yaml-front-matter/examples",
           "node_modules/yaml-front-matter",
+          "node_modules/yaml-front-matter/lib/browser",
           "node_modules/yaml-front-matter/lib",
           "node_modules/yaml-front-matter/test"
         ],
         "dependencies": {
           "commander": "1.0.0",
-          "js-yaml": "~3.2.3",
-          "is-browser": "~2.0.0"
+          "js-yaml": "^3.5.2"
         }
       },
       {
         "paths": [
           "node_modules/yaml-front-matter/node_modules/js-yaml/bin",
-          "node_modules/yaml-front-matter/node_modules/js-yaml",
           "node_modules/yaml-front-matter/node_modules/js-yaml/dist",
-          "node_modules/yaml-front-matter/node_modules/js-yaml/examples",
+          "node_modules/yaml-front-matter/node_modules/js-yaml",
           "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml",
           "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/schema",
           "node_modules/yaml-front-matter/node_modules/js-yaml/lib/js-yaml/type",
@@ -13648,13 +13624,12 @@
           "node_modules/yaml-front-matter/node_modules/js-yaml/lib"
         ],
         "dependencies": {
-          "argparse": "~ 1.0.0",
-          "esprima": "~ 2.0.0"
+          "argparse": "^1.0.2",
+          "esprima": "^2.6.0"
         }
       },
       {
         "paths": [
-          "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/examples",
           "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse",
           "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/action/append",
           "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/action",
@@ -13664,7 +13639,6 @@
           "node_modules/yaml-front-matter/node_modules/js-yaml/node_modules/argparse/lib/help"
         ],
         "dependencies": {
-          "lodash": ">= 3.2.0 < 4.0.0",
           "sprintf-js": "~1.0.2"
         }
       }

@@ -15,20 +15,35 @@ module.exports =
       type: 'boolean'
       default: false
       description: 'Disable linter when no `.jshintrc` is found in project.'
+    lintJSXFiles:
+      title: 'Lint JSX Files'
+      type: 'boolean'
+      default: false
 
   activate: ->
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe 'linter-jshint.executablePath',
       (executablePath) =>
         @executablePath = executablePath
-    scopeEmbedded = 'source.js.embedded.html'
+
     @scopes = ['source.js', 'source.js.jsx', 'source.js-semantic']
+
+    scopeEmbedded = 'source.js.embedded.html'
     @subscriptions.add atom.config.observe 'linter-jshint.lintInlineJavaScript',
       (lintInlineJavaScript) =>
         if lintInlineJavaScript
-          @scopes.push(scopeEmbedded) unless scopeEmbedded in @scopes
+          @scopes.push(scopeEmbedded)
         else
           @scopes.splice(@scopes.indexOf(scopeEmbedded), 1) if scopeEmbedded in @scopes
+
+    scopeJSX = 'source.js.jsx'
+    @subscriptions.add atom.config.observe 'linter-jshint.lintJSXFiles',
+      (lintJSXFiles) =>
+        if lintJSXFiles
+          @scopes.push(scopeJSX)
+        else
+          @scopes.splice(@scopes.indexOf(scopeJSX), 1) if lintJSXFiles in @scopes
+
     @subscriptions.add atom.config.observe 'linter-jshint.disableWhenNoJshintrcFileInPath',
       (disableWhenNoJshintrcFileInPath) =>
         @disableWhenNoJshintrcFileInPath = disableWhenNoJshintrcFileInPath
@@ -61,12 +76,22 @@ module.exports =
           output = output.filter((entry) -> entry.error.id)
           return output.map (entry) ->
             error = entry.error
-            pointStart = [error.line - 1, error.character - 1]
-            pointEnd = [error.line - 1, error.character]
+            line = error.line - 1
+            # First, check if we are hitting jshint GH2846
+            # TODO: Remove when JSHint > 2.9.1 is released
+            if error.character?
+              col = error.character
+              # Now check if we are hitting esprima GH1457
+              # TODO: Remove when JSHint uses esprima > 2.7.2
+              maxCol = textEditor.getBuffer().lineLengthForRow(line)
+              col = maxCol if col > maxCol
+              range = helpers.rangeFromLineNumber(textEditor, line, col)
+            else
+              range = helpers.rangeFromLineNumber(textEditor, line)
             type = error.code.substr(0, 1)
             return {
               type: if type is 'E' then 'Error' else if type is 'W' then 'Warning' else 'Info'
               text: "#{error.code} - #{error.reason}"
               filePath
-              range: [pointStart, pointEnd]
+              range
             }
