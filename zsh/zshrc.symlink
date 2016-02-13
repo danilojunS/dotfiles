@@ -84,8 +84,8 @@ source $ZSH/oh-my-zsh.sh
 . `brew --prefix`/etc/profile.d/z.sh
 
 # user vim mode
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey ‘^R’ history-incremental-search-backward
+# bindkey -v
+# bindkey -M viins 'jk' vi-cmd-mode
+# bindkey ‘^R’ history-incremental-search-backward
 
 alias src='source ~/.zshrc'
