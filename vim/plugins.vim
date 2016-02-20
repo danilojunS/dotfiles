@@ -23,6 +23,10 @@ Plugin 'tpope/vim-commentary'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'christoomey/vim-system-copy'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'mhinz/vim-signify'
+Plugin 'Raimondi/delimitMate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,4 +41,17 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+
+"" PLUGINS CONFIGURATION
+
+" NERDTree
+
+map <C-\> :NERDTreeToggle<CR>
+
+" EasyAlign
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
