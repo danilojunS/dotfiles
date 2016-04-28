@@ -89,3 +89,5 @@ source $ZSH/oh-my-zsh.sh
 # bindkey ‘^R’ history-incremental-search-backward
 
 alias src='source ~/.zshrc'
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
