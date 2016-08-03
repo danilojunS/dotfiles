@@ -1,0 +1,28 @@
+## MOUSE MODE
+
+# activate mouse mode
+bind m \
+  set -g mouse on \;\
+  display 'Mouse: ON'
+
+# deactivate mouse mode
+bind M \
+  set -g mouse off \;\
+  display 'Mouse: OFF'
+
+## ZOOM MODE
+# enables copy content from one pane
+
+# activate zoom mode
+unbind +
+bind + \
+  new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
+  swap-pane -s tmux-zoom.0 \;\
+  select-window -t tmux-zoom
+
+# deactivate zoom mode
+unbind -
+bind - \
+  last-window \;\
+  swap-pane -s tmux-zoom.0 \;\
+  kill-window -t tmux-zoom
