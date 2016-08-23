@@ -23,6 +23,9 @@ set tabstop=2"
 " set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 " set list
 
+" search highlight
+set hlsearch
+
 " mapping keys
 let mapleader = ','
 map <C-\> :NERDTreeToggle<CR>
