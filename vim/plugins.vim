@@ -50,13 +50,16 @@ filetype plugin indent on    " required
 "" PLUGINS CONFIGURATION
 
 " NERDTree
-map <C-\> :NERDTreeToggle<CR>
+map <Leader>t :NERDTreeToggle<CR>
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" vim-autoformat
+nmap <Leader>f :Autoformat<CR>
 
 " vim-javacript
 let g:javascript_conceal_function   = "ƒ"
@@ -85,3 +88,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" colorschemes
+set t_Co=256
+colorscheme xoria256
