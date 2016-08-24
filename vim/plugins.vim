@@ -50,19 +50,15 @@ filetype plugin indent on    " required
 "" PLUGINS CONFIGURATION
 
 " NERDTree
-
 map <C-\> :NERDTreeToggle<CR>
 
 " EasyAlign
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
 " vim-javacript
-
 let g:javascript_conceal_function   = "ƒ"
 let g:javascript_conceal_null       = "ø"
 let g:javascript_conceal_this       = "@"
@@ -75,3 +71,17 @@ let g:javascript_conceal_super      = "Ω"
 
 set conceallevel=1
 set concealcursor=nvic
+
+" airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_theme='dark'
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
