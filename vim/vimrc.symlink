@@ -25,3 +25,6 @@ let mapleader=','
 
 " load plugins
 source ~/.dotfiles/vim/plugins.vim
+
+" mouse support
+set mouse=a
