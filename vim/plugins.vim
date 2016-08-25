@@ -33,6 +33,7 @@ Plugin 'helino/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,6 +56,12 @@ map <Leader>t :NERDTreeToggle<CR>
 
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+nnoremap <Leader>a :Ack!<Space>
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
