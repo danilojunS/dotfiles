@@ -32,6 +32,7 @@ Plugin 'ternjs/tern_for_vim'
 Plugin 'helino/vim-json'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,6 +52,9 @@ filetype plugin indent on    " required
 
 " NERDTree
 map <Leader>t :NERDTreeToggle<CR>
+
+" tagbar
+nmap <Leader>b :TagbarToggle<CR>
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
