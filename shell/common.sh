@@ -4,9 +4,9 @@
 
 OS='unknown'
 if [[ $(uname) == 'Darwin' ]]; then
-    OS='osx'
+  OS='osx'
 elif [[ $(uname) == 'Linux' ]]; then
-    OS='linux'
+  OS='linux'
 fi
 
 ## Export ENV variables
@@ -21,12 +21,13 @@ alias rs='reset'
 alias dotfiles='cd $HOME/.dotfiles'
 
 # git
+alias g='git'
 alias s='git status'
 alias p='git push'
 alias u='git pull'
 
 if [[ $OS == 'osx' ]]; then
-    alias blender="/Applications/Blender/blender.app/Contents/MacOS/blender"
-    alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+  alias blender="/Applications/Blender/blender.app/Contents/MacOS/blender"
+  alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 fi
 
