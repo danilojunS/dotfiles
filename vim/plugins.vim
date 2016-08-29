@@ -54,6 +54,7 @@ filetype plugin indent on    " required
 " NERDTree
 map <Leader>t :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.swp$']
 
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
@@ -82,7 +83,7 @@ nnoremap \ :Ag<SPACE>
 
 " ctrlp
 let g:ctrlp_show_hidden=1
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " let g:ctrlp_custom_ignore = {
 "       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 "       \ 'file': '\v\.(exe|so|dll)$'
