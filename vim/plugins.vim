@@ -130,6 +130,7 @@ let g:syntastic_check_on_wq = 0
 
 " markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_github=1           " requires installation of grip
 
 " colorschemes
 set t_Co=256
