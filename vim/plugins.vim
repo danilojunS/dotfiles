@@ -53,6 +53,7 @@ filetype plugin indent on    " required
 
 " NERDTree
 map <Leader>t :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
@@ -60,13 +61,13 @@ nmap <Leader>b :TagbarToggle<CR>
 " The Silver Searcher
 if executable('ag')
   " User ag over ack
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --hidden --vimgrep'
 
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag --hidden %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -78,6 +79,14 @@ nnoremap \ :Ag<SPACE>
 
 " ack.vim
 " nnoremap <Leader>a :Ack!<Space>
+
+" ctrlp
+let g:ctrlp_show_hidden=1
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+" let g:ctrlp_custom_ignore = {
+"       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"       \ 'file': '\v\.(exe|so|dll)$'
+"       \ }
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
