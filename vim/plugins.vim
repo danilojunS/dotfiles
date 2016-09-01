@@ -128,6 +128,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_javascript_checkers = ['eslint']
+
 " markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1           " requires installation of grip
