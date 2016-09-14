@@ -23,6 +23,9 @@ set splitright
 " search highlight
 set hlsearch
 
+" auto remove trailing white spaces
+autocmd BufWritePre * %s/\s\+$//e
+
 " mapping keys
 let mapleader=','
 :inoremap jk <esc>
