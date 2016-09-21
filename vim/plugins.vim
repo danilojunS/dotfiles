@@ -137,4 +137,4 @@ let vim_markdown_preview_github=1           " requires installation of grip
 
 " colorschemes
 set t_Co=256
-colorscheme xoria256
+colorscheme hybrid_material
