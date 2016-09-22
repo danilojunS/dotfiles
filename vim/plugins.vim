@@ -37,6 +37,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'terryma/vim-smooth-scroll'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -135,6 +136,13 @@ let g:syntastic_javascript_checkers = ['eslint']
 " markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1           " requires installation of grip
+
+" vim-smooth-scroll
+" parameters: distance, duration, speed
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 8)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 8)<CR>
 
 " colorschemes
 set t_Co=256
