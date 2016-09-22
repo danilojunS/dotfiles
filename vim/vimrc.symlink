@@ -26,7 +26,7 @@ set hlsearch
 " folding
 
 set foldmethod=syntax
-set foldlevelstart=1
+set foldlevelstart=20
 
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
