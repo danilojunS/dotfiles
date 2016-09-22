@@ -66,13 +66,13 @@ nmap <Leader>b :TagbarToggle<CR>
 " The Silver Searcher
 if executable('ag')
   " User ag over ack
-  let g:ackprg = 'ag --hidden --vimgrep'
+  let g:ackprg = 'ag --hidden --vimgrep --silent'
 
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --silent
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --hidden %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag --hidden %s -l --nocolor --silent -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
