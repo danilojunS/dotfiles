@@ -17,8 +17,8 @@ set splitbelow
 set splitright
 
 " configure special characters
-" set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-" set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
 
 " search highlight
 set hlsearch
