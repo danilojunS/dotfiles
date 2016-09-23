@@ -344,7 +344,7 @@
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>-1917 272 1914 1026 -1920 246 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-1917 783 570 502 -1920 246 1920 1057 </string>
+	<string>3 600 570 452 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>-1917 251 1914 1047 -1920 246 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1112,7 +1112,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>BAA289AC-75BD-43AF-855B-56B9C19856FF</string>
 	<key>NoSyncLastTipTime</key>
-	<real>493737342.93860102</real>
+	<real>496246622.79040301</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1167,6 +1167,26 @@
 		<string>0036</string>
 		<string>0037</string>
 		<string>0038</string>
+		<string>0039</string>
+		<string>0040</string>
+		<string>0041</string>
+		<string>0042</string>
+		<string>0043</string>
+		<string>0044</string>
+		<string>0045</string>
+		<string>0046</string>
+		<string>0047</string>
+		<string>0048</string>
+		<string>0049</string>
+		<string>0050</string>
+		<string>0051</string>
+		<string>0052</string>
+		<string>0053</string>
+		<string>0054</string>
+		<string>0055</string>
+		<string>0056</string>
+		<string>0057</string>
+		<string>0058</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1240,13 +1260,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-08-23T19:58:55Z</date>
+	<date>2016-09-23T02:45:54Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>
@@ -1293,6 +1313,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.7</string>
+	<string>3.0.9</string>
 </dict>
 </plist>
