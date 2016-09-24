@@ -70,7 +70,9 @@ noremap ∆ :TernDef<CR>
 " go back: alt + k = ˚ (mac)
 noremap ˚ <c-o>
 " show docs: alt + h = ˙ (mac)
-map ˙ :TernDoc<CR>
+noremap ˙ :TernDoc<CR>
+" show references: alt + l = ¬ (mac)
+noremap ¬ :TernRefs<CR>
 
 " The Silver Searcher
 if executable('ag')
