@@ -64,6 +64,14 @@ let NERDTreeIgnore = ['\.swp$']
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
 
+" tern_for_vim
+" go to definition: alt + j = ∆ (mac)
+noremap ∆ :TernDef<CR>
+" go back: alt + k = ˚ (mac)
+noremap ˚ <c-o>
+" show docs: alt + h = ˙ (mac)
+map ˙ :TernDoc<CR>
+
 " The Silver Searcher
 if executable('ag')
   " User ag over ack
