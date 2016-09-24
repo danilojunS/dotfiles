@@ -5,6 +5,9 @@
     "jquery"
   ],
   "plugins": {
-     "node": {}
+    "node": {},
+    "node_resolve": {},
+    "commonjs": {},
+    "es_modules": {}
   }
 }
