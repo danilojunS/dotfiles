@@ -65,14 +65,41 @@ let NERDTreeIgnore = ['\.swp$']
 nmap <Leader>b :TagbarToggle<CR>
 
 " tern_for_vim
+
+" auxiliary functions
+
+function GoToDefinition()
+  if (&ft=='javascript')
+    :TernDef
+  else
+    :echom 'GoToDefinition() not implemented for this filetype'
+  endif
+endfunction
+
+function ShowReferences()
+  if (&ft=='javascript')
+    :TernRefs
+  else
+    :echom 'ShowReferences() not implemented for this filetype'
+  endif
+endfunction
+
+function ShowDocs()
+  if (&ft=='javascript')
+    :TernDoc
+  else
+    :echom 'ShowDocs() not implemented for this filetype'
+  endif
+endfunction
+
 " go to definition: alt + j = ∆ (mac)
-noremap ∆ :TernDef<CR>
+noremap ∆ :call GoToDefinition()<CR>
 " go back: alt + k = ˚ (mac)
 noremap ˚ <c-o>
 " show docs: alt + h = ˙ (mac)
-noremap ˙ :TernDoc<CR>
+noremap ˙ :call ShowDocs()<CR>
 " show references: alt + l = ¬ (mac)
-noremap ¬ :TernRefs<CR>
+noremap ¬ :call ShowReferences()<CR>
 
 " The Silver Searcher
 if executable('ag')
