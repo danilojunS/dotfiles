@@ -44,6 +44,25 @@ autocmd BufWritePre * %s/\s\+$//e
 let mapleader=','
 :inoremap jk <esc>
 
+" splits
+map <Leader>s :split<CR>
+map <Leader>v :vsplit<CR>
+
+" tabs navigation
+
+" go to previous tab: alt + shift + [ = ” (mac)
+nnoremap ” :tabprevious<CR>
+" go to next tab: alt + shift + ] = ’ (mac)
+nnoremap ’ :tabnext<CR>
+" new tab: alt + t = † (mac)
+nnoremap † :tabnew<CR>
+
+" close buffer: alt + w (mac)
+nnoremap ∑ :q<CR>
+
+" save (write buffer): alt + s = ß (mac)
+nnoremap ß :w<CR>
+
 " mouse support
 set mouse=a
 
