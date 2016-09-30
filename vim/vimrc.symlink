@@ -45,8 +45,13 @@ let mapleader=','
 :inoremap jk <esc>
 
 " splits
+
 map <Leader>s :split<CR>
 map <Leader>v :vsplit<CR>
+" new horizontal split: alt + shift + d = Î (mac)
+nnoremap Î :new<CR>
+" new vertical split: alt + d = ∂ (mac)
+nnoremap ∂ :vnew<CR>
 
 " tabs navigation
 
