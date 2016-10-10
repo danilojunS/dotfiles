@@ -73,8 +73,12 @@ set mouse=a
 
 " set clipboard
 set clipboard=unnamed
+"
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" open files in new tab
+set switchbuf+=usetab,newtab
 
 " tell vim to keep a backup file
 set backup
