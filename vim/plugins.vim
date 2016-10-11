@@ -92,14 +92,16 @@ function ShowDocs()
   endif
 endfunction
 
-" go to definition: alt + j = ∆ (mac)
-noremap ∆ :call GoToDefinition()<CR>
-" go back: alt + k = ˚ (mac)
-noremap ˚ <c-o>
-" show docs: alt + h = ˙ (mac)
-noremap ˙ :call ShowDocs()<CR>
-" show references: alt + l = ¬ (mac)
-noremap ¬ :call ShowReferences()<CR>
+if has('macunix')
+  " go to definition: alt + j = ∆ (mac)
+  noremap ∆ :call GoToDefinition()<CR>
+  " go back: alt + k = ˚ (mac)
+  noremap ˚ <c-o>
+  " show docs: alt + h = ˙ (mac)
+  noremap ˙ :call ShowDocs()<CR>
+  " show references: alt + l = ¬ (mac)
+  noremap ¬ :call ShowReferences()<CR>
+endif
 
 " The Silver Searcher
 if executable('ag')
