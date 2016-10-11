@@ -20,6 +20,9 @@ set splitright
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set list
 
+" cursor
+set cursorline
+
 " search
 set hlsearch
 set incsearch
