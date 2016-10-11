@@ -79,6 +79,9 @@ if has('macunix')
   nnoremap ß :w<CR>
 endif
 
+" ctags
+set tags=./.tags;,tags;
+
 " mouse support
 set mouse=a
 

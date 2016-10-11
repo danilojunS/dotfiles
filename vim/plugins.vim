@@ -65,6 +65,9 @@ let NERDTreeIgnore = ['\.swp$']
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
 
+" vim-autotag
+let g:autotagTagsFile=".tags"
+
 " tern_for_vim
 
 " auxiliary functions
