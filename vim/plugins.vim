@@ -39,6 +39,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'mhinz/vim-startify'
+Plugin 'craigemery/vim-autotag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
