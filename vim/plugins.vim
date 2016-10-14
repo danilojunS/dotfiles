@@ -161,6 +161,10 @@ nmap <Leader>f :Autoformat<CR>
 set conceallevel=1
 set concealcursor=nvic
 
+" vim-startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+
 " airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
