@@ -46,7 +46,7 @@ let xml_syntax_folding=1      " XML
 autocmd BufWritePre * %s/\s\+$//e
 
 " mapping keys
-let mapleader=','
+let mapleader=' '
 :inoremap jk <esc>
 
 " splits
