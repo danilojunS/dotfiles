@@ -64,6 +64,14 @@ map <Leader>t :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.swp$']
 
+" vim-devicons
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
+" vim-nerdtree-syntax-highlight
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
 " tagbar
 nmap <Leader>b :TagbarToggle<CR>
 
