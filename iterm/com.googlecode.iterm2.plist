@@ -301,8 +301,10 @@
 	<true/>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 5</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~</string>
+	<string>~/Documents</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -330,27 +332,38 @@
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
+	<key>NSToolbar Configuration Terminal Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<integer>0</integer>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
 	<dict>
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>-670 413 570 356 -1920 246 1920 1057 </string>
+	<string>238 228 761 401 0 0 1280 800 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>744 601 606 456 0 0 1920 1057 </string>
+	<string>183 317 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>-1422 481 918 495 -1920 246 1920 1057 </string>
+	<string>246 115 918 495 0 0 1280 800 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1917 272 1914 1026 -1920 246 1920 1057 </string>
+	<string>1 47 1277 730 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>3 600 570 452 0 0 1920 1057 </string>
+	<string>1 50 1277 724 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>-1917 251 1914 1047 -1920 246 1920 1057 </string>
+	<string>2 151 850 626 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>-1917 251 1914 1047 -1920 246 1920 1057 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>1 59 1277 996 0 0 1920 1057 </string>
+	<string>2 151 850 626 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -928,11 +941,11 @@
 			<key>Name</key>
 			<string>manjuu</string>
 			<key>Non Ascii Font</key>
-			<string>MesloLGLDZ-RegularForPowerline 12</string>
+			<string>MesloLGLDZNerdFontCompleteMono---RegularForPowerline 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMDZ-RegularForPowerline 12</string>
+			<string>MesloLGLDZNerdFontCompleteMono---RegularForPowerline 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1097,6 +1110,8 @@
 			<false/>
 			<key>Use Italic Font</key>
 			<true/>
+			<key>Use Non-ASCII Font</key>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1109,10 +1124,12 @@
 	</array>
 	<key>NoSyncConfirmBeta</key>
 	<true/>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>BAA289AC-75BD-43AF-855B-56B9C19856FF</string>
+	<string>93695B75-1BBA-432B-901E-101AB404D865</string>
 	<key>NoSyncLastTipTime</key>
-	<real>496246622.79040301</real>
+	<real>498458390.91058499</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1120,11 +1137,11 @@
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>487715441.947303</real>
+	<real>486800319.538118</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>487632605.04316401</real>
+	<real>477630278.033095</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>487632605.04349899</real>
+	<real>486164763.293423</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
@@ -1170,23 +1187,6 @@
 		<string>0039</string>
 		<string>0040</string>
 		<string>0041</string>
-		<string>0042</string>
-		<string>0043</string>
-		<string>0044</string>
-		<string>0045</string>
-		<string>0046</string>
-		<string>0047</string>
-		<string>0048</string>
-		<string>0049</string>
-		<string>0050</string>
-		<string>0051</string>
-		<string>0052</string>
-		<string>0053</string>
-		<string>0054</string>
-		<string>0055</string>
-		<string>0056</string>
-		<string>0057</string>
-		<string>0058</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1238,7 +1238,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/.dotfiles/iterm/</string>
+	<string>/Users/danilojun/.dotfiles/iterm</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -1256,11 +1256,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=44</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=31</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-23T02:45:54Z</date>
+	<date>2016-10-18T02:34:27Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1290,6 +1290,8 @@
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1476760320</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -1313,6 +1315,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.9</string>
+	<string>3.0.10</string>
 </dict>
 </plist>

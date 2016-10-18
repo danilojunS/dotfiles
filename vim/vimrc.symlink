@@ -1,6 +1,8 @@
 " syntax highlighting
 syntax on
 
+set encoding=utf8
+
 " show hybrid line numbers
 set relativenumber
 set number
