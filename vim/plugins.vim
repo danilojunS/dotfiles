@@ -41,6 +41,7 @@ Plugin 'terryma/vim-smooth-scroll'
 Plugin 'mhinz/vim-startify'
 Plugin 'craigemery/vim-autotag'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
