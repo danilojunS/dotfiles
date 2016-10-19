@@ -158,6 +158,8 @@ nmap ga <Plug>(EasyAlign)
 nmap <Leader>f :Autoformat<CR>
 
 " vim-javacript
+let g:javascript_plugin_jsdoc = 1
+"
 " let g:javascript_conceal_function       = "ƒ"
 " let g:javascript_conceal_null           = "ø"
 " let g:javascript_conceal_this           = "@"
