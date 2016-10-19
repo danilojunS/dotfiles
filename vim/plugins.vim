@@ -40,6 +40,7 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'mhinz/vim-startify'
 Plugin 'craigemery/vim-autotag'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
