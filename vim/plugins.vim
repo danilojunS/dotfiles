@@ -43,6 +43,7 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'romgrk/winteract.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -204,6 +205,9 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 4)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 4)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 8)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 8)<CR>
+
+" winteract
+nmap <leader>w :InteractiveWindow<CR>
 
 " colorschemes
 set t_Co=256
