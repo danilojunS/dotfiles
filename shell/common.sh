@@ -18,6 +18,7 @@ export STUDIO_JDK=$JAVA_HOME
 ## ALIASES
 
 alias rs='reset'
+alias cl='clear'
 alias dotfiles='cd $HOME/.dotfiles'
 
 # git
