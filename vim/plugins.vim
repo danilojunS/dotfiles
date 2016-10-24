@@ -182,7 +182,7 @@ let g:startify_change_to_vcs_root = 1
 " airline
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dark'
+let g:airline_theme='ubaryd'
 
 " syntastic
 set statusline+=%#warningmsg#
