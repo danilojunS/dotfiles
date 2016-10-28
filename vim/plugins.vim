@@ -122,13 +122,13 @@ endif
 " The Silver Searcher
 if executable('ag')
   " User ag over ack
-  let g:ackprg = 'ag --hidden --vimgrep --silent'
+  let g:ackprg = 'ag --hidden --vimgrep --silent --path-to-agignore ~/.agignore'
 
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor\ --silent
+  set grepprg=ag\ --nogroup\ --nocolor\ --silent\ --path-to-agignore\ ~/.agignore
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --hidden %s -l --nocolor --silent -g ""'
+  let g:ctrlp_user_command = 'ag --hidden %s -l --nocolor --silent -g "" --path-to-agignore ~/.agignore'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
