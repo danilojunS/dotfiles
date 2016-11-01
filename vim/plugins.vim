@@ -44,6 +44,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'romgrk/winteract.vim'
+Plugin 'nikvdp/ejs-syntax'
+Plugin 'othree/html5.vim'
+Plugin 'gregsexton/matchtag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
