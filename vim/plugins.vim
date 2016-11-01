@@ -46,7 +46,7 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'romgrk/winteract.vim'
 Plugin 'nikvdp/ejs-syntax'
 Plugin 'othree/html5.vim'
-Plugin 'gregsexton/matchtag'
+Plugin 'valloric/matchtagalways'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -197,6 +197,16 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
 let g:syntastic_javascript_checkers = ['eslint']
+
+" matchtagalways
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
+let g:mta_use_matchparen_group = 1
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'ejs' : 1,
+      \}
 
 " markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
