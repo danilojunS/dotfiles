@@ -91,8 +91,8 @@ set tags=./.tags;,tags;
 set mouse=a
 
 " set clipboard
-set clipboard=unnamed
-"
+set clipboard+=unnamed
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 

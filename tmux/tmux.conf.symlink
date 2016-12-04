@@ -38,6 +38,9 @@ bind M \
 # don't rename windows automatically
 set-option -g allow-rename off
 
+# OS specific configs
+if-shell 'test "$(uname)" = "Darwin"' 'source ~/.dotfiles/tmux/tmux-osx.conf'
+
 ######################
 ### DESIGN CHANGES ###
 ######################
