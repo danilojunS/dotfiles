@@ -47,6 +47,7 @@ Plugin 'romgrk/winteract.vim'
 Plugin 'nikvdp/ejs-syntax'
 Plugin 'othree/html5.vim'
 Plugin 'valloric/matchtagalways'
+Plugin 'elixir-lang/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
