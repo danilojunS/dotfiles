@@ -1,0 +1,13 @@
+[include]
+  path = ~/.gitconfig.local
+[push]
+	default = simple
+[alias]
+	df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	lg = log --graph --branches=* --remotes=* --decorate --oneline
+	rh = reset --hard
+	visual = !gitx
