@@ -9,5 +9,5 @@
 	ci = commit
 	st = status
 	lg = log --graph --branches=* --remotes=* --decorate --oneline
-	rh = reset --hard
+	rs = reset
 	visual = !gitx
