@@ -7,7 +7,7 @@
 	co = checkout
 	br = branch
 	ci = commit
-	st = status
+	st = status -sb
 	lg = log --graph --branches=* --remotes=* --decorate --oneline
 	rs = reset
 	visual = !gitx
