@@ -55,3 +55,5 @@ if [[ $OS == 'osx' ]]; then
   alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 fi
 
+# import packages
+[[ -f "$(brew --prefix)/etc/profile.d/z.sh" ]] && . `brew --prefix`/etc/profile.d/z.sh

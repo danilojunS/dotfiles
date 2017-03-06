@@ -81,7 +81,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Include Z, yo
-. `brew --prefix`/etc/profile.d/z.sh
 
 # user vim mode
 # bindkey -v
