@@ -24,8 +24,8 @@ export NODE_PATH="$NODE_PATH:$HOME/.npm-packages/lib/node_modules"
 
 # pip settings to allow install packages without sudo
 # http://kazhack.org/?post/2014/12/12/pip-gem-install-without-sudo
-export PIP_PACKAGES="${HOME}/.pip-packages"
-PATH="$PATH:$PIP_PACKAGES/bin"
+export PYTHONUSERBASE="${HOME}/.pip-packages"
+PATH="$PATH:$PYTHONUSERBASE/bin"
 
 # java version to use
 export JAVA_HOME="$(/usr/libexec/java_home)"
