@@ -4,18 +4,18 @@
 # The symlinks are created in the $HOME directory
 
 echo -n "Creating symlinks... "
-
 FILES=$(find "$HOME/.dotfiles" -name "*.symlink")
 SYMLINKS=$(find "$HOME/.dotfiles" -name "*.symlink" | sed -e "s/.symlink//g" | sed -e "s/.*\//./g")
-
 FILES=(${FILES// / })
 SYMLINKS=(${SYMLINKS// / })
-
 for index in "${!FILES[@]}"
 do
-    ln -s "${FILES[index]}" "$HOME/${SYMLINKS[index]}"
+  ln -s "${FILES[index]}" "$HOME/${SYMLINKS[index]}"
 done
+echo "done!"
 
+echo -n "Installing bash-it..."
+git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
 echo "done!"
 
 # installs Vundle (vim plugin manager)
