@@ -1,22 +1,56 @@
+;;; Package MANAGEMENT SETTINGS
+
 (require 'package)
 
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
+(setq package-enable-at-startup nil)
 (package-initialize)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-(setq my-package-list '(
-  paganini-theme
-  evil
-))
-(mapc #'package-install my-package-list)
+(eval-when-compile
+  (require 'use-package))
 
-;; theme
-(load-theme 'paganini 1)
+;;; EVIL MODE SETTINGS
 
-;; evil mode
-(require 'evil)
+(use-package evil
+  :ensure t
+  :config
   (evil-mode 1)
+
+  (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode)))
+
+;;; HELM SETTINGS
+
+(use-package helm
+  :ensure t
+  ;:diminish helm-mode
+  ;:commands helm-mode
+  :config
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") 'helm-M-x))
+
+;;; THEME SETTINGS
+
+(use-package paganini-theme
+  :ensure t
+  :config
+  (load-theme 'paganini t))
+
+;;; AUXILIARY ALL PURPOSE FUNCTIONS
 
 (defun system-is-mac ()
   (interactive)
@@ -25,6 +59,8 @@
 (defun system-is-linux ()
   (interactive)
   (string-equal system-type "gnu/linux"))
+
+;;; DO NOT TOUCH! - Automatic generated configs
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
