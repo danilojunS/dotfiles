@@ -28,6 +28,14 @@
 
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
+;;; GENERAL SETTINGS
+
+(use-package linum-relative
+  :ensure t
+  :config
+  (linum-mode)
+  (linum-relative-global-mode))
+
 ;;; EVIL MODE SETTINGS
 
 (use-package evil
