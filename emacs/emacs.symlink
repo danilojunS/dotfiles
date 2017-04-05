@@ -74,6 +74,14 @@
   (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x))
 
+;;; PROJECTILE SETTINGS
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm))
+
 ;;; THEME SETTINGS
 
 (use-package paganini-theme
