@@ -36,6 +36,11 @@
   (linum-mode)
   (linum-relative-global-mode))
 
+(use-package expand-region
+  :ensure t
+  :config
+  (setq expand-region-contract-fast-key "z"))
+
 ;;; EVIL MODE SETTINGS
 
 (use-package evil
@@ -48,7 +53,10 @@
   (use-package evil-leader
     :ensure t
     :config
-    (global-evil-leader-mode))
+    (global-evil-leader-mode)
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "xx" 'er/expand-region))
 
   (use-package evil-surround
     :ensure t
@@ -81,6 +89,12 @@
   :config
   (projectile-global-mode)
   (setq projectile-completion-system 'helm))
+
+;;; FLYCHECK SETTINGS
+
+(use-package flycheck
+  :ensure t
+  :commands flycheck-mode)
 
 ;;; THEME SETTINGS
 
