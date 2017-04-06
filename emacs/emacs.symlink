@@ -41,13 +41,20 @@
   :config
   (setq expand-region-contract-fast-key "z"))
 
-
 (use-package dtrt-indent
   :ensure t
   :config
   (dtrt-indent-mode 1)
   (setq-default tab-width 2 indent-tabs-mode nil)
   (setq-default c-basic-offset 2 c-default-style "bsd"))
+
+(show-paren-mode 1)
+(setq show-paren-style 'mixed)
+
+(global-set-key [s-left] 'windmove-left)
+(global-set-key [s-right] 'windmove-right)
+(global-set-key [s-up] 'windmove-up)
+(global-set-key [s-down] 'windmove-down)
 
 ;;; KEY-CHORD SETTINGS
 
