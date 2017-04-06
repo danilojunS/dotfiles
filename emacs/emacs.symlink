@@ -131,6 +131,16 @@
     :config
     (global-evil-surround-mode))
 
+  (use-package evil-nerd-commenter
+    :ensure t
+    :config
+    (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines))
+
+  (use-package evil-matchit
+    :ensure t
+    :config
+    (global-evil-matchit-mode 1))
+
   (evil-define-key 'normal neotree-mode-map (kbd "o") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
@@ -147,6 +157,12 @@
   :ensure t
   :config
   (load-theme 'paganini t))
+
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-center-evil-theme)
+  (display-time-mode t))
 
 ;;; AUXILIARY FUNCTIONS
 
