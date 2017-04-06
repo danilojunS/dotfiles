@@ -62,6 +62,8 @@
 (global-set-key [s-up] 'windmove-up)
 (global-set-key [s-down] 'windmove-down)
 
+(scroll-bar-mode -1)
+
 ;;; KEY-CHORD SETTINGS
 
 (use-package key-chord
@@ -102,11 +104,33 @@
   (setq neo-smart-open t)
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
+;;; COMPANY SETTINGS
+
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode)
+  (setq company-selection-wrap-around t)
+  (define-key company-active-map (kbd "<tab>") 'company-select-next)
+  (define-key company-active-map (kbd "<S-tab>") 'company-select-previous)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+
 ;;; FLYCHECK SETTINGS
 
 (use-package flycheck
   :ensure t
   :commands flycheck-mode)
+
+;;; SILVER SEARCHER SETTINGS
+
+(use-package ag
+  :ensure t
+  :commands (ag ag-project)
+  :config
+  (setq ag-executable "/usr/local/bin/ag")
+  (setq ag-highlight-search t)
+  (setq ag-reuse-buffers t))
 
 ;;; EVIL MODE SETTINGS
 
