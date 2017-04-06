@@ -30,6 +30,13 @@
 
 ;;; GENERAL SETTINGS
 
+(use-package exec-path-from-shell
+  :ensure t
+  :defer t
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
 (use-package linum-relative
   :ensure t
   :config
@@ -53,6 +60,11 @@
   :config
   (elscreen-start)
   (elscreen-set-prefix-key "\C-a"))
+
+(use-package autopair
+  :ensure t
+  :config
+  (autopair-global-mode))
 
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
@@ -120,7 +132,15 @@
 
 (use-package flycheck
   :ensure t
-  :commands flycheck-mode)
+  :commands flycheck-mode
+  :config
+  (global-flycheck-mode)
+  (setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers '(javascript-jshint)))
+  (setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers '(json-jsonlist)))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq-default flycheck-temp-prefix ".flycheck"))
 
 ;;; SILVER SEARCHER SETTINGS
 
@@ -187,6 +207,28 @@
   :config
   (powerline-center-evil-theme)
   (display-time-mode t))
+
+;;; LANGUAGES SETTINGS
+
+(use-package web-mode
+  :ensure t
+  :defer t
+  :config
+  (setq web-mode-attr-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-indent-style 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-sql-indent-offset 2))
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :config
+  (setq js2-highlight-level 3)
+
+(use-package json-mode
+  :ensure t)
 
 ;;; AUXILIARY FUNCTIONS
 
