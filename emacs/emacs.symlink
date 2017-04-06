@@ -48,6 +48,12 @@
   (setq-default tab-width 2 indent-tabs-mode nil)
   (setq-default c-basic-offset 2 c-default-style "bsd"))
 
+(use-package elscreen
+  :ensure t
+  :config
+  (elscreen-start)
+  (elscreen-set-prefix-key "\C-a"))
+
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
 
