@@ -225,7 +225,7 @@
   :ensure t
   :mode "\\.js\\'"
   :config
-  (setq js2-highlight-level 3)
+  (setq js2-highlight-level 3))
 
 (use-package json-mode
   :ensure t)
