@@ -41,6 +41,14 @@
   :config
   (setq expand-region-contract-fast-key "z"))
 
+
+(use-package dtrt-indent
+  :ensure t
+  :config
+  (dtrt-indent-mode 1)
+  (setq-default tab-width 2 indent-tabs-mode nil)
+  (setq-default c-basic-offset 2 c-default-style "bsd"))
+
 ;;; EVIL MODE SETTINGS
 
 (use-package evil
