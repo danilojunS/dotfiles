@@ -1,5 +1,4 @@
 ;;; PACKAGE MANAGEMENT SETTINGS
-
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -28,11 +27,12 @@
 
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
+(savehist-mode 1)
+
 ;;; GENERAL SETTINGS
 
 (use-package exec-path-from-shell
   :ensure t
-  :defer t
   :config
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
@@ -81,7 +81,8 @@
 (use-package key-chord
   :ensure t
   :config
-  (key-chord-mode 1))
+  (key-chord-mode 1)
+  (setq key-chord-two-keys-delay 0.3))
 
 ;;; HELM SETTINGS
 
@@ -132,7 +133,6 @@
 
 (use-package flycheck
   :ensure t
-  :commands flycheck-mode
   :config
   (global-flycheck-mode)
   (setq-default flycheck-disabled-checkers
@@ -168,6 +168,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       "t"  'neotree-project-dir
+      "e"  'flycheck-list-errors
       "xx" 'er/expand-region))
 
   (use-package evil-surround
@@ -193,6 +194,10 @@
   (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
   (evil-define-key 'normal neotree-mode-map (kbd "i") 'neotree-enter-horizontal-split)
   (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-enter-vertical-split)
+
+  (key-chord-define evil-normal-state-map "]e" 'flycheck-next-error)
+  (key-chord-define evil-normal-state-map "[e" 'flycheck-previous-error)
+
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state))
 
 ;;; THEME SETTINGS
@@ -225,7 +230,9 @@
   :ensure t
   :mode "\\.js\\'"
   :config
-  (setq js2-highlight-level 3))
+  (setq js2-highlight-level 3)
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil))
 
 (use-package json-mode
   :ensure t)
