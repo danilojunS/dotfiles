@@ -239,15 +239,18 @@
 (use-package json-mode
   :ensure t)
 
+(use-package alchemist
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "markdown"))
+
 ;;; AUXILIARY FUNCTIONS
-
-(defun system-is-mac ()
-  (interactive)
-  (string-equal system-type "darwin"))
-
-(defun system-is-linux ()
-  (interactive)
-  (string-equal system-type "gnu/linux"))
 
 (defun neotree-project-dir ()
     "Open NeoTree using the git root."
