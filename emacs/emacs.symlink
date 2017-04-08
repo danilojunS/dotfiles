@@ -94,15 +94,35 @@
   ;:commands helm-mode
   :config
   (helm-mode 1)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-limit 30)
   (global-set-key (kbd "M-x") 'helm-M-x))
 
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
+
 ;;; PROJECTILE SETTINGS
+
+(setq projectile-directories-to-ignore-list '(
+  "_build"
+  "deps"
+  "node_modules"
+))
 
 (use-package projectile
   :ensure t
   :config
   (projectile-global-mode)
-  (setq projectile-completion-system 'helm))
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'projectile-dired)
+  (setq projectile-enable-caching t)
+  (dolist (dir projectile-directories-to-ignore-list)
+    (add-to-list 'projectile-globally-ignored-directories dir)
+    (add-to-list 'grep-find-ignored-directories dir)))
 
 ;;; NEOTREE SETTINGS
 
@@ -118,6 +138,14 @@
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-smart-open t)
   (setq projectile-switch-project-action 'neotree-projectile-action))
+
+;;; IMENU-LIST SETTINGS
+
+(use-package imenu-list
+  :ensure t
+  :config
+  (setq imenu-list-focus-after-activation t)
+  (setq imenu-list-auto-resize t))
 
 ;;; COMPANY SETTINGS
 
@@ -169,7 +197,9 @@
     (global-evil-leader-mode)
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
+      "s"  'helm-mini
       "t"  'neotree-project-dir
+      "b"  'imenu-list-smart-toggle
       "e"  'flycheck-list-errors
       "xx" 'er/expand-region))
 
@@ -204,10 +234,10 @@
 
 ;;; THEME SETTINGS
 
-(use-package paganini-theme
+(use-package seti-theme
   :ensure t
   :config
-  (load-theme 'paganini t))
+  (load-theme 'seti t))
 
 (use-package powerline
   :ensure t
