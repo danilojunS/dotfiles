@@ -147,6 +147,17 @@
   (setq imenu-list-focus-after-activation t)
   (setq imenu-list-auto-resize t))
 
+;;; MAGIT AND GIT-GUTTER SETTINGS
+
+(use-package magit
+  :ensure t)
+
+(use-package git-gutter
+  :ensure t
+  :config
+  (global-git-gutter-mode t)
+  (git-gutter:linum-setup))
+
 ;;; COMPANY SETTINGS
 
 (use-package company
@@ -198,6 +209,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       "s"  'helm-mini
+      "g"  'magit-status
       "t"  'neotree-project-dir
       "b"  'imenu-list-smart-toggle
       "e"  'flycheck-list-errors
