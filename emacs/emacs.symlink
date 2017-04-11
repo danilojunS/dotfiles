@@ -230,14 +230,18 @@
     :config
     (global-evil-matchit-mode 1))
 
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "o") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
   (evil-define-key 'normal neotree-mode-map (kbd "i") 'neotree-enter-horizontal-split)
   (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-enter-vertical-split)
+  (evil-define-key 'normal neotree-mode-map (kbd "C") 'neotree-change-root)
+  (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+  (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
+  (evil-define-key 'normal neotree-mode-map (kbd "m") 'neotree-rename-node)
 
   (key-chord-define evil-normal-state-map "]e" 'flycheck-next-error)
   (key-chord-define evil-normal-state-map "[e" 'flycheck-previous-error)
