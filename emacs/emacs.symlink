@@ -61,10 +61,7 @@
   (elscreen-start)
   (elscreen-set-prefix-key "\C-a"))
 
-(use-package autopair
-  :ensure t
-  :config
-  (autopair-global-mode))
+(electric-pair-mode 1)
 
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
