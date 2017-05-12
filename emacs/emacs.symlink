@@ -78,6 +78,10 @@
 (global-set-key [s-down] 'windmove-down)
 
 (scroll-bar-mode -1)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (global-hl-line-mode 1)
 
@@ -90,6 +94,19 @@
   :config
   (key-chord-mode 1)
   (setq key-chord-two-keys-delay 0.3))
+
+;;; DASHBOARD SETTINGS
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((recents  . 10)
+                         (projects . 10)
+                         (bookmarks . 5)
+                         (agenda . 5)))
+  (setq dashboard-banner-logo-title (shell-command-to-string "fortune || echo Hello Jun !"))
+  (setq dashboard-startup-banner 'logo))
 
 ;;; HELM SETTINGS
 
