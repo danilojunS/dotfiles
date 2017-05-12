@@ -62,6 +62,11 @@
   (elscreen-start)
   (elscreen-set-prefix-key "\C-a"))
 
+(use-package origami
+  :ensure t
+  :config
+  (global-origami-mode 1))
+
 (electric-pair-mode 1)
 
 (show-paren-mode 1)
@@ -123,6 +128,13 @@
   (dolist (dir projectile-directories-to-ignore-list)
     (add-to-list 'projectile-globally-ignored-directories dir)
     (add-to-list 'grep-find-ignored-directories dir)))
+
+;;; MINIMAP SETTINGS
+
+(use-package minimap
+  :ensure t
+  :config
+  (setq minimap-window-location 'right))
 
 ;;; NEOTREE SETTINGS
 
@@ -212,6 +224,7 @@
       "t"  'neotree-project-dir
       "b"  'imenu-list-smart-toggle
       "e"  'flycheck-list-errors
+      "m"  'minimap-mode
       "xx" 'er/expand-region))
 
   (use-package evil-surround
@@ -281,6 +294,17 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode)))
 
+(use-package tern
+  :ensure t
+  :config
+  (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+
+  (use-package tern-auto-complete
+    :ensure t
+    :config
+    (tern-ac-setup)
+    (add-hook 'tern-mode-hook (lambda () (auto-complete-mode t)))))
+
 (use-package js2-mode
   :ensure t
   :mode "\\.js\\'"
@@ -302,6 +326,13 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "markdown"))
+
+;;; FUN TIME
+
+(use-package emojify
+  :ensure t
+  :config
+  (global-emojify-mode 1))
 
 ;;; AUXILIARY FUNCTIONS
 
