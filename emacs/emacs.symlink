@@ -171,6 +171,7 @@
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-smart-open t)
+  (setq neo-window-fixed-size nil)
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;;; IMENU-LIST SETTINGS
@@ -226,6 +227,23 @@
   (setq ag-highlight-search t)
   (setq ag-reuse-buffers t))
 
+;;; AVY SETTINGS
+
+(use-package avy
+  :ensure t)
+
+;;; DUMB JUMP SETTINGS
+
+(use-package dumb-jump
+  :ensure t
+  :config
+  (dumb-jump-mode 1))
+
+;;; DASH SETTINGS
+
+(use-package helm-dash
+  :ensure t)
+
 ;;; EVIL MODE SETTINGS
 
 (use-package evil
@@ -247,7 +265,10 @@
       "b"  'imenu-list-smart-toggle
       "e"  'flycheck-list-errors
       "m"  'minimap-mode
-      "xx" 'er/expand-region))
+      "d"  'helm-dash
+      "xx" 'er/expand-region
+      "<SPC>"  'avy-goto-char)
+    )
 
   (use-package evil-surround
     :ensure t
@@ -264,6 +285,17 @@
     :config
     (global-evil-matchit-mode 1))
 
+  (use-package evil-visualstar
+    :ensure t
+    :config
+    (global-evil-visualstar-mode 1))
+
+  (use-package evil-nerd-commenter
+    :ensure t
+    :config
+    (key-chord-define evil-normal-state-map "gc" 'evilnc-comment-or-uncomment-lines)
+    (key-chord-define evil-visual-state-map "gc" 'evilnc-comment-or-uncomment-lines))
+
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "o") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
@@ -277,10 +309,14 @@
   (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
   (evil-define-key 'normal neotree-mode-map (kbd "m") 'neotree-rename-node)
 
+  (evil-define-key 'normal dumb-jump-mode-map (kbd "M-j") 'dumb-jump-go)
+  (evil-define-key 'normal dumb-jump-mode-map (kbd "M-k") 'dumb-jump-back)
+
   (key-chord-define evil-normal-state-map "]e" 'flycheck-next-error)
   (key-chord-define evil-normal-state-map "[e" 'flycheck-previous-error)
 
-  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state))
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+  (key-chord-define evil-visual-state-map "ga" 'align-regexp))
 
 ;;; THEME SETTINGS
 
