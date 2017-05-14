@@ -6,6 +6,13 @@ unbind C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
 
+# vim mode
+setw -g mode-keys vi
+
+# vim-like selection-copy
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
+
 # reload conf file
 bind r source-file ~/.tmux.conf
 
@@ -37,9 +44,6 @@ bind M \
 
 # don't rename windows automatically
 set-option -g allow-rename off
-
-# OS specific configs
-if-shell 'test "$(uname)" = "Darwin"' 'source ~/.dotfiles/tmux/tmux-osx.conf'
 
 ######################
 ### DESIGN CHANGES ###
@@ -144,6 +148,7 @@ set -g message-bg colour166
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-yank'
