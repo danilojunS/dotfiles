@@ -77,6 +77,11 @@
 (global-set-key [s-up] 'windmove-up)
 (global-set-key [s-down] 'windmove-down)
 
+(global-set-key (kbd "C-h") 'windmove-left)
+(global-set-key (kbd "C-l") 'windmove-right)
+(global-set-key (kbd "C-k") 'windmove-up)
+(global-set-key (kbd "C-j") 'windmove-down)
+
 (scroll-bar-mode -1)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 ;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
