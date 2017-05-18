@@ -362,11 +362,10 @@
   :config
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
-  (use-package tern-auto-complete
+  (use-package company-tern
     :ensure t
     :config
-    (tern-ac-setup)
-    (add-hook 'tern-mode-hook (lambda () (auto-complete-mode t)))))
+    (add-to-list 'company-backends 'company-tern)))
 
 (use-package js2-mode
   :ensure t
