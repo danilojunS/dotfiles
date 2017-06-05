@@ -92,4 +92,4 @@ alias src='source ~/.zshrc'
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # workstation specific settings
-[[ -f "~/.customrc" ]] && source ~/.customrc
+[[ -f "$HOME/.customrc" ]] && source ~/.customrc
