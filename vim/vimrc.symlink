@@ -56,33 +56,19 @@ let mapleader=' '
 map <Leader>s :split<CR>
 map <Leader>v :vsplit<CR>
 
-if has('macunix')
-  " new horizontal split: alt + shift + d = Î (mac)
-  nnoremap Î :new<CR>
-  " new vertical split: alt + d = ∂ (mac)
-  nnoremap ∂ :vnew<CR>
-endif
+nnoremap <M-D> :new<CR>
+nnoremap <M-d> :vnew<CR>
 
 " tabs navigation
 
-if has('macunix')
-  " go to previous tab: alt + shift + [ = ” (mac)
-  nnoremap ” :tabprevious<CR>
-  " go to next tab: alt + shift + ] = ’ (mac)
-  nnoremap ’ :tabnext<CR>
-  " new tab: alt + t = † (mac)
-  nnoremap † :tabnew<CR>
-
-endif
+nnoremap <M-{> :tabprevious<CR>
+nnoremap <M-}> :tabnext<CR>
+nnoremap <M-t> :tabnew<CR>
 
 " window management
 
-if has('macunix')
-  " close buffer: alt + w (mac)
-  nnoremap ∑ :q<CR>
-  " save (write buffer): alt + s = ß (mac)
-  nnoremap ß :w<CR>
-endif
+nnoremap <M-w> :q<CR>
+nnoremap <M-s> :w<CR>
 
 " ctags
 set tags=./.tags;,tags;
