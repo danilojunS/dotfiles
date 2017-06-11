@@ -345,7 +345,8 @@ you should place your code here."
   (evil-define-key 'normal dumb-jump-mode-map (kbd "M-k") 'dumb-jump-back)
 
   ;; git-gutter settings
-  (git-gutter-mode)
+  (require 'git-gutter-fringe)
+  (global-git-gutter-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
