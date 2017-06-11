@@ -329,10 +329,10 @@
 
 ;;; THEME SETTINGS
 
-(use-package seti-theme
+(use-package material-theme
   :ensure t
   :config
-  (load-theme 'seti t))
+  (load-theme 'material t))
 
 (use-package powerline
   :ensure t
