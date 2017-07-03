@@ -11,3 +11,6 @@
 	lg = log --graph --branches=* --remotes=* --decorate --oneline
 	rs = reset
 	visual = !gitx
+[user]
+	name = Danilo Jun
+	email = danilojunS@users.noreply.github.com
