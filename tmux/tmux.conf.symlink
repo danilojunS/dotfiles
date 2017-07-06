@@ -10,8 +10,8 @@ bind-key C-a send-prefix
 setw -g mode-keys vi
 
 # vim-like selection-copy
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+bind-key -Tcopy-mode-vi 'y' send -X copy-selection
 
 # reload conf file
 bind r source-file ~/.tmux.conf
