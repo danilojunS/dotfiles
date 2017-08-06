@@ -22,6 +22,9 @@ fi
 # include global npm modules to node REPL
 export NODE_PATH="$NODE_PATH:$HOME/.npm-packages/lib/node_modules"
 
+# go settings
+[[ ! "$(type go)" =~ "not found" ]] && PATH="$PATH:$(go env GOPATH)/bin"
+
 # pip settings to allow install packages without sudo
 # http://kazhack.org/?post/2014/12/12/pip-gem-install-without-sudo
 export PYTHONUSERBASE="${HOME}/.pip-packages"
