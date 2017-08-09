@@ -11,16 +11,9 @@ fi
 
 ## Export ENV variables
 
-# npm settings to allow install global packages without sudo
-# https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-# NPM_PACKAGES="${HOME}/.npm-packages"
-# PATH="$PATH:$NPM_PACKAGES/bin"
-# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
-# unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-# export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-# include global npm modules to node REPL
-export NODE_PATH="$NODE_PATH:$HOME/.npm-packages/lib/node_modules"
+# node settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # go settings
 [[ ! "$(type go)" =~ "not found" ]] && PATH="$PATH:$(go env GOPATH)/bin"
