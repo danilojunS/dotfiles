@@ -1,3 +1,5 @@
 #!/bin/sh
 
-brew install macvim --with-override-system-vim
+brew install vim --ovverride-system-vi
+brew install macvim --override-system-vim
+brew linkapps macvim
