@@ -91,8 +91,12 @@ alias src='source ~/.zshrc'
 
 # plugins
 source "$HOME/.oh-my-zsh/custom/plugins/antigen.zsh"
+
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
 
 antigen apply
 
