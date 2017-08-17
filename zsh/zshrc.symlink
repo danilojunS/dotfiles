@@ -60,11 +60,11 @@ plugins=(git extract node npm bower brew python go docker fasd)
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -80,6 +80,7 @@ plugins=(git extract node npm bower brew python go docker fasd)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias src='source ~/.zshrc'
 
 # Include Z, yo
 
@@ -88,12 +89,13 @@ plugins=(git extract node npm bower brew python go docker fasd)
 # bindkey -M viins 'jk' vi-cmd-mode
 # bindkey ‘^R’ history-incremental-search-backward
 
-# aliases
-alias src='source ~/.zshrc'
+# plugins
+source "$HOME/.oh-my-zsh/custom/plugins/antigen.zsh"
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 
-# custom extensions
-[[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+antigen apply
+
 [ -s "$NVM_DIR/nvm.sh" ] && source ~/.dotfiles/zsh/extensions/nvm-autoload.sh
 
 # workstation specific settings
