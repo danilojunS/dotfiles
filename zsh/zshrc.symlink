@@ -92,7 +92,8 @@ plugins=(git extract node npm bower brew python go docker fasd)
 alias src='source ~/.zshrc'
 
 # custom extensions
-[[ -f "$HOME/.oh-my-zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source ~/.oh-my-zsh/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -s "$NVM_DIR/nvm.sh" ] && source ~/.dotfiles/zsh/extensions/nvm-autoload.sh
 
 # workstation specific settings
