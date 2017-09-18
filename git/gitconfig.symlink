@@ -5,12 +5,18 @@
 [alias]
 	df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
 	co = checkout
+	pl = pull
+	ps = push
 	br = branch
 	ci = commit
 	st = status -sb
 	lg = log --graph --branches=* --remotes=* --decorate --oneline
 	rs = reset
 	visual = !gitx
+  stats = shortlog -sn --all --no-merges
+  praise = blame
+  recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+  overview = log --all --oneline --no-merges
 [user]
 	name = Danilo Jun
 	email = danilojunS@users.noreply.github.com
