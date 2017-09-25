@@ -51,6 +51,9 @@ if [[ $OS == 'osx' ]]; then
   alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 fi
 
+# vscode
+alias vs='code'
+
 # import packages and tools
 [[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
 [[ -f "$(brew --prefix)/etc/profile.d/z.sh" ]] && . `brew --prefix`/etc/profile.d/z.sh
