@@ -1274,13 +1274,13 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>96</integer>
+	<integer>9</integer>
 	<key>HotkeyCode</key>
-	<integer>50</integer>
+	<integer>48</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>HotkeyModifiers</key>
-	<integer>262144</integer>
+	<integer>262401</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>JobName</key>
@@ -1344,7 +1344,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>330 301 620 392 0 0 1280 778 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>162 274 796 473 0 0 1280 778 </string>
+	<string>162 295 796 473 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 46 1280 479 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
