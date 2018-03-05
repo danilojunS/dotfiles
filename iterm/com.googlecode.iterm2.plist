@@ -1328,12 +1328,17 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>827 110 787 351 0 0 1680 1028 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>442 457 918 401 0 0 1680 1028 </string>
+	<string>442 457 796 473 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 251 1466 777 0 0 1680 1028 </string>
+	<string>0 66 1676 962 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1954,7 +1959,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>MesloLGMDZForPowerline-Regular 11</string>
+			<string>MesloLGMDZForPowerline-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>1</integer>
 			<key>Prompt Before Closing 2</key>
@@ -2217,7 +2222,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-04T18:46:54Z</date>
+	<date>2018-03-05T21:50:10Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
