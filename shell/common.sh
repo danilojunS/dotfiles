@@ -19,10 +19,8 @@ export NODE_PATH="$(npm root -g)"
 # go settings
 [[ ! "$(type go)" =~ "not found" ]] && PATH="$PATH:$(go env GOPATH)/bin"
 
-# pip settings to allow install packages without sudo
-# http://kazhack.org/?post/2014/12/12/pip-gem-install-without-sudo
-export PYTHONUSERBASE="${HOME}/.pip-packages"
-PATH="$PATH:$PYTHONUSERBASE/bin"
+# python settings
+[[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)"
 
 # java version to use
 export JAVA_HOME="$(/usr/libexec/java_home)"
