@@ -21,6 +21,8 @@ export NODE_PATH="$(npm root -g)"
 
 # python settings
 [[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)"
+export PYTHONUSERBASE="${HOME}/.pip-packages"
+PATH="$PATH:$PYTHONUSERBASE/bin"
 
 # java version to use
 export JAVA_HOME="$(/usr/libexec/java_home)"
