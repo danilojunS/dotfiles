@@ -23,6 +23,7 @@ export NODE_PATH="$(npm root -g)"
 [[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 export PYTHONUSERBASE="${HOME}/.pip-packages"
 PATH="$PATH:$PYTHONUSERBASE/bin"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # ruby settings
 export RVM_DIR="$HOME/.rvm"
