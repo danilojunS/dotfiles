@@ -27,20 +27,26 @@ echo "done!"
 
 # Homebrew installed packages
 echo -n "Installing Homebrew packages..."
-brew install antigen
-brew install fasd
-brew install pyenv
-brew install terraform
-brew install watchman
-brew install pyenv-virtualenv
-brew install redis
-brew install the_silver_searcher
 brew install diff-so-fancy
+brew install fasd
 brew install htop
-brew install node
-brew install python
-brew install sqlite
+brew install the_silver_searcher
+brew install watchman
+
+brew install antigen
 brew install tmux
+
+brew install node
+
+brew install python
+brew install pyenv
+brew install pyenv-virtualenv
+
+brew install terraform
+
+# brew install redis
+# brew install sqlite
+# brew install opencv
 echo -n "done!"
 
 # echo -n "Installing bash-it..."
