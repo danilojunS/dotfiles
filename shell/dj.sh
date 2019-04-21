@@ -20,14 +20,13 @@ export NODE_PATH="$(npm root -g)"
 [[ ! "$(type go)" =~ "not found" ]] && PATH="$PATH:$(go env GOPATH)/bin"
 
 # python settings
-[[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)"
+[[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 export PYTHONUSERBASE="${HOME}/.pip-packages"
 PATH="$PATH:$PYTHONUSERBASE/bin"
 
 # java version to use
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export STUDIO_JDK="$JAVA_HOME"
-# export PATH="/Users/danilojun/.bin:/Users/danilojun/.npm-packages/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Volumes/HDD/Servers/glassfish4/bin"
 
 # to have cool history with timestamps
 export HISTTIMEFORMAT="%y/%m/%d %T "
