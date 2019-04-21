@@ -1,5 +1,5 @@
 # Source common SHELL scripts and aliases
-source $HOME/.dotfiles/shell/common.sh
+source $HOME/.dotfiles/shell/dj.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -105,7 +105,7 @@ bindkey '^[OB' history-substring-search-down
 
 antigen apply
 
-[ -s "$NVM_DIR/nvm.sh" ] && source ~/.dotfiles/zsh/extensions/nvm-autoload.sh
+[ -s "$NVM_DIR/nvm.sh" ] && source "$HOME/.dotfiles/shell/zsh/extensions/nvm-autoload.sh"
 
 # workstation specific settings
-[[ -f "$HOME/.customrc" ]] && source ~/.customrc
+[[ -f "$HOME/.customrc" ]] && source "$HOME/.customrc"

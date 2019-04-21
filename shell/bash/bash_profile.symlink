@@ -1,5 +1,5 @@
 # Source common SHELL scripts and aliases
-source $HOME/.dotfiles/shell/common.sh
+source "$HOME/.dotfiles/shell/dj.sh"
 
 ## Customization
 
@@ -9,4 +9,4 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 alias filetree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 
-source ~/.bashrc
+source "$HOME/.bashrc"

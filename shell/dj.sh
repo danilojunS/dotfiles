@@ -40,9 +40,6 @@ alias dotfiles='cd $HOME/.dotfiles'
 
 # git
 alias g='git'
-alias s='git status'
-alias p='git push'
-alias u='git pull'
 
 # vim
 alias v='vim'
@@ -60,4 +57,3 @@ alias tf='terraform'
 
 # import packages and tools
 [[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
-[[ -f "$(brew --prefix)/etc/profile.d/z.sh" ]] && . `brew --prefix`/etc/profile.d/z.sh
