@@ -54,5 +54,10 @@ alias vs='code'
 # terraform
 alias tf='terraform'
 
+# languages
+alias js='node'
+alias py='python'
+alias rb='ruby'
+
 # import packages and tools
 [[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
