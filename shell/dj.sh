@@ -13,7 +13,7 @@ fi
 
 # node settings
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 export NODE_PATH="$(npm root -g)"
 
 # go settings
@@ -23,6 +23,10 @@ export NODE_PATH="$(npm root -g)"
 [[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 export PYTHONUSERBASE="${HOME}/.pip-packages"
 PATH="$PATH:$PYTHONUSERBASE/bin"
+
+# ruby settings
+export RVM_DIR="$HOME/.rvm"
+[ -s "$RVM_DIR/scripts/rvm" ] && source "$RVM_DIR/scripts/rvm"
 
 # java version to use
 export JAVA_HOME="$(/usr/libexec/java_home)"
