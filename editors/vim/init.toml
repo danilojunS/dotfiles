@@ -38,7 +38,10 @@ auto-completion-tab-key-behavior = "cycle"
 name = "lang#javascript"
 
 [[layers]]
-  name = "tmux"
+name = "tmux"
+
+[[layers]]
+name = "ctrlp"
 
 [[layers]]
 name = 'shell'
