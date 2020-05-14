@@ -56,6 +56,9 @@ fi
 # vscode
 alias vs='code'
 
+# yarn
+alias ya='yarn'
+
 # terraform
 alias tf='terraform'
 
