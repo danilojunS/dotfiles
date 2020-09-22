@@ -22,7 +22,8 @@ export NODE_PATH="$(npm root -g)"
 # python settings
 [[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
 # export PYTHONUSERBASE="${HOME}/.pip-packages"
-# PATH="$PATH:$PYTHONUSERBASE/bin"
+export PYENV_DIR="$HOME/.local"
+PATH="${PYENV_DIR}/bin:$PATH"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # ruby settings
