@@ -31,8 +31,8 @@ export RVM_DIR="$HOME/.rvm"
 [ -s "$RVM_DIR/scripts/rvm" ] && source "$RVM_DIR/scripts/rvm"
 
 # java version to use
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export STUDIO_JDK="$JAVA_HOME"
+# export JAVA_HOME="$(/usr/libexec/java_home)"
+# export STUDIO_JDK="$JAVA_HOME"
 
 # to have cool history with timestamps
 export HISTTIMEFORMAT="%y/%m/%d %T "
