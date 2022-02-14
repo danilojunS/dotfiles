@@ -148,7 +148,8 @@ set-option -g allow-rename off
 # }
 
 # set theme using tmux-themepack plugin
-set -g @themepack 'powerline/double/cyan'
+# set -g @themepack 'powerline/double/cyan'
+set -g @themepack 'powerline/block/yellow'
 
 ## Tmux plugin manager
 
