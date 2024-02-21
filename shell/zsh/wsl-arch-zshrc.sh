@@ -45,7 +45,7 @@ if [[ $OS == 'osx' ]]; then
 fi
 
 # vscode
-alias vs='code --remote wsl+Arch'
+alias vs='code'
 
 # yarn
 alias ya='yarn'
