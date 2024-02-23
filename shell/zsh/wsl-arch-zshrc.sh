@@ -24,6 +24,10 @@ antigen apply
 
 source "/opt/asdf-vm/asdf.sh"
 
+# remember ssh git passhphrase
+# echo "AddKeysToAgent yes" >> ~/.ssh/config
+eval $(ssh-agent) > /dev/null
+
 ## ALIASES
 
 alias rs='reset'
