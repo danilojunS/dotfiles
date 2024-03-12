@@ -27,20 +27,16 @@ echo "done!"
 
 # Homebrew installed packages
 echo -n "Installing Homebrew packages..."
+
+brew install powerlevel10k
+brew install tmux
 brew install diff-so-fancy
+brew install antigen
+brew install asdf
 brew install fasd
 brew install htop
 brew install the_silver_searcher
 brew install watchman
-
-brew install antigen
-brew install tmux
-
-brew install node
-
-brew install python
-brew install pyenv
-brew install pyenv-virtualenv
 
 brew install terraform
 

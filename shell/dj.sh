@@ -11,37 +11,18 @@ fi
 
 ## Export ENV variables
 
-# node settings
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-export NODE_PATH="$(npm root -g)"
-
-# go settings
-[[ ! "$(type go)" =~ "not found" ]] && PATH="$PATH:$(go env GOPATH)/bin"
-
-# python settings
-[[ ! "$(type pyenv)" =~ "not found" ]] && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"
-# export PYTHONUSERBASE="${HOME}/.pip-packages"
-export PYENV_DIR="$HOME/.local"
-PATH="${PYENV_DIR}/bin:$PATH"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-# ruby settings
-export RVM_DIR="$HOME/.rvm"
-[ -s "$RVM_DIR/scripts/rvm" ] && source "$RVM_DIR/scripts/rvm"
-
-# java version to use
-# export JAVA_HOME="$(/usr/libexec/java_home)"
-# export STUDIO_JDK="$JAVA_HOME"
-
 # to have cool history with timestamps
 export HISTTIMEFORMAT="%y/%m/%d %T "
 
 ## ALIASES
 
+alias dotfiles='cd $HOME/.dotfiles'
+
 alias rs='reset'
 alias cl='clear'
-alias dotfiles='cd $HOME/.dotfiles'
+alias cat="bat --style=auto"
+alias ls="exa --icons"
+alias l="ls -lah"
 
 # git
 alias g='git'
@@ -69,4 +50,26 @@ alias py='python'
 alias rb='ruby'
 
 # import packages and tools
+
+# antigen
+[[ -f "/usr/share/zsh/share/antigen.zsh" ]] && source "/usr/share/zsh/share/antigen.zsh"
+[[ -f "/usr/local/share/antigen/antigen.zsh" ]] && source "/usr/local/share/antigen/antigen.zsh"
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/411
+zle -N history-substring-search-up
+zle -N history-substring-search-down
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+
+antigen apply
+
+# fasd
 [[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
+
+# asdf
+[[ -f "/opt/asdf-vm/asdf.sh" ]] && source "/opt/asdf-vm/asdf.sh"
+[[ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]] && source "/usr/local/opt/asdf/libexec/asdf.sh"
