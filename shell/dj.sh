@@ -21,7 +21,7 @@ alias dotfiles='cd $HOME/.dotfiles'
 alias rs='reset'
 alias cl='clear'
 alias cat="bat --style=auto"
-alias ls="exa --icons"
+alias ls="eza --icons"
 alias l="ls -lah"
 
 # git

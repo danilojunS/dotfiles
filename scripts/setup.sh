@@ -37,7 +37,7 @@ brew install fasd
 brew install htop
 brew install the_silver_searcher
 brew install watchman
-brew install exa
+brew install eza
 brew install bat
 
 brew install terraform
