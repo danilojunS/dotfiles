@@ -54,6 +54,7 @@ alias rb='ruby'
 # antigen
 [[ -f "/usr/share/zsh/share/antigen.zsh" ]] && source "/usr/share/zsh/share/antigen.zsh"
 [[ -f "/usr/local/share/antigen/antigen.zsh" ]] && source "/usr/local/share/antigen/antigen.zsh"
+[[ -f "/opt/homebrew/opt/antigen/share/antigen/antigen.zsh" ]] && source "/opt/homebrew/opt/antigen/share/antigen/antigen.zsh"
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
@@ -67,9 +68,11 @@ bindkey '^[OB' history-substring-search-down
 
 antigen apply
 
-# fasd
+# fasd or autojump
 [[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
+[ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
 
 # asdf
 [[ -f "/opt/asdf-vm/asdf.sh" ]] && source "/opt/asdf-vm/asdf.sh"
 [[ -f "/usr/local/opt/asdf/libexec/asdf.sh" ]] && source "/usr/local/opt/asdf/libexec/asdf.sh"
+[[ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ]] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh"
