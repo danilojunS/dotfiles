@@ -20,7 +20,7 @@ eval $(ssh-agent) > /dev/null
 
 ## ALIASES
 
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin/:$PATH"
 
 source $HOME/.dotfiles/shell/dj.sh
 source "$HOME/.customrc"
