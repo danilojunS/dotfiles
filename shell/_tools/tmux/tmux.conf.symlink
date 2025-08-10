@@ -149,7 +149,12 @@ set-option -g allow-rename off
 
 # set theme using tmux-themepack plugin
 # set -g @themepack 'powerline/double/cyan'
-set -g @themepack 'powerline/block/yellow'
+# set -g @themepack 'powerline/block/yellow'
+
+# set theme using tmux2k plugin
+set -g @tmux2k-theme 'monokai'
+# set -g @tmux2k-prefix-highlight 'yellow'
+# set -g @tmux2k-pane-active-border 'yellow'
 
 ## Tmux plugin manager
 
@@ -161,7 +166,8 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'jimeh/tmux-themepack'
+# set -g @plugin 'jimeh/tmux-themepack'
+set -g @plugin '2kabhishek/tmux2k'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
