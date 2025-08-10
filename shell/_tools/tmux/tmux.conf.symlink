@@ -153,8 +153,8 @@ set-option -g allow-rename off
 
 # set theme using tmux2k plugin
 set -g @tmux2k-theme 'monokai'
-# set -g @tmux2k-prefix-highlight 'yellow'
-# set -g @tmux2k-pane-active-border 'yellow'
+set -g @tmux2k-pane-active-border 'blue'
+set -g @tmux2k-prefix-highlight 'yellow'
 
 ## Tmux plugin manager
 
