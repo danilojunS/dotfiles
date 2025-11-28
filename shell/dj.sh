@@ -9,6 +9,11 @@ elif [[ $(uname) == 'Linux' ]]; then
   OS='linux'
 fi
 
+## Keychain in WSL
+if [[ "$OS" = "linux" ]]; then
+  eval $(keychain --quiet --eval id_ed25519)
+fi
+
 ## Export ENV variables
 
 # to have cool history with timestamps
