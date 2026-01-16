@@ -11,7 +11,7 @@ fi
 
 ## Keychain in WSL
 if [[ "$OS" = "linux" ]]; then
-  eval $(keychain --quiet --eval id_ed25519)
+  eval $(keychain --eval --quiet --noask id_ed25519)
 fi
 
 ## Export ENV variables
