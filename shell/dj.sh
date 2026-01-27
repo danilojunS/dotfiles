@@ -29,19 +29,23 @@ alias cat="bat --style=auto"
 alias ls="eza --icons"
 alias l="ls -lah"
 
+# open command for wsl
+if command -v explorer.exe >/dev/null 2>&1; then
+    alias open='explorer.exe'
+fi
+
 # git
 alias g='git'
 
-# vim
+# editors
 alias v='vim'
+alias vs='code'
+alias zd='zed'
 
 if [[ $OS == 'osx' ]]; then
   alias blender="/Applications/Blender/blender.app/Contents/MacOS/blender"
   alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 fi
-
-# vscode
-alias vs='code'
 
 # yarn
 alias ya='yarn'
