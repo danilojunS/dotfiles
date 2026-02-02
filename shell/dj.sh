@@ -58,6 +58,9 @@ alias js='node'
 alias py='python'
 alias rb='ruby'
 
+# agents
+alias ccusage='npx ccusage@latest'
+
 # import packages and tools
 
 # antigen
