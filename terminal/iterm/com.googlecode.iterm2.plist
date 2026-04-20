@@ -25,7 +25,7 @@
 	<key>AiMaxTokens</key>
 	<integer>400000</integer>
 	<key>AiModel</key>
-	<string>gpt-5.1</string>
+	<string>gpt-5.2</string>
 	<key>AiResponseMaxTokens</key>
 	<integer>128000</integer>
 	<key>AitermURL</key>
@@ -1503,7 +1503,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>5.8400287628173828</real>
+			<real>5.8400287628173819</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -2234,7 +2234,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.16654492914676666</real>
+			<real>0.062018111770880138</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
