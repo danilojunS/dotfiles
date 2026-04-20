@@ -18,6 +18,7 @@
     recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
     overview = log --all --oneline --no-merges
     mine = "!git for-each-ref --sort=-committerdate refs/heads/ --format=$'\\e[32m%(committerdate:relative)\\e[0m \\e[33m%(refname:short)\\e[0m \\e[36m%(authoremail)\\e[0m %(contents:subject)' | grep \"$(git config user.email)\" | head -20"
+    wip = "!git for-each-ref --sort=-committerdate --no-merged=master refs/heads/ --format=$'\\e[32m%(committerdate:relative)\\e[0m \\e[33m%(refname:short)\\e[0m \\e[36m%(authoremail)\\e[0m %(contents:subject)' | grep \"$(git config user.email)\" | head -20"
 [user]
 	name = Danilo Jun
 	email = danilojunS@users.noreply.github.com
