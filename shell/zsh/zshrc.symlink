@@ -16,7 +16,7 @@ fi
 
 # remember ssh git passhphrase
 # echo "AddKeysToAgent yes" >> ~/.ssh/config
-eval $(ssh-agent) > /dev/null
+# eval $(ssh-agent) > /dev/null
 
 ## ALIASES
 
