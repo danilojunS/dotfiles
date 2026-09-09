@@ -64,6 +64,16 @@ alias ccusage='npx ccusage@latest'
 # import packages and tools
 
 # antigen
+
+# Antigen short-circuits on the mere existence of its generated cache, so a
+# zero-byte ~/.antigen/init.zsh (an interrupted first run, or two shells racing
+# on the `cat >` that truncates it) silently stubs out `antigen` and every
+# bundle below becomes a no-op. It never self-heals: the only rebuild trigger is
+# a check file being newer than its .zwc. Drop an empty cache before sourcing
+# antigen - it has already read the cache by the time `antigen apply` runs.
+[[ -f "$HOME/.antigen/init.zsh" && ! -s "$HOME/.antigen/init.zsh" ]] && \
+  rm -f "$HOME/.antigen/init.zsh" "$HOME/.antigen/init.zsh.zwc"
+
 [[ -f "/usr/share/zsh/share/antigen.zsh" ]] && source "/usr/share/zsh/share/antigen.zsh"
 [[ -f "/usr/local/share/antigen/antigen.zsh" ]] && source "/usr/local/share/antigen/antigen.zsh"
 [[ -f "/opt/homebrew/opt/antigen/share/antigen/antigen.zsh" ]] && source "/opt/homebrew/opt/antigen/share/antigen/antigen.zsh"
