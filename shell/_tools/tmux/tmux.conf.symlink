@@ -169,5 +169,9 @@ set -g @plugin 'tmux-plugins/tmux-copycat'
 # set -g @plugin 'jimeh/tmux-themepack'
 set -g @plugin '2kabhishek/tmux2k'
 
+# Machine-specific overrides (not tracked in the dotfiles repo)
+# Put per-machine tweaks (colors, etc.) in ~/.tmux.conf.local
+if-shell '[ -f ~/.tmux.conf.local ]' 'source-file ~/.tmux.conf.local'
+
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
