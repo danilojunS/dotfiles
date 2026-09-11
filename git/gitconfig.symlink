@@ -22,7 +22,7 @@
 [user]
 	name = Danilo Jun
 	email = danilojunS@users.noreply.github.com
-	signingkey = /Users/danilojuns/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519.pub
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -33,4 +33,4 @@
 [commit]
 	gpgsign = true
 [gpg "ssh"]
-	allowedSignersFile = /Users/danilojuns/.ssh/allowed_signers
+	allowedSignersFile = ~/.ssh/allowed_signers
