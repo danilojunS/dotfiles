@@ -1923,7 +1923,7 @@
 			<key>Minimum Contrast</key>
 			<real>0.0</real>
 			<key>Mouse Reporting</key>
-			<true/>
+			<false/>
 			<key>Name</key>
 			<string>manjuu</string>
 			<key>Non Ascii Font</key>
