@@ -24,3 +24,8 @@ export PATH="$HOME/bin:$HOME/.local/bin/:$PATH"
 
 source $HOME/.dotfiles/shell/dj.sh
 source "$HOME/.customrc"
+
+# LM Studio CLI (lms), only if installed on this machine
+if [ -d "$HOME/.lmstudio/bin" ]; then
+  export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
