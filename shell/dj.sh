@@ -9,8 +9,14 @@ elif [[ $(uname) == 'Linux' ]]; then
   OS='linux'
 fi
 
-## ssh-agent is set up in zsh/zshrc.symlink, above the p10k instant prompt block
-## (it can prompt for a passphrase, which instant prompt would swallow).
+## ssh-agent is set up in zsh/zshrc.symlink, above the p10k instant prompt
+## block. On Linux/WSL that block starts an agent but deliberately loads no
+## keys, so startup can never block on a passphrase; load the key by hand once
+## per boot with this. (On macOS the agent already holds it and this no-ops.)
+sshkey() {
+  ssh-add -l >/dev/null 2>&1 && return 0   # agent already holds a key
+  ssh-add "${1:-$HOME/.ssh/id_ed25519}"
+}
 
 ## Export ENV variables
 

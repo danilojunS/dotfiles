@@ -1,34 +1,63 @@
-# SSH agent. Must stay ABOVE the p10k instant prompt block: this may prompt for
-# a key passphrase, and instant prompt swallows console input.
+# SSH agent. Must stay ABOVE the p10k instant prompt block: the macOS path may
+# prompt for a key passphrase, and instant prompt swallows console input.
+#
+# Commit signing uses ssh (gpg.format=ssh), so every commit shells out to
+# ssh-keygen -Y sign and needs an agent to sign through; without one it re-reads
+# the encrypted key and asks for the passphrase every single time.
 #
 # A GUI macOS session already has the Keychain-backed launchd agent, and a
 # forwarded agent sets SSH_AUTH_SOCK too, so in both cases there is nothing to
 # do. An incoming SSH session gets neither (the launchd agent is Aqua-only),
 # which is where keychain comes in: one persistent agent per host, re-exported
-# to every later shell, so the passphrase is entered once per boot rather than
-# on every signed commit.
+# to every later shell.
 #
 # Escape hatch if this ever misbehaves: DOTFILES_NO_SSH_AGENT=1
 if [[ -z "$SSH_AUTH_SOCK" && -z "$DOTFILES_NO_SSH_AGENT" ]] && command -v keychain >/dev/null 2>&1; then
   # Detect by version number, NOT by probing for the `add` action: 2.x prints
   # usage and exits 0 for any `--help`, so an action probe false-positives.
+  # 3.x moved to subcommands (`keychain add`); 2.x keeps the flat CLI, and
+  # --quick/--immediate/--no-gui/--ignore-missing are 3.x-only spellings.
   _kcmaj=$(keychain --version 2>&1 | sed -n 's/.*[Kk]ey[Cc]hain[^0-9]*\([0-9][0-9]*\).*/\1/p' | head -1)
-  if [[ -n "$_kcmaj" && "$_kcmaj" -ge 3 ]]; then
-    # 3.x subcommand CLI. --quick short-circuits once the agent holds a key;
-    # --immediate skips the "Press Enter to initialize keys" step.
-    _kc=(keychain add --eval --quiet --quick --immediate --ignore-missing --no-gui)
+
+  if [[ $(uname) == 'Darwin' ]]; then
+    # macOS reached over SSH is the case this was built for: load the key here
+    # so the passphrase is typed once per boot rather than on every commit.
+    # Verified end to end on the Mac mini with keychain 3.0.4.
+    if [[ -n "$_kcmaj" && "$_kcmaj" -ge 3 ]]; then
+      # --quick short-circuits once the agent holds a key; --immediate skips
+      # the "Press Enter to initialize keys" step.
+      _kc=(keychain add --eval --quiet --quick --immediate --ignore-missing --no-gui)
+    else
+      _kc=(keychain --eval --quiet --noask --nogui)
+    fi
+    # Without a tty there is nowhere to type a passphrase either.
+    [[ -t 0 ]] || _kc+=(--noask)
+    # stderr must NOT be redirected: the passphrase prompt goes to stderr, and
+    # hiding it leaves the shell blocked on invisible input.
+    eval "$("${_kc[@]}" id_ed25519)"
   else
-    # 2.x (and anything unrecognised) keeps the older flat CLI and never asks.
-    # ssh-add can silently block on a GUI askpass that never appears, e.g. under
-    # WSL, which hangs the shell with no output at all. Load keys there by hand:
-    #   ssh-add ~/.ssh/id_ed25519
-    _kc=(keychain --eval --quiet --noask --nogui)
+    # Linux/WSL only ever got this as collateral, and loading a key here is what
+    # hung every new shell: keychain 3.x runs `ssh-add -q`, which sat on
+    # /dev/tty waiting for a passphrase with no visible prompt (-q), and its
+    # coordinated activation then parked every *other* new shell as a waiter on
+    # that one unanswered load (~/.keychain/<host>-waiters, state.json
+    # "in_progress": true). One missed prompt wedged every terminal after it.
+    #
+    # So: agent only, never a key. --noask means nothing can prompt and no
+    # activation exists for other shells to queue behind. Load keys on demand
+    # with `sshkey` (shell/dj.sh), which is one passphrase per boot as before.
+    if [[ -n "$_kcmaj" && "$_kcmaj" -ge 3 ]]; then
+      _kc=(keychain add --eval --quiet --quick --noask --no-gui --ignore-missing)
+    else
+      # The flat 2.x line this file shipped for years, unchanged.
+      _kc=(keychain --eval --quiet --noask --nogui)
+    fi
+    # Belt and braces: nothing above can prompt, so nothing above may block.
+    # A wedged shell is far worse than a missing agent. Safe here precisely
+    # because this branch never waits on input -- do NOT copy it to macOS.
+    command -v timeout >/dev/null 2>&1 && _kc=(timeout 5 "${_kc[@]}")
+    eval "$("${_kc[@]}" id_ed25519 </dev/null)"
   fi
-  # Without a tty there is nowhere to type a passphrase either.
-  [[ -t 0 ]] || _kc+=(--noask)
-  # stderr must NOT be redirected: the passphrase prompt goes to stderr, and
-  # hiding it leaves the shell blocked on invisible input.
-  eval "$("${_kc[@]}" id_ed25519)"
   unset _kc _kcmaj
 fi
 
