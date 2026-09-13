@@ -1,0 +1,26 @@
+# Symlinked to ~/.ssh/config.
+#
+# Machine-specific hosts live in ~/.ssh/config.local, which is not versioned
+# (same split as ~/.gitconfig.local). The Include goes first because ssh keeps
+# the first value it sees for each option, so the local file always wins.
+Include ~/.ssh/config.local
+
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519
+
+# Defaults for every host. `Host *` goes last for the same first-wins reason.
+# No IdentityFile here on purpose: setting one replaces ssh's default candidate
+# list instead of adding to it, which would stop a machine whose key is named
+# something else (id_rsa on an older box) from ever offering it.
+Host *
+  # Load the key into the agent on first use and unlock it from the macOS
+  # keychain, so the passphrase is asked once per boot instead of per connection.
+  # UseKeychain is an Apple-only option: without IgnoreUnknown, stock OpenSSH
+  # does not skip it, it aborts every connection with "Bad configuration option".
+  IgnoreUnknown UseKeychain
+  AddKeysToAgent yes
+  UseKeychain yes
+  # Tailscale drops idle connections; a ping a minute keeps sessions from
+  # freezing when you come back to a terminal you left open.
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
