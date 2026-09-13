@@ -98,7 +98,7 @@ _taildrop_ssh_origin() {
 # common case needs no configuration and stays correct from any client.
 #
 #   rtsend report.md                    # back to the machine you are sitting at
-#   rtsend -t rog-zephyrus-m16 a.md b.md
+#   rtsend -t my-laptop a.md b.md
 #   some-cmd | rtsend -n output.txt     # send stdin under a chosen name
 #   rtsend --targets                    # list what you can send to
 #
