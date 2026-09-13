@@ -90,8 +90,8 @@ bindkey '^[OB' history-substring-search-down
 
 antigen apply
 
-# fasd or autojump
-[[ ! "$(type fasd)" =~ "not found" ]] && eval "$(fasd --init auto)"
+# zoxide or autojump
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 [ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
 
 # asdf

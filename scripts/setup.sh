@@ -33,7 +33,7 @@ brew install tmux
 brew install diff-so-fancy
 brew install antigen
 brew install asdf
-brew install fasd
+brew install zoxide
 brew install htop
 brew install the_silver_searcher
 brew install watchman
