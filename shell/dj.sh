@@ -18,6 +18,9 @@ sshkey() {
   ssh-add "${1:-$HOME/.ssh/id_ed25519}"
 }
 
+## Cross-SSH clipboard + file transfer (rtcopy, rtpaste, rtsend)
+[ -f "$HOME/.dotfiles/shell/clip.sh" ] && source "$HOME/.dotfiles/shell/clip.sh"
+
 ## Export ENV variables
 
 # to have cool history with timestamps

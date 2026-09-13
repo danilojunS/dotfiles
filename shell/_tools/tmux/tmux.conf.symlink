@@ -16,6 +16,13 @@ setw -g mode-keys vi
 bind-key -Tcopy-mode-vi 'v' send -X begin-selection
 bind-key -Tcopy-mode-vi 'y' send -X copy-selection
 
+# Let applications inside tmux set the OUTER terminal's clipboard via OSC 52.
+# The default here is 'external', which lets tmux set the clipboard for its own
+# copy-mode but silently drops OSC 52 coming from programs -- which is what
+# `rcopy` uses to reach the machine you are sitting at over SSH.
+set -g set-clipboard on
+set -g allow-passthrough on
+
 # reload conf file
 bind r source-file ~/.tmux.conf
 
