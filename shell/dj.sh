@@ -9,10 +9,8 @@ elif [[ $(uname) == 'Linux' ]]; then
   OS='linux'
 fi
 
-## Keychain in WSL
-if [[ "$OS" = "linux" ]]; then
-  eval $(keychain --eval --quiet --noask id_ed25519)
-fi
+## ssh-agent is set up in zsh/zshrc.symlink, above the p10k instant prompt block
+## (it can prompt for a passphrase, which instant prompt would swallow).
 
 ## Export ENV variables
 
