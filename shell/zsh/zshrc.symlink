@@ -4,25 +4,32 @@
 # A GUI macOS session already has the Keychain-backed launchd agent, and a
 # forwarded agent sets SSH_AUTH_SOCK too, so in both cases there is nothing to
 # do. An incoming SSH session gets neither (the launchd agent is Aqua-only),
-# which is where keychain comes in: it starts one persistent agent per host and
-# re-exports it to every later shell, so the passphrase is entered once per boot
-# rather than on every signed commit.
-if [[ -z "$SSH_AUTH_SOCK" ]] && command -v keychain >/dev/null 2>&1; then
-  if keychain add --help >/dev/null 2>&1; then
-    # --quick short-circuits once the agent holds a key, so only the first shell
-    # after a boot pays for the lock and the prompt. --immediate skips the
-    # "Press Enter to initialize keys" interstitial and asks straight away.
-    _kc=(keychain add --eval --quiet --quick --immediate --ignore-missing --no-gui)  # 3.x
+# which is where keychain comes in: one persistent agent per host, re-exported
+# to every later shell, so the passphrase is entered once per boot rather than
+# on every signed commit.
+#
+# Escape hatch if this ever misbehaves: DOTFILES_NO_SSH_AGENT=1
+if [[ -z "$SSH_AUTH_SOCK" && -z "$DOTFILES_NO_SSH_AGENT" ]] && command -v keychain >/dev/null 2>&1; then
+  # Detect by version number, NOT by probing for the `add` action: 2.x prints
+  # usage and exits 0 for any `--help`, so an action probe false-positives.
+  _kcmaj=$(keychain --version 2>&1 | sed -n 's/.*[Kk]ey[Cc]hain[^0-9]*\([0-9][0-9]*\).*/\1/p' | head -1)
+  if [[ -n "$_kcmaj" && "$_kcmaj" -ge 3 ]]; then
+    # 3.x subcommand CLI. --quick short-circuits once the agent holds a key;
+    # --immediate skips the "Press Enter to initialize keys" step.
+    _kc=(keychain add --eval --quiet --quick --immediate --ignore-missing --no-gui)
   else
-    _kc=(keychain --eval --quiet)                                        # 2.x
+    # 2.x (and anything unrecognised) keeps the older flat CLI and never asks.
+    # ssh-add can silently block on a GUI askpass that never appears, e.g. under
+    # WSL, which hangs the shell with no output at all. Load keys there by hand:
+    #   ssh-add ~/.ssh/id_ed25519
+    _kc=(keychain --eval --quiet --noask --nogui)
   fi
-  # Without a tty there is nowhere to type a passphrase, so only adopt an agent
-  # that is already running instead of blocking a non-interactive shell.
+  # Without a tty there is nowhere to type a passphrase either.
   [[ -t 0 ]] || _kc+=(--noask)
-  # stderr must NOT be redirected here: the passphrase prompt goes to stderr,
-  # and hiding it leaves the shell blocked on invisible input.
+  # stderr must NOT be redirected: the passphrase prompt goes to stderr, and
+  # hiding it leaves the shell blocked on invisible input.
   eval "$("${_kc[@]}" id_ed25519)"
-  unset _kc
+  unset _kc _kcmaj
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
