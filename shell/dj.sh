@@ -98,7 +98,43 @@ bindkey '^[OB' history-substring-search-down
 antigen apply
 
 # zoxide or autojump
-command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null; then
+  if [ -n "$ZSH_VERSION" ]; then
+    # Antigen defers compinit to the first precmd and, until it fires, leaves
+    # `compdef` stubbed out as an empty function (~/.antigen/init.zsh). Every
+    # completion registered from .zshrc -- zoxide's included -- is therefore
+    # silently thrown away, and the deferred compinit would rebuild _comps from
+    # fpath afterwards anyway. Run compinit here and cancel the deferred one, so
+    # the compdef calls below actually stick.
+    autoload -Uz add-zsh-hook compinit
+    add-zsh-hook -D precmd _antigen_compinit 2>/dev/null
+    compinit -i -d "$HOME/.antigen/.zcompdump"
+    (( $+functions[_antigen] )) && compdef _antigen antigen
+  fi
+
+  eval "$(zoxide init zsh)"
+
+  if [ -n "$ZSH_VERSION" ]; then
+    # zoxide ships a completion that only reaches the database on Space-Tab,
+    # and only through fzf; plain `z data2<TAB>` just lists subdirectories of
+    # the current directory. Complete from the database directly instead, so
+    # the keywords you type rank against every folder you have visited.
+    _zoxide_db_complete() {
+      local -a results
+      results=(${(f)"$(command zoxide query --list --exclude "$PWD" -- "${(@)words[2,CURRENT]}" 2>/dev/null)"})
+      (( $#results )) || return 1
+      # Two defaults have to be overridden to keep zoxide's ranking intact:
+      # plain compadd sorts matches alphabetically (-V makes an unsorted group),
+      # and the first Tab inserts the longest prefix common to every match --
+      # for "data2" that is just /Users/danilojuns/, because cowork/data2 shares
+      # nothing else with the development/data2 tree. Menu insertion puts the
+      # best-ranked path on the line instead, and further Tabs cycle.
+      compstate[insert]=menu
+      compadd -U -Q -V zoxide -a results
+    }
+    compdef _zoxide_db_complete z
+  fi
+fi
 [ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
 
 # asdf
