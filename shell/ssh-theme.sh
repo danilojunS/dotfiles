@@ -54,7 +54,7 @@ _ssh_theme_flavour() {
     gruvbox-hard)  echo "1d2021:ebdbb2" ;;
     gruvbox-soft)  echo "32302f:ebdbb2" ;;
     # Catppuccin's pastels rotated warm; matches ~/.tmux.conf.local
-    foxpuccin)     echo "2b2420:f3e5da" ;;
+    foxpuccin)     echo "1c1612:f3e5da" ;;
     *)             return 1 ;;
   esac
 }
