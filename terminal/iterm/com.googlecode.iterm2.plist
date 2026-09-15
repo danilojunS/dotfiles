@@ -1498,11 +1498,11 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.07058823529411765</real>
+				<real>0.070588238537311554</real>
 				<key>Green Component</key>
-				<real>0.08627450980392157</real>
+				<real>0.070588238537311554</real>
 				<key>Red Component</key>
-				<real>0.10980392156862745</real>
+				<real>0.070588238537311554</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
