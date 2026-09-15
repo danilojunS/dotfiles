@@ -21,6 +21,9 @@ sshkey() {
 ## Cross-SSH clipboard + file transfer (rtcopy, rtpaste, rtsend)
 [ -f "$HOME/.dotfiles/shell/clip.sh" ] && source "$HOME/.dotfiles/shell/clip.sh"
 
+## Per-host terminal colours while SSHed in (map: ~/.ssh/themes)
+[ -f "$HOME/.dotfiles/shell/ssh-theme.sh" ] && source "$HOME/.dotfiles/shell/ssh-theme.sh"
+
 ## Export ENV variables
 
 # to have cool history with timestamps

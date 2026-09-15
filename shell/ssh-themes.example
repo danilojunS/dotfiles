@@ -1,0 +1,32 @@
+# Per-host terminal colours for the `ssh` wrapper in shell/ssh-theme.sh.
+# Copy to ~/.ssh/themes (or point $SSH_THEMES_FILE at it) and edit.
+#
+#   <pattern>   <background>   [foreground]
+#
+# <pattern> is a glob, matched first against the host as typed, then against the
+# hostname ssh resolves it to. First match wins. Colours are a flavour name --
+# Catppuccin (latte, frappe, macchiato, mocha) or Gruvbox dark (gruvbox,
+# gruvbox-hard, gruvbox-soft) -- or six hex digits with NO leading '#', since
+# '#' starts a comment. A host with no line here is left alone: the terminal
+# keeps whatever background it already has.
+
+my-server            mocha
+my-laptop            macchiato
+build-box            gruvbox     # match whatever its tmux sits on
+
+# *.prod.example.com   ff5555  ffffff    # shout about production
+
+# Restore colour. Only needed if your terminal ignores OSC 111/110 ("reset to
+# the profile's colours"), which is what the wrapper uses by default.
+# default   121212
+
+# ---------------------------------------------------------------------------
+# The other direction: a host can declare its OWN colours, so every client that
+# connects gets them -- even one with none of this installed. On that host put a
+# single line in ~/.ssh/host-theme (or /etc/ssh/host-theme for every user):
+#
+#   gruvbox
+#
+# Same colour syntax as above, minus the host pattern. A client that has its own
+# line here overrides it: it sends LC_SSH_THEME=client and the host stays quiet,
+# so list a self-declaring host above only when you want to override it.
