@@ -12,6 +12,7 @@
 ##   # <pattern>          <background>  [foreground]
 ##   my-server            mocha                  # a named flavour
 ##   build-box            gruvbox
+##   my-desktop           foxpuccin
 ##   *.prod.example.com   ff5555        ffffff   # 6 hex digits, no leading #
 ##   default              121212                 # optional, see _ssh_theme_reset
 ##
@@ -52,6 +53,8 @@ _ssh_theme_flavour() {
     gruvbox)       echo "282828:ebdbb2" ;;
     gruvbox-hard)  echo "1d2021:ebdbb2" ;;
     gruvbox-soft)  echo "32302f:ebdbb2" ;;
+    # Catppuccin's pastels rotated warm; matches ~/.tmux.conf.local
+    foxpuccin)     echo "2b2420:f3e5da" ;;
     *)             return 1 ;;
   esac
 }

@@ -5,8 +5,9 @@
 #
 # <pattern> is a glob, matched first against the host as typed, then against the
 # hostname ssh resolves it to. First match wins. Colours are a flavour name --
-# Catppuccin (latte, frappe, macchiato, mocha) or Gruvbox dark (gruvbox,
-# gruvbox-hard, gruvbox-soft) -- or six hex digits with NO leading '#', since
+# Catppuccin (latte, frappe, macchiato, mocha), Gruvbox dark (gruvbox,
+# gruvbox-hard, gruvbox-soft) or foxpuccin, the warm pastel palette this
+# machine's tmux uses -- or six hex digits with NO leading '#', since
 # '#' starts a comment. A host with no line here is left alone: the terminal
 # keeps whatever background it already has.
 
