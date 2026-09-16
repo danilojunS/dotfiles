@@ -67,6 +67,12 @@ _ssh_theme_flavour() {
     gruvbox-soft)  echo "32302f:ebdbb2" ;;
     # Catppuccin's pastels rotated warm; matches ~/.tmux.conf.local
     foxpuccin)     echo "1c1612:f3e5da" ;;
+    # The iTerm profile's own colours, under the name of the profile. Only
+    # worth declaring on the machine that already opens on them: it buys the
+    # host a name to announce rather than a new look, and pins the restore
+    # colour for a terminal that ignores OSC 111. Keep it in step with
+    # New Bookmarks[0] in terminal/iterm/com.googlecode.iterm2.plist.
+    manjuu)        echo "121212:a0a0a0" ;;
     *)             return 1 ;;
   esac
 }
