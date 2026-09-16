@@ -22,12 +22,22 @@ build-box            gruvbox     # match whatever its tmux sits on
 # default   121212
 
 # ---------------------------------------------------------------------------
-# The other direction: a host can declare its OWN colours, so every client that
-# connects gets them -- even one with none of this installed. On that host put a
-# single line in ~/.ssh/host-theme (or /etc/ssh/host-theme for every user):
+# The other direction: a machine can declare its OWN colour. On that machine put
+# a single line in ~/.ssh/host-theme (or /etc/ssh/host-theme for every user):
 #
 #   gruvbox
 #
-# Same colour syntax as above, minus the host pattern. A client that has its own
-# line here overrides it: it sends LC_SSH_THEME=client and the host stays quiet,
-# so list a self-declaring host above only when you want to override it.
+# Same colour syntax as above, minus the host pattern. That colour goes on the
+# window from both sides:
+#
+#   - every client that connects gets it, even one with none of this installed.
+#     A client with its own line here overrides it: it sends LC_SSH_THEME=client
+#     and the host stays quiet, so list a self-declaring host above only when
+#     you want to override it.
+#
+#   - terminals sitting at the machine itself get it too, so `ssh that-box` from
+#     here and a window opened over there land on the same background. Keep the
+#     line above and the host's own file on the same flavour NAME and they
+#     cannot drift apart -- both resolve through one table in ssh-theme.sh.
+#     Set DOTFILES_NO_LOCAL_THEME=1 on the machine to keep its local windows
+#     alone and only announce to clients.

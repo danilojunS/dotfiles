@@ -21,18 +21,30 @@
 ## one entry. Colours are either a flavour name from the table below or six hex
 ## digits WITHOUT a leading `#` -- `#` starts a comment anywhere on the line.
 ##
-## The other half of this file runs on the SERVER: a host can declare its own
-## colours in ~/.ssh/host-theme (or /etc/ssh/host-theme, for every user on the
-## box), one line, same colour syntax:
+## The other half of this file declares a colour for the machine it runs ON,
+## rather than for the machines it connects to. One line in ~/.ssh/host-theme
+## (or /etc/ssh/host-theme, for every user on the box), same colour syntax
+## minus the host pattern:
 ##
 ##   gruvbox
 ##   282828 ebdbb2
 ##
-## That reaches any client, including one with none of this installed, because
-## it is just an escape sequence the login shell prints. A client that has its
-## own entry for the host wins: it tells the server to keep quiet by sending
-## LC_SSH_THEME=client (an LC_* name because that is what sshd accepts by
-## default), so the two halves never fight over the same window.
+## That colour is the machine's, so it goes on the window in both directions:
+##
+##   - over SSH, announced to whoever connects. It reaches a client with none
+##     of this installed, because it is just an escape sequence the login shell
+##     prints. A client that has its own entry for the host wins: it tells the
+##     server to keep quiet by sending LC_SSH_THEME=client (an LC_* name
+##     because that is what sshd accepts by default), so the two halves never
+##     fight over the same window.
+##
+##   - locally, on a terminal sitting at the machine itself. `ssh fox` from a
+##     laptop and fox's own iTerm then open on one background instead of two,
+##     without the colour being written down twice -- both sides resolve the
+##     same flavour name through the table below.
+##
+## Declaring a colour for clients but not for local windows: set
+## DOTFILES_NO_LOCAL_THEME=1 on that machine.
 ##
 ## Escape hatch if this ever misbehaves: DOTFILES_NO_SSH_THEME=1
 
@@ -192,7 +204,14 @@ _ssh_theme_apply() {
 _ssh_theme_reset() {
   local had_fg="$1" spec bg fg
 
-  spec=$(_ssh_theme_default)
+  # A window this machine painted for itself comes back to that colour, not to
+  # the profile's: on a host with its own theme, `ssh elsewhere` and back has
+  # to land on the host's background again, and OSC 111 would strip it down to
+  # whatever the iTerm profile happens to be. Exported, so an ssh run from a
+  # subshell or a tmux pane restores what is actually on screen.
+  spec="$_SSH_THEME_SELF"
+  [ -n "$spec" ] || spec=$(_ssh_theme_default)
+
   if [ -n "$spec" ]; then
     bg="${spec%%:*}"
     fg="${spec#*:}"
@@ -302,30 +321,46 @@ _ssh_theme_host_spec() {
 # resets: children and tmux panes inherit _SSH_THEME_ANNOUNCED with their
 # parent's pid, so exiting one pane cannot strip the colour from the rest.
 _ssh_theme_unannounce() {
+  local spec
+
   [ "$_SSH_THEME_ANNOUNCED" = "$$" ] || return 0
 
-  # Clear the marker BEFORE resetting. zsh runs zshexit hooks on subshell exit
+  # Clear the markers BEFORE resetting. zsh runs zshexit hooks on subshell exit
   # as well, so the command substitutions below re-enter this function; without
   # this they would print a second copy of the escapes into the captured
-  # output, corrupting the value being read.
-  unset _SSH_THEME_ANNOUNCED
+  # output, corrupting the value being read. Clearing _SSH_THEME_SELF is also
+  # what stops _ssh_theme_reset putting back the very colour being taken off.
+  spec="$_SSH_THEME_SELF"
+  unset _SSH_THEME_ANNOUNCED _SSH_THEME_SELF
 
-  _ssh_theme_reset "$_SSH_THEME_ANNOUNCED_FG"
+  # A spec always carries the separator, so an empty tail means "no foreground
+  # was set" and only the background needs resetting.
+  if [ -n "${spec#*:}" ]; then
+    _ssh_theme_reset 1
+  else
+    _ssh_theme_reset 0
+  fi
 }
 
 _ssh_theme_announce() {
-  local spec bg fg
+  local spec bg fg remote=0
 
-  # Only an interactive login over SSH, on a real terminal, that no ancestor
-  # shell has already announced for -- and never when the client said it has
-  # already themed the window itself.
+  # Only an interactive shell on a real terminal, and only one that no ancestor
+  # already painted the window for.
   case $- in *i*) ;; *) return 0 ;; esac
-  [ -n "$SSH_CONNECTION" ] || return 0
-  [ -n "$_SSH_THEME_ANNOUNCED" ] && return 0
-  [ "$LC_SSH_THEME" = client ] && return 0
+  [ -n "$_SSH_THEME_SELF" ] && return 0
   [ -n "$DOTFILES_NO_SSH_THEME" ] && return 0
   [ -n "$TERM" ] && [ "$TERM" != dumb ] || return 0
   [ -t 1 ] || return 0
+
+  if [ -n "$SSH_CONNECTION" ]; then
+    # The client has an entry for this host and has already painted the window
+    # from it; announcing over the top would only fight it.
+    [ "$LC_SSH_THEME" = client ] && return 0
+    remote=1
+  else
+    [ -n "$DOTFILES_NO_LOCAL_THEME" ] && return 0
+  fi
 
   spec=$(_ssh_theme_host_spec)
   [ -n "$spec" ] || return 0
@@ -333,10 +368,16 @@ _ssh_theme_announce() {
   fg="${spec#*:}"
 
   _ssh_theme_apply "$bg" "$fg"
+  export _SSH_THEME_SELF="$spec"
+
+  # Only a session that ends with the window still standing has a colour to
+  # hand back. A local shell exits with the window, and registering the hook
+  # anyway would be actively wrong under tmux: panes started after this one do
+  # not inherit the marker, so each would match its own pid and the first pane
+  # to close would strip the background off all the rest.
+  [ "$remote" = 1 ] || return 0
 
   export _SSH_THEME_ANNOUNCED="$$"
-  export _SSH_THEME_ANNOUNCED_FG=0
-  [ -n "$fg" ] && export _SSH_THEME_ANNOUNCED_FG=1
 
   # add-zsh-hook rather than defining zshexit(), so this does not quietly
   # replace an exit hook something else installed.
