@@ -1,0 +1,27 @@
+# Shared herdr config, symlinked to ~/.config/herdr/config.toml by install.sh.
+# Per-machine overrides (theme, etc.) go in ~/.config/herdr/config.local.toml,
+# which the herdr() wrapper in shell/dj.sh merges on top of this file.
+
+onboarding = false
+
+[keys]
+# ctrl+a outside tmux. Inside tmux (which owns ctrl+a) the herdr() wrapper in
+# shell/dj.sh drops it back to ctrl+b.
+prefix = "ctrl+a"
+
+# tmux-style splits (matches ~/.tmux.conf: prefix+| side by side, prefix+- stacked)
+split_vertical = ["prefix+|", "prefix+v"]
+split_horizontal = "prefix+minus"
+
+# ctrl+hjkl moves between panes without the prefix
+focus_pane_left = ["ctrl+h", "prefix+h"]
+focus_pane_down = ["ctrl+j", "prefix+j"]
+focus_pane_up = ["ctrl+k", "prefix+k"]
+focus_pane_right = ["ctrl+l", "prefix+l"]
+
+[theme]
+name = "kanagawa"
+auto_switch = false
+
+[ui.toast]
+delivery = "system"
