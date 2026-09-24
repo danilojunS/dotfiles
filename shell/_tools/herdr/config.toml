@@ -1,6 +1,6 @@
-# Shared herdr config, symlinked to ~/.config/herdr/config.toml by install.sh.
-# Per-machine overrides (theme, etc.) go in ~/.config/herdr/config.local.toml,
-# which the herdr() wrapper in shell/dj.sh merges on top of this file.
+# Shared herdr config. build-config.sh merges ~/.config/herdr/config.local.toml
+# (per-machine overrides: theme, etc.) on top of it into ~/.config/herdr/config.toml,
+# on install and on every `herdr` through the wrapper in shell/dj.sh.
 
 onboarding = false
 

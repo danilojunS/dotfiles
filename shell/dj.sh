@@ -71,33 +71,28 @@ alias rb='ruby'
 # agents
 alias ccusage='npx ccusage@latest'
 
-# herdr reads one config file: ~/.config/herdr/config.toml, a symlink to
-# shell/_tools/herdr/config.toml. Two things need a different one, so they are
-# merged into config.effective.toml and herdr is pointed at that instead:
+# herdr reads one config file, ~/.config/herdr/config.toml, and both the client
+# and the brew-managed server read it: the server draws the panes, so their
+# borders follow its config. build-config.sh generates it from
+# shell/_tools/herdr/config.toml plus ~/.config/herdr/config.local.toml (this
+# machine's own overrides, unversioned like ~/.tmux.conf.local, optional), and
+# reloads the server when it changes. Rebuilt on every call: edit the sources,
+# never the generated files, and relaunch to apply.
 #
-#   - ~/.config/herdr/config.local.toml, this machine's own overrides (theme,
-#     sidebar, ...), unversioned like ~/.tmux.conf.local. Optional.
-#   - running inside tmux, which already owns herdr's ctrl+a prefix, so the
-#     prefix drops back to ctrl+b.
-#
-# Theme and keys come from the attaching client's config, so this only has to
-# reach `herdr` typed here, not the brew-managed server. Rebuilt on every call:
-# edit the sources, never config.effective.toml, and relaunch to apply.
+# Inside tmux, which already owns herdr's ctrl+a prefix, the client alone runs
+# on config.effective.toml, the same config with the prefix back on ctrl+b.
 herdr() {
-  local dir="$HOME/.config/herdr"
-  local base="$dir/config.toml" local_conf="$dir/config.local.toml"
-  local out="$dir/config.effective.toml"
-  local merge="$HOME/.dotfiles/shell/_tools/herdr/merge-config.py"
+  local tools="$HOME/.dotfiles/shell/_tools/herdr"
+  local conf="$HOME/.config/herdr/config.toml"
+  local out="$HOME/.config/herdr/config.effective.toml"
 
-  if [ -f "$base" ] && { [ -f "$local_conf" ] || [ -n "$TMUX" ]; }; then
-    local args=("$out" "$base")
-    [ -f "$local_conf" ] && args+=("$local_conf")
-    [ -n "$TMUX" ] && args+=(--prefix ctrl+b)
-    if python3 "$merge" "${args[@]}"; then
-      HERDR_CONFIG_PATH="$out" command herdr "$@"
-      return
-    fi
-    echo "herdr: could not merge config, starting on $base alone" >&2
+  zsh "$tools/build-config.sh" ||
+    echo "herdr: could not merge config, starting on $conf as it is" >&2
+
+  if [ -n "$TMUX" ] && [ -f "$conf" ] &&
+    python3 "$tools/merge-config.py" "$out" "$conf" --prefix ctrl+b; then
+    HERDR_CONFIG_PATH="$out" command herdr "$@"
+    return
   fi
   command herdr "$@"
 }

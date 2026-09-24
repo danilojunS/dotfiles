@@ -3,8 +3,9 @@
 
 herdr reads exactly one config file and TOML has no include, so the shared
 config in the dotfiles and a machine's own overrides have to be merged into a
-third file, which the herdr() wrapper in shell/dj.sh hands to herdr through
-HERDR_CONFIG_PATH.
+third file: ~/.config/herdr/config.toml itself, written by build-config.sh, and
+inside tmux config.effective.toml, which the herdr() wrapper in shell/dj.sh
+hands the client through HERDR_CONFIG_PATH.
 
     merge-config.py OUT BASE [LOCAL] [--prefix KEY]
 
@@ -13,7 +14,7 @@ other value (strings, arrays, arrays of tables) is replaced whole. --prefix
 overrides keys.prefix after the merge, for running inside tmux.
 
 Needs tomllib (Python 3.11+). Exits non-zero without touching OUT if it is
-missing or either file does not parse, so the wrapper can fall back to BASE.
+missing or either file does not parse, so the caller can keep the config it has.
 """
 
 import json
