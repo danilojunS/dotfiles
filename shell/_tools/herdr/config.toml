@@ -19,9 +19,22 @@ focus_pane_down = ["ctrl+j", "prefix+j"]
 focus_pane_up = ["ctrl+k", "prefix+k"]
 focus_pane_right = ["ctrl+l", "prefix+l"]
 
+# prefix+x asks before closing, like tmux's kill-pane (see [[keys.command]]
+# below), so the built-in instant close gives the key up.
+close_pane = []
+
 [theme]
 name = "kanagawa"
 auto_switch = false
 
 [ui.toast]
 delivery = "system"
+
+# tmux-style `kill-pane? (y/n)` for prefix+x. Any key but y cancels.
+[[keys.command]]
+key = "prefix+x"
+type = "popup"
+description = "close pane (confirm)"
+width = 30
+height = 3
+command = 'printf "close pane? (y/n) "; stty -icanon -echo; c=$(dd bs=1 count=1 2>/dev/null); [ "$c" = y ] && "$HERDR_BIN_PATH" pane close "$HERDR_ACTIVE_PANE_ID"; exit 0'
