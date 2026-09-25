@@ -23,6 +23,10 @@ next_workspace = "prefix+)"
 navigate_workspace_up = ["up", "ctrl+p"]
 navigate_workspace_down = ["down", "ctrl+n"]
 
+# prefix+\ shows/hides the sidebar, next to prefix+| for splits; herdr's
+# prefix+b stays too
+toggle_sidebar = ["prefix+b", 'prefix+\']
+
 # ctrl+hjkl moves between panes without the prefix
 focus_pane_left = ["ctrl+h", "prefix+h"]
 focus_pane_down = ["ctrl+j", "prefix+j"]
