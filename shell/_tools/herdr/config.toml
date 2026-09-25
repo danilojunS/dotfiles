@@ -70,3 +70,13 @@ description = "close pane (confirm)"
 width = 30
 height = 3
 command = 'printf "close pane? (y/n) "; stty -icanon -echo; c=$(dd bs=1 count=1 2>/dev/null); [ "$c" = y ] && "$HERDR_BIN_PATH" pane close "$HERDR_ACTIVE_PANE_ID"; exit 0'
+
+# prefix+a sends one command to every pane in the tab, like tmux's
+# synchronize-panes. See send-all.sh.
+[[keys.command]]
+key = "prefix+a"
+type = "popup"
+description = "send to all panes"
+width = 60
+height = 3
+command = '"$HOME/.dotfiles/shell/_tools/herdr/send-all.sh"'
