@@ -30,6 +30,28 @@ auto_switch = false
 [ui.toast]
 delivery = "system"
 
+# Every agent in one space reads ".dotfiles · 2 / claude" by default. Name the
+# agent up top in its own colour, and put its session title on the second line.
+# herdr has no per-agent icon, and an override replaces the whole layout, so
+# each agent repeats it with only the colour changed.
+[ui.sidebar.agents.rows_by_agent]
+claude = [
+  ["state_icon", { token = "agent", fg = "#d97757" }, "workspace", "tab"],
+  ["terminal_title_stripped"],
+]
+codex = [
+  ["state_icon", { token = "agent", fg = "#10a37f" }, "workspace", "tab"],
+  ["terminal_title_stripped"],
+]
+grok = [
+  ["state_icon", { token = "agent", fg = "#b8b4d0" }, "workspace", "tab"],
+  ["terminal_title_stripped"],
+]
+opencode = [
+  ["state_icon", { token = "agent", fg = "#7fb4ca" }, "workspace", "tab"],
+  ["terminal_title_stripped"],
+]
+
 # tmux-style `kill-pane? (y/n)` for prefix+x. Any key but y cancels.
 [[keys.command]]
 key = "prefix+x"
