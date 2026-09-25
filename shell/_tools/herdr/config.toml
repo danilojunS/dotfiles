@@ -37,6 +37,21 @@ close_pane = []
 name = "kanagawa"
 auto_switch = false
 
+[ui]
+# Right end of the tab row, like tmux2k's status-right in ~/.tmux.conf.
+# Plain text only: herdr drops colour codes from command output.
+tab_bar_right = [
+  # The OS as a Nerd Font glyph (nf-fa-apple / nf-fa-linux) in place of the
+  # hostname. Runs on the server, so over --remote it names the remote machine.
+  { type = "command", command = 'case $(uname) in Darwin) printf "\357\205\271";; Linux) printf "\357\205\274";; *) uname;; esac', interval_seconds = 86400 },
+  { type = "zoom" },
+  { type = "command", command = "~/.dotfiles/shell/_tools/herdr/status.sh", interval_seconds = 5, timeout_seconds = 2 },
+  { type = "datetime", format = "%d/%m %H:%M" },
+]
+# herdr's default is a bare space. Two spaces and no mark: the icons already
+# start each part. status.sh puts the same gap between its own parts.
+tab_bar_right_separator = "  "
+
 [ui.toast]
 delivery = "system"
 
