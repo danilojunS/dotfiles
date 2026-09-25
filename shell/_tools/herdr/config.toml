@@ -13,6 +13,16 @@ prefix = "ctrl+a"
 split_vertical = ["prefix+|", "prefix+v"]
 split_horizontal = "prefix+minus"
 
+# prefix+( / prefix+) cycle workspaces, like tmux's switch-client -p/-n
+# (prefix+n/p already cycle tabs)
+previous_workspace = "prefix+("
+next_workspace = "prefix+)"
+
+# ctrl+p / ctrl+n move through the workspace list (prefix+w), next to the
+# arrows. j/k can't: navigate mode already uses hjkl to focus panes.
+navigate_workspace_up = ["up", "ctrl+p"]
+navigate_workspace_down = ["down", "ctrl+n"]
+
 # ctrl+hjkl moves between panes without the prefix
 focus_pane_left = ["ctrl+h", "prefix+h"]
 focus_pane_down = ["ctrl+j", "prefix+j"]
