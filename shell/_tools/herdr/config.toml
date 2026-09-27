@@ -18,6 +18,11 @@ split_horizontal = "prefix+minus"
 previous_workspace = "prefix+("
 next_workspace = "prefix+)"
 
+# prefix+> / prefix+< cycle through the agents in the sidebar, next to
+# prefix+( / prefix+) for workspaces
+next_agent = "prefix+>"
+previous_agent = "prefix+<"
+
 # ctrl+p / ctrl+n move through the workspace list (prefix+w), next to the
 # arrows. j/k can't: navigate mode already uses hjkl to focus panes.
 navigate_workspace_up = ["up", "ctrl+p"]
