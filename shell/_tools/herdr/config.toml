@@ -62,7 +62,9 @@ tab_bar_right = [
 tab_bar_right_separator = "  "
 
 [ui.toast]
-delivery = "system"
+# "terminal" asks the outer terminal for the desktop notification (OSC), so it
+# also reaches you over --remote/SSH; "system" would fire on the server's OS.
+delivery = "terminal"
 
 # Every agent in one space reads ".dotfiles · 2 / claude" by default. Name the
 # agent up top in its own colour, and put its session title on the second line.
