@@ -246,14 +246,43 @@ _ssh_theme_dest() {
 
 # A remote command means a one-shot run, not a session to sit in -- repainting
 # the window for the length of `ssh my-server uptime` is just a flash of colour.
+#
+# ssh keeps reading options after the destination (`ssh fox -P tunnel`), so the
+# first word after it is only a command if it is not an option. The letters in
+# the case below are the options that take a value, from ssh's getopt string:
+# their value is the rest of the word (`-Ptunnel`) or, failing that, the next
+# word (`-P tunnel`), and that word must not be mistaken for a command.
 _ssh_theme_interactive() {
-  local dest="$1" found=0 a
+  local dest="$1" found=0 skip=0 ended=0 a rest c
   shift
   for a in "$@"; do
-    [ "$found" = 1 ] && return 1
+    if [ "$found" = 0 ]; then
+      case "$a" in
+        "$dest"|*@"$dest") found=1 ;;
+      esac
+      continue
+    fi
+
+    [ "$skip" = 1 ] && { skip=0; continue; }
+    [ "$ended" = 1 ] && return 1
+
     case "$a" in
-      "$dest"|*@"$dest") found=1 ;;
+      --) ended=1; continue ;;
+      -?*) ;;
+      *) return 1 ;;
     esac
+
+    rest="${a#-}"
+    while [ -n "$rest" ]; do
+      c="${rest%"${rest#?}"}"
+      rest="${rest#?}"
+      case "$c" in
+        [bceilmopBDEFIJLOPQRSWw])
+          [ -n "$rest" ] || skip=1
+          break
+          ;;
+      esac
+    done
   done
   return 0
 }
