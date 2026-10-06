@@ -94,11 +94,17 @@ alias ccusage='npx ccusage@latest'
 # the ssh config (ssh resolves it to some other hostname) or has a user@ is a
 # machine to attach to. herdr's own subcommands resolve to themselves, so
 # `herdr status` and friends still reach herdr untouched.
+#
+# A remote attach runs on the server's keybindings (--remote-keybindings
+# server) unless told otherwise. With herdr's default, local, the client drops
+# every [[keys.command]], so prefix+x and prefix+a did nothing; the server's
+# are the same shared config, and its commands run where the panes are. Inside
+# tmux that also means the server's ctrl+a prefix, not ctrl+b.
 herdr() {
   local tools="$HOME/.dotfiles/shell/_tools/herdr"
   local conf="$HOME/.config/herdr/config.toml"
   local out="$HOME/.config/herdr/config.effective.toml"
-  local remote="" prev="" a flavour
+  local remote="" prev="" a flavour keys=""
   local -a run merge
 
   zsh "$tools/build-config.sh" ||
@@ -117,10 +123,13 @@ herdr() {
   for a in "$@"; do
     case "$a" in
       --remote=*) remote="${a#--remote=}" ;;
+      --remote-keybindings|--remote-keybindings=*) keys=1 ;;
       *) [ "$prev" = --remote ] && remote="$a" ;;
     esac
     prev="$a"
   done
+
+  [ -n "$remote" ] && [ -z "$keys" ] && set -- "$@" --remote-keybindings server
 
   merge=()
   [ -n "$TMUX" ] && merge+=(--prefix ctrl+b)
