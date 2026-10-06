@@ -81,20 +81,68 @@ alias ccusage='npx ccusage@latest'
 #
 # Inside tmux, which already owns herdr's ctrl+a prefix, the client alone runs
 # on config.effective.toml, the same config with the prefix back on ctrl+b.
+#
+# `herdr --remote <host>` repaints the window with the host's colours from
+# ~/.ssh/themes, the same as `ssh <host>` does (shell/ssh-theme.sh): herdr runs
+# ssh itself, so the ssh() wrapper never sees that connection. The local client
+# also draws the UI with its own config, so when the host's entry there names a
+# flavour with a themes/<flavour>.toml (`my-desktop foxpuccin`), the client runs on
+# config.remote-<flavour>.toml: this config with that [theme] in place of ours,
+# the one the remote machine itself runs on.
+#
+# `herdr my-server` is short for `herdr --remote my-server`: a first word that is a Host in
+# the ssh config (ssh resolves it to some other hostname) or has a user@ is a
+# machine to attach to. herdr's own subcommands resolve to themselves, so
+# `herdr status` and friends still reach herdr untouched.
 herdr() {
   local tools="$HOME/.dotfiles/shell/_tools/herdr"
   local conf="$HOME/.config/herdr/config.toml"
   local out="$HOME/.config/herdr/config.effective.toml"
+  local remote="" prev="" a flavour
+  local -a run merge
 
   zsh "$tools/build-config.sh" ||
     echo "herdr: could not merge config, starting on $conf as it is" >&2
 
-  if [ -n "$TMUX" ] && [ -f "$conf" ] &&
-    python3 "$tools/merge-config.py" "$out" "$conf" --prefix ctrl+b; then
-    HERDR_CONFIG_PATH="$out" command herdr "$@"
+  case "$1" in
+    ''|-*) ;;
+    *@*) set -- --remote "$@" ;;
+    *)
+      if [ "$(command ssh -G "$1" 2>/dev/null | awk '$1 == "hostname" { print $2 }')" != "$1" ]; then
+        set -- --remote "$@"
+      fi
+      ;;
+  esac
+
+  for a in "$@"; do
+    case "$a" in
+      --remote=*) remote="${a#--remote=}" ;;
+      *) [ "$prev" = --remote ] && remote="$a" ;;
+    esac
+    prev="$a"
+  done
+
+  merge=()
+  [ -n "$TMUX" ] && merge+=(--prefix ctrl+b)
+  if [ -n "$remote" ] && typeset -f _ssh_theme_target >/dev/null; then
+    flavour=$(_ssh_theme_target "$remote" --word)
+    if [ -n "$flavour" ] && [ -f "$tools/themes/$flavour.toml" ]; then
+      merge+=(--theme "$tools/themes/$flavour.toml")
+      out="$HOME/.config/herdr/config.remote-$flavour.toml"
+    fi
+  fi
+
+  run=(command herdr)
+  if [ "${#merge[@]}" -gt 0 ] && [ -f "$conf" ] &&
+    python3 "$tools/merge-config.py" "$out" "$conf" "${merge[@]}"; then
+    run=(env HERDR_CONFIG_PATH="$out" herdr)
+  fi
+
+  if [ -n "$remote" ] && typeset -f _ssh_theme_run >/dev/null; then
+    _ssh_theme_run "$remote" "${run[@]}" "$@"
     return
   fi
-  command herdr "$@"
+  "${run[@]}" "$@"
 }
 
 # import packages and tools

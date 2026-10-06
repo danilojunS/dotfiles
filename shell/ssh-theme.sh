@@ -38,8 +38,8 @@
 ##     because that is what sshd accepts by default), so the two halves never
 ##     fight over the same window.
 ##
-##   - locally, on a terminal sitting at the machine itself. `ssh fox` from a
-##     laptop and fox's own iTerm then open on one background instead of two,
+##   - locally, on a terminal sitting at the machine itself. `ssh my-desktop` from a
+##     laptop and my-desktop's own iTerm then open on one background instead of two,
 ##     without the colour being written down twice -- both sides resolve the
 ##     same flavour name through the table below.
 ##
@@ -112,12 +112,14 @@ _ssh_theme_colours() {
   return 1
 }
 
-# Look one name up in the themes file. Echoes "bg:fg" (fg may be empty).
+# Look one name up in the themes file. Echoes "bg:fg" (fg may be empty), or
+# with --word the background word as written (`foxpuccin`, `ff5555`), which is
+# how other tools key their own per-host theme on the same entry.
 #
 # `default` is the restore colour, not a host, so it never matches here -- which
 # also means a host actually called `default` cannot be themed.
 _ssh_theme_match() {
-  local name="$1" pat bg fg
+  local name="$1" word="$2" pat bg fg
 
   # zsh does not treat the result of an expansion as a pattern unless
   # GLOB_SUBST is on, so without this `work-*` in the file would only ever
@@ -140,6 +142,7 @@ _ssh_theme_match() {
       *) continue ;;
     esac
 
+    [ "$word" = --word ] && { echo "$bg"; return 0; }
     _ssh_theme_colours "$bg" "$fg" && return 0
 
     printf 'ssh: unknown colour "%s" for %s in %s\n' "$bg" "$pat" "$_ssh_theme_file" >&2
@@ -247,7 +250,7 @@ _ssh_theme_dest() {
 # A remote command means a one-shot run, not a session to sit in -- repainting
 # the window for the length of `ssh my-server uptime` is just a flash of colour.
 #
-# ssh keeps reading options after the destination (`ssh fox -P tunnel`), so the
+# ssh keeps reading options after the destination (`ssh my-server -P tunnel`), so the
 # first word after it is only a command if it is not an option. The letters in
 # the case below are the options that take a value, from ssh's getopt string:
 # their value is the rest of the word (`-Ptunnel`) or, failing that, the next
@@ -331,6 +334,63 @@ ssh() {
   fi
 
   [ -n "$spec" ] && _ssh_theme_reset "$had_fg"
+  return $ret
+}
+
+# The themes-file entry for an SSH target, for tools that reach a host without
+# going through the wrapper above (`herdr --remote my-server` runs ssh itself).
+# <target> is anything ssh takes as a destination, or an ssh:// URL. Same
+# lookup as ssh(): the name as typed, then what it resolves to. Echoes what
+# _ssh_theme_match does, so --word gives the flavour name.
+_ssh_theme_target() {
+  local target="$1" word="$2" names name spec
+
+  [ -n "$target" ] && [ -r "$_ssh_theme_file" ] || return 1
+
+  # ssh://[user@]host[:port] -> host; ssh -G does not take the URL form.
+  case "$target" in
+    ssh://*)
+      target="${target#ssh://}"
+      target="${target%%/*}"
+      target="${target##*@}"
+      target="${target%:*}"
+      ;;
+  esac
+
+  names=$(_ssh_theme_dest "$target")
+  [ -n "$names" ] || return 1
+  for name in "${names%% *}" "${names#* }"; do
+    spec=$(_ssh_theme_match "$name" "$word")
+    [ -n "$spec" ] && { echo "$spec"; return 0; }
+  done
+  return 1
+}
+
+# Run a command that opens a session on <target> under that host's colours.
+# Hosts with no theme just run the command.
+#
+#   _ssh_theme_run <target> <command> [args...]
+_ssh_theme_run() {
+  local target="$1" spec bg fg had_fg ret
+  shift
+
+  spec=""
+  if [ -z "$DOTFILES_NO_SSH_THEME" ] && [ -t 1 ]; then
+    spec=$(_ssh_theme_target "$target")
+  fi
+
+  [ -n "$spec" ] || { "$@"; return; }
+
+  bg="${spec%%:*}"
+  fg="${spec#*:}"
+  had_fg=0
+  [ -n "$fg" ] && had_fg=1
+  _ssh_theme_apply "$bg" "$fg"
+
+  "$@"
+  ret=$?
+
+  _ssh_theme_reset "$had_fg"
   return $ret
 }
 
