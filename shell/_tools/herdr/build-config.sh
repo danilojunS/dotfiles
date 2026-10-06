@@ -1,7 +1,12 @@
 #!/bin/zsh
 
-# Write ~/.config/herdr/config.toml: the shared config.toml here with this
-# machine's ~/.config/herdr/config.local.toml (optional) merged on top.
+# Write ~/.config/herdr/config.toml from three layers, later ones winning:
+#
+#   1. the shared config.toml here;
+#   2. themes/<name>.toml, <name> being the first word of the machine's
+#      ~/.ssh/host-theme (or /etc/ssh/host-theme), the same file
+#      shell/ssh-theme.sh reads; skipped when there is no such theme file;
+#   3. this machine's ~/.config/herdr/config.local.toml (optional).
 #
 # It is a generated file rather than a symlink because the brew-managed server
 # reads it too, and the server draws the panes: their borders take the theme's
@@ -20,6 +25,15 @@ conf=$dir/config.toml
 tmp=$conf.tmp
 
 sources=("$here/config.toml")
+
+# First non-comment line's first word, as _ssh_theme_host_spec reads it.
+for f in ~/.ssh/host-theme /etc/ssh/host-theme; do
+  [ -r "$f" ] || continue
+  theme=$(awk '!/^[[:space:]]*(#|$)/ { print $1; exit }' "$f")
+  [ -n "$theme" ] && [ -f "$here/themes/$theme.toml" ] && sources+=("$here/themes/$theme.toml")
+  break
+done
+
 [ -f "$dir/config.local.toml" ] && sources+=("$dir/config.local.toml")
 
 python3 "$here/merge-config.py" "$tmp" "${sources[@]}" || { rm -f "$tmp"; exit 1; }

@@ -1,0 +1,24 @@
+# foxpuccin: the herdr side of the "foxpuccin" flavour in shell/ssh-theme.sh.
+#
+# build-config.sh merges themes/<name>.toml between the shared config.toml and
+# config.local.toml, <name> being the first word of the machine's
+# ~/.ssh/host-theme (or /etc/ssh/host-theme). Under `herdr --remote` the client
+# draws the UI with its own config, so a machine that connects here can use
+# this file to look the same.
+#
+# Self-contained: it lands on top of whatever base theme the shared config
+# picks (kanagawa, terminal, ...), so it names its own base and every colour
+# it changes. Only [theme] and [theme.custom] belong here.
+
+[theme]
+name = "vesper"
+auto_switch = false
+
+# Focused pane border (and herdr's other accent highlights): foxpuccin peach,
+# the same colour ~/.tmux.conf.local uses for tmux's active pane border.
+[theme.custom]
+accent = "#fab387"
+
+# Selected workspace/agent row in the sidebar: vesper's default is near-black
+# and hard to tell apart from the rest, so lift it to a visible grey.
+active_row_bg = "#3a3a3a"

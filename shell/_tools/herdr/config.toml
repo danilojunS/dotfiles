@@ -1,6 +1,7 @@
-# Shared herdr config. build-config.sh merges ~/.config/herdr/config.local.toml
-# (per-machine overrides: theme, etc.) on top of it into ~/.config/herdr/config.toml,
-# on install and on every `herdr` through the wrapper in shell/dj.sh.
+# Shared herdr config. build-config.sh merges themes/<name>.toml (the machine's
+# theme, named by ~/.ssh/host-theme) and then ~/.config/herdr/config.local.toml
+# (per-machine overrides) on top of it into ~/.config/herdr/config.toml, on
+# install and on every `herdr` through the wrapper in shell/dj.sh.
 
 onboarding = false
 

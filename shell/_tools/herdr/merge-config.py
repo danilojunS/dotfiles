@@ -7,9 +7,9 @@ third file: ~/.config/herdr/config.toml itself, written by build-config.sh, and
 inside tmux config.effective.toml, which the herdr() wrapper in shell/dj.sh
 hands the client through HERDR_CONFIG_PATH.
 
-    merge-config.py OUT BASE [LOCAL] [--prefix KEY]
+    merge-config.py OUT SOURCE... [--prefix KEY]
 
-Tables merge key by key, and LOCAL wins wherever both set the same key; any
+Tables merge key by key, and a later SOURCE wins wherever two set the same key; any
 other value (strings, arrays, arrays of tables) is replaced whole. --prefix
 overrides keys.prefix after the merge, for running inside tmux.
 
