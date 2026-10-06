@@ -1,0 +1,26 @@
+# mocha: the herdr side of the "mocha" flavour in shell/ssh-theme.sh.
+#
+# build-config.sh merges themes/<name>.toml between the shared config.toml and
+# config.local.toml, <name> being the first word of the machine's
+# ~/.ssh/host-theme (or /etc/ssh/host-theme). Under `herdr --remote` the client
+# draws the UI with its own config, so a machine that connects here can use
+# this file to look the same.
+#
+# Self-contained: it lands on top of whatever base theme the shared config
+# picks (kanagawa, terminal, ...), so it names its own base and every colour
+# it changes. Only [theme] and [theme.custom] belong here.
+
+[theme]
+name = "rose-pine"
+auto_switch = false
+
+# Focused pane border (and herdr's other accent highlights): the light pink
+# ~/.tmux.conf.local uses for tmux's active pane border and the prompt's cwd.
+[theme.custom]
+accent = "#ecbfe4"
+
+# Selected workspace/agent row in the sidebar, and the Navigate-mode cursor
+# row: rose-pine's own is too faint, so use the prompt's segment background
+# (catppuccin macchiato surface0).
+active_row_bg = "#363a4f"
+selection_bg = "#363a4f"
