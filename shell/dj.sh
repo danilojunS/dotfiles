@@ -155,6 +155,10 @@ herdr() {
 }
 alias hd='herdr'
 
+# Update Claude Code and restart the idle sessions in herdr onto the new version.
+# See shell/_tools/claude/ccupdate.sh.
+alias ccupdate='zsh ~/.dotfiles/shell/_tools/claude/ccupdate.sh'
+
 # import packages and tools
 
 # antigen
