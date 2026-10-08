@@ -1,7 +1,8 @@
 #!/bin/zsh
 # Claude Code status line: git branch, and the worktree name when the session
-# is in a linked worktree rather than the main checkout. The folder is left out
-# for now: it is where the session was started, already known.
+# is in a linked worktree, or "main" when it is on the main checkout. The
+# folder is left out for now: it is where the session was started, already
+# known.
 # Claude Code pipes the session as JSON on stdin; install.sh points
 # ~/.claude/settings.json here.
 
@@ -20,6 +21,8 @@ if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   if [ "$gitdir" != "$common" ]; then
     top=$(git -C "$dir" rev-parse --show-toplevel)
     out+="  %F{yellow}worktree ${top:t}%f"
+  else
+    out+="  %F{yellow}main%f"
   fi
 
   [ -n "$(git -C "$dir" status --porcelain 2>/dev/null | head -1)" ] && out+=" %F{red}*%f"
