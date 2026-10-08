@@ -2,7 +2,7 @@
 # ccupdate: update Claude Code, then restart every idle Claude Code session in
 # herdr onto the new version, so none of them needs "restart to update". Each
 # one is /exit-ed in its pane and resumed there with `claude --resume <id>`, in
-# the folder it was running in.
+# the folder it was in at the time (its worktree, if it had moved into one).
 #
 #   ccupdate [-n]     -n: skip the update, only say what would be restarted
 #
@@ -66,7 +66,23 @@ for line in "${panes[@]}"; do
   [ -n "$pid" ] && [ -f "$reg" ] || { echo "$pane: skipped, no Claude Code session found"; continue; }
 
   id=$(jq -r .sessionId "$reg")
-  cwd=$(jq -r .cwd "$reg")
+  # Where the session is now, not where it started: sessions.json keeps the
+  # launch folder, but a session that went into a worktree (or cd-ed) has
+  # moved on, and resuming in the launch folder would put it back on the main
+  # checkout. The transcript's last entry has the current folder, but only once
+  # this process has written one; before that (just resumed, nothing sent yet)
+  # the process's own folder is the one it was resumed in.
+  cwd=$(lsof -a -p "$pid" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p')
+  [ -d "$cwd" ] || cwd=$(jq -r .cwd "$reg")
+  transcript=(~/.claude/projects/*/$id.jsonl(N[1]))
+  if (( ${#transcript} )); then
+    started=$(jq -r '.startedAt / 1000 | floor' "$reg")
+    now=$(tail -n 200 "$transcript" | jq -r --argjson started "$started" '
+      select(.cwd and .timestamp)
+      | select((.timestamp | sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) >= $started)
+      | .cwd' 2>/dev/null | tail -1)
+    [ -n "$now" ] && [ -d "$now" ] && cwd=$now
+  fi
   version=$(jq -r .version "$reg")
   name=$(jq -r '.name // .sessionId' "$reg")
   label="$pane ($name)"
@@ -79,7 +95,7 @@ for line in "${panes[@]}"; do
   # Keep the flags it was started with, minus the resume/continue ones.
   args=()
   argv=("${(@f)$("$herdr" pane process-info --pane "$pane" |
-    jq -r --argjson pid "$pid" '.result.process_info.foreground_processes[] | select(.pid == $pid) | .argv[1:][]')}")
+    jq -r --argjson pid "$pid" '.result.process_info.foreground_processes[] | select(.pid == $pid) | (.argv // [])[1:][]')}")
   for (( i = 1; i <= ${#argv}; i++ )); do
     case ${argv[i]} in
       -c|--continue|'') ;;
@@ -90,7 +106,7 @@ for line in "${panes[@]}"; do
   done
 
   if (( dry )); then
-    echo "$label: would restart $version -> $latest"
+    echo "$label: would restart $version -> $latest in ${cwd/#$HOME/~}"
     continue
   fi
 
