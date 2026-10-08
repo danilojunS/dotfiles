@@ -8,7 +8,8 @@
 #
 # A session is left alone when it is already on the installed version, when
 # herdr or Claude Code says it is not idle, when its prompt holds a draft (the
-# /exit would be sent along with it), or when it is the pane this runs in.
+# /exit would be sent along with it), or when it is the pane this runs in. A
+# session in a worktree keeps it: ccupdate answers "Keep worktree" on the way out.
 #
 # The session id comes from Claude Code's own ~/.claude/sessions/<pid>.json,
 # not from herdr: herdr's agent_session can lag behind a pane that resumed or
@@ -32,6 +33,12 @@ prompt_is_empty() {
   "$herdr" pane read --source visible "$1" 2>/dev/null |
     awk '/^❯/ { prompt = $0; getline next_line; last = prompt "\n" next_line }
          END { split(last, l, "\n"); exit !(l[1] ~ /^❯[[:space:]]*$/ && l[2] ~ /^─/) }'
+}
+
+# /exit in a worktree session opens "Exiting worktree session" with the cursor
+# on "1. Keep worktree"; only then is Enter safe to send.
+keep_worktree_asked() {
+  "$herdr" pane read --source visible "$1" 2>/dev/null | grep -q '❯ 1\. Keep worktree'
 }
 
 claude_pid() {
@@ -88,6 +95,10 @@ for line in "${panes[@]}"; do
   fi
 
   "$herdr" pane run "$pane" "/exit" >/dev/null
+  # A session in a worktree asks whether to keep it on the way out; keep it.
+  if wait_until "! kill -0 $pid 2>/dev/null || keep_worktree_asked $pane"; then
+    keep_worktree_asked "$pane" && "$herdr" pane send-keys "$pane" enter >/dev/null
+  fi
   wait_until "! kill -0 $pid 2>/dev/null" || { echo "$label: did not exit, left as it was"; continue; }
 
   # A subshell, so the pane's shell stays in its own folder.
