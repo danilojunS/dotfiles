@@ -20,7 +20,7 @@ if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   common=$(git -C "$dir" rev-parse --path-format=absolute --git-common-dir)
   if [ "$gitdir" != "$common" ]; then
     top=$(git -C "$dir" rev-parse --show-toplevel)
-    out+="  %F{yellow}worktree ${top:t}%f"
+    out+="  %F{yellow}${top:t}%f"
   else
     out+="  %F{yellow}main%f"
   fi
