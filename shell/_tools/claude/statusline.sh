@@ -7,7 +7,15 @@
 dir=$(jq -r '.workspace.current_dir // .cwd // empty')
 [ -n "$dir" ] || dir=$PWD
 
-out="%F{blue}${dir/#$HOME/~}%f"
+# Fish-style: every folder but the last cut to its first letter (two for a
+# dot folder), so ~/development/data2/data2 reads ~/d/d/data2.
+parts=("${(@s:/:)${dir/#$HOME/~}}")
+for (( i = 1; i < ${#parts}; i++ )); do
+  [[ ${parts[i]} == .* ]] && parts[i]=${parts[i][1,2]} || parts[i]=${parts[i][1]}
+done
+short=${(j:/:)parts}
+
+out="%F{blue}${short//\%/%%}%f"
 
 if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   branch=$(git -C "$dir" symbolic-ref --short -q HEAD || git -C "$dir" rev-parse --short HEAD)
