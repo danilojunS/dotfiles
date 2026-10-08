@@ -153,6 +153,7 @@ herdr() {
   fi
   "${run[@]}" "$@"
 }
+alias hd='herdr'
 
 # import packages and tools
 
