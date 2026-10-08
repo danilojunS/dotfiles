@@ -1,25 +1,18 @@
 #!/bin/zsh
-# Claude Code status line: folder, git branch, and the worktree name when the
-# session is in a linked worktree rather than the main checkout.
+# Claude Code status line: git branch, and the worktree name when the session
+# is in a linked worktree rather than the main checkout. The folder is left out
+# for now: it is where the session was started, already known.
 # Claude Code pipes the session as JSON on stdin; install.sh points
 # ~/.claude/settings.json here.
 
 dir=$(jq -r '.workspace.current_dir // .cwd // empty')
 [ -n "$dir" ] || dir=$PWD
 
-# Fish-style: every folder but the last cut to its first letter (two for a
-# dot folder), so ~/development/data2/data2 reads ~/d/d/data2.
-parts=("${(@s:/:)${dir/#$HOME/~}}")
-for (( i = 1; i < ${#parts}; i++ )); do
-  [[ ${parts[i]} == .* ]] && parts[i]=${parts[i][1,2]} || parts[i]=${parts[i][1]}
-done
-short=${(j:/:)parts}
-
-out="%F{blue}${short//\%/%%}%f"
+out=""
 
 if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   branch=$(git -C "$dir" symbolic-ref --short -q HEAD || git -C "$dir" rev-parse --short HEAD)
-  out+="  %F{magenta} $branch%f"
+  out+="%F{magenta} $branch%f"
 
   # A linked worktree has its own git dir under the main repo's .git/worktrees.
   gitdir=$(git -C "$dir" rev-parse --absolute-git-dir)
