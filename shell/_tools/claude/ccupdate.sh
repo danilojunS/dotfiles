@@ -4,19 +4,29 @@
 # one is /exit-ed in its pane and resumed there with `claude --resume <id>`, in
 # the folder it was in at the time (its worktree, if it had moved into one).
 #
-#   ccupdate [-n]     -n: skip the update, only say what would be restarted
+#   ccupdate [-n] [-a]
+#     -n  skip the update, only say what would be restarted
+#     -a  restart sessions already on the installed version too, e.g. so they
+#         pick up hooks changed in ~/.claude/settings.json
 #
-# A session is left alone when it is already on the installed version, when
-# herdr or Claude Code says it is not idle, when its prompt holds a draft (the
-# /exit would be sent along with it), or when it is the pane this runs in. A
-# session in a worktree keeps it: ccupdate answers "Keep worktree" on the way out.
+# A session is left alone when it is already on the installed version (unless
+# -a), when herdr or Claude Code says it is not idle, when its prompt holds a
+# draft (the /exit would be sent along with it), or when it is the pane this
+# runs in. A session in a worktree keeps it: ccupdate answers "Keep worktree"
+# on the way out.
 #
 # The session id comes from Claude Code's own ~/.claude/sessions/<pid>.json,
 # not from herdr: herdr's agent_session can lag behind a pane that resumed or
 # switched sessions, and resuming that id brings back the wrong conversation.
 
-dry=0
-[ "$1" = -n ] && dry=1
+dry=0 all=0
+for arg; do
+  case $arg in
+    -n) dry=1 ;;
+    -a) all=1 ;;
+    *) echo "usage: ccupdate [-n] [-a]" >&2; exit 2 ;;
+  esac
+done
 
 herdr=${HERDR_BIN_PATH:-$(whence -p herdr)}
 
@@ -87,7 +97,7 @@ for line in "${panes[@]}"; do
   name=$(jq -r '.name // .sessionId' "$reg")
   label="$pane ($name)"
 
-  [ "$version" = "$latest" ] && { echo "$label: already on $version"; continue; }
+  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; continue; }
   [ "$state" = idle ] && [ "$(jq -r .status "$reg")" = idle ] ||
     { echo "$label: skipped, working"; continue; }
   prompt_is_empty "$pane" || { echo "$label: skipped, prompt has a draft"; continue; }
