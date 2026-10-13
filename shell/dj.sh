@@ -203,6 +203,10 @@ if command -v zoxide >/dev/null; then
     (( $+functions[_antigen] )) && compdef _antigen antigen
   fi
 
+  # Keep Claude Code's .claude/ folders (worktrees under .claude/worktrees
+  # mostly) out of the database: they come and go with each session, and z
+  # would jump into a worktree instead of the repo. $HOME is zoxide's default.
+  export _ZO_EXCLUDE_DIRS="$HOME:*/.claude:*/.claude/*"
   eval "$(zoxide init zsh)"
 
   if [ -n "$ZSH_VERSION" ]; then
