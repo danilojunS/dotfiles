@@ -40,40 +40,29 @@ if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   [ -n "$(git -C "$dir" status --porcelain 2>/dev/null | head -1)" ] && out+=" %F{red}*%f"
 fi
 
-# Loop and crons: a /loop's next wakeup ( HH:MM) and how many cron jobs the
-# session has ( N). Claude Code keeps both in memory and sends neither here,
-# so they are worked out from the transcript: CronCreate, CronDelete and
-# ScheduleWakeup results since this process started (a resumed session lost
-# the old ones). One-shot jobs end at their fire time, recurring ones expire
-# after 7 days; a wakeup counts for 5 minutes past its time, while the turn it
-# woke runs and schedules the next.
+# Loop and crons: when a /loop wakes next ( HH:MM), and when the next cron
+# job runs ( HH:MM, with how many there are when more than one). Claude Code
+# keeps both in memory and sends neither here; statusline-jobs.py works them
+# out from the transcript, since this process started.
 transcript=$(jq -r '.transcript_path // empty' <<<"$input")
 session=$(jq -r '.session_id // empty' <<<"$input")
-tools='"name":"(CronCreate|CronDelete|ScheduleWakeup)"'
-if [ -f "$transcript" ] && grep -qE "$tools" "$transcript"; then
+if [ -f "$transcript" ] && grep -qE '"name":"(CronCreate|ScheduleWakeup)"' "$transcript"; then
   reg=$(grep -lF "\"sessionId\":\"$session\"" ~/.claude/sessions/*.json 2>/dev/null | head -1)
   started=$([ -n "$reg" ] && jq -r '.startedAt // 0' "$reg" || echo 0)
-  uses=$(grep -E "$tools" "$transcript")
-  ids=$(jq -r '.message.content[]? | select(.type == "tool_use") | .id' <<<"$uses")
-  read -r loop crons < <(
-    { print -r -- "$uses"; grep -F "$ids" "$transcript" | grep -F '"toolUseResult"'; } |
-      jq -rs --argjson started "$started" --argjson now "$(date +%s)000" '
-        (map(.message.content[]? | select(.type == "tool_use") | {(.id): .name}) | add) as $names
-        | map(select(.type == "user" and .toolUseResult and .timestamp)
-              | {t: (.timestamp | sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601 * 1000),
-                 name: $names[.message.content[0].tool_use_id // ""], r: .toolUseResult}
-              | select(.name and .t >= $started))
-        | sort_by(.t)
-        | reduce .[] as $e ({jobs: {}, wake: null};
-            if $e.name == "CronCreate" then
-              .jobs[$e.r.id] = (if $e.r.recurring then $e.t + 7 * 86400000 else $e.r.nextFireAt end)
-            elif $e.name == "CronDelete" then del(.jobs[$e.r.id])
-            elif $e.r.stopped then .wake = null
-            else .wake = $e.r.scheduledFor end)
-        | [(if .wake and .wake + 300000 > $now then .wake / 1000 | floor else 0 end),
-           ([.jobs[] | select(. > $now)] | length)] | @tsv')
-  (( loop )) && out+="  %F{cyan} $(date -r "$loop" +%H:%M 2>/dev/null || date -d "@$loop" +%H:%M)%f"
-  (( crons )) && out+="  %F{cyan} $crons%f"
+  read -r loop cron jobs < <(python3 -I "${0:A:h}/statusline-jobs.py" "$transcript" "$started" 2>/dev/null)
+  # A time today as HH:MM, a later one with its day too.
+  zmodload zsh/datetime
+  when() {
+    local fmt=%H:%M
+    [ "$(strftime %F "$1")" = "$(strftime %F $EPOCHSECONDS)" ] || fmt="%d/%m %H:%M"
+    strftime "$fmt" "$1"
+  }
+  (( loop )) && out+="  %F{cyan} $(when $loop)%f"
+  if (( cron )); then
+    out+="  %F{cyan} $(when $cron)"
+    (( jobs > 1 )) && out+=" ($jobs)"
+    out+="%f"
+  fi
 fi
 
 print -P -- "$out"
