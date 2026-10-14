@@ -40,8 +40,8 @@ if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   [ -n "$(git -C "$dir" status --porcelain 2>/dev/null | head -1)" ] && out+=" %F{red}*%f"
 fi
 
-# Loop and crons: a /loop's next wakeup (⟳ HH:MM) and how many cron jobs the
-# session has (⏰ N). Claude Code keeps both in memory and sends neither here,
+# Loop and crons: a /loop's next wakeup ( HH:MM) and how many cron jobs the
+# session has ( N). Claude Code keeps both in memory and sends neither here,
 # so they are worked out from the transcript: CronCreate, CronDelete and
 # ScheduleWakeup results since this process started (a resumed session lost
 # the old ones). One-shot jobs end at their fire time, recurring ones expire
@@ -72,8 +72,8 @@ if [ -f "$transcript" ] && grep -qE "$tools" "$transcript"; then
             else .wake = $e.r.scheduledFor end)
         | [(if .wake and .wake + 300000 > $now then .wake / 1000 | floor else 0 end),
            ([.jobs[] | select(. > $now)] | length)] | @tsv')
-  (( loop )) && out+="  %F{cyan}⟳ $(date -r "$loop" +%H:%M 2>/dev/null || date -d "@$loop" +%H:%M)%f"
-  (( crons )) && out+="  %F{cyan}⏰ $crons%f"
+  (( loop )) && out+="  %F{cyan} $(date -r "$loop" +%H:%M 2>/dev/null || date -d "@$loop" +%H:%M)%f"
+  (( crons )) && out+="  %F{cyan} $crons%f"
 fi
 
 print -P -- "$out"
