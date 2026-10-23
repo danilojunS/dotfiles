@@ -3,6 +3,7 @@
 # herdr onto the new version, so none of them needs "restart to update". Each
 # one is /exit-ed in its pane and resumed there with `claude --resume <id>`, in
 # the folder it was in at the time (its worktree, if it had moved into one).
+# The panes go all at once, not one after another.
 #
 #   ccupdate [-n] [-a]
 #     -n  skip the update, only say what would be restarted
@@ -65,15 +66,18 @@ wait_until() {
   return 1
 }
 
-# An array rather than a pipe into the loop, so nothing in it reads the list.
-panes=("${(@f)$("$herdr" pane list | jq -r '.result.panes[] | select(.agent == "claude") | "\(.pane_id) \(.agent_status)"')}")
-for line in "${panes[@]}"; do
+# One pane, start to end. Each runs in the background, all at once: the slow
+# part is waiting for a session to exit and come back, and the sessions do not
+# wait on each other.
+restart_pane() {
+  local line=$1 pane state pid reg id cwd transcript started now version name label i
+  local -a args argv
   pane=${line%% *} state=${line#* }
-  [ "$pane" = "$HERDR_PANE_ID" ] && { echo "$pane: skipped, this pane"; continue; }
+  [ "$pane" = "$HERDR_PANE_ID" ] && { echo "$pane: skipped, this pane"; return; }
 
   pid=$(claude_pid "$pane")
   reg=~/.claude/sessions/$pid.json
-  [ -n "$pid" ] && [ -f "$reg" ] || { echo "$pane: skipped, no Claude Code session found"; continue; }
+  [ -n "$pid" ] && [ -f "$reg" ] || { echo "$pane: skipped, no Claude Code session found"; return; }
 
   id=$(jq -r .sessionId "$reg")
   # Where the session is now, not where it started: sessions.json keeps the
@@ -97,10 +101,10 @@ for line in "${panes[@]}"; do
   name=$(jq -r '.name // .sessionId' "$reg")
   label="$pane ($name)"
 
-  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; continue; }
+  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; return; }
   [ "$state" = idle ] && [ "$(jq -r .status "$reg")" = idle ] ||
-    { echo "$label: skipped, working"; continue; }
-  prompt_is_empty "$pane" || { echo "$label: skipped, prompt has a draft"; continue; }
+    { echo "$label: skipped, working"; return; }
+  prompt_is_empty "$pane" || { echo "$label: skipped, prompt has a draft"; return; }
 
   # Keep the flags it was started with, minus the resume/continue ones.
   args=()
@@ -117,7 +121,7 @@ for line in "${panes[@]}"; do
 
   if (( dry )); then
     echo "$label: would restart $version -> $latest in ${cwd/#$HOME/~}"
-    continue
+    return
   fi
 
   "$herdr" pane run "$pane" "/exit" >/dev/null
@@ -125,7 +129,7 @@ for line in "${panes[@]}"; do
   if wait_until "! kill -0 $pid 2>/dev/null || keep_worktree_asked $pane"; then
     keep_worktree_asked "$pane" && "$herdr" pane send-keys "$pane" enter >/dev/null
   fi
-  wait_until "! kill -0 $pid 2>/dev/null" || { echo "$label: did not exit, left as it was"; continue; }
+  wait_until "! kill -0 $pid 2>/dev/null" || { echo "$label: did not exit, left as it was"; return; }
 
   # A subshell, so the pane's shell stays in its own folder.
   "$herdr" pane run "$pane" "(cd ${(q)cwd} && claude ${(j: :)${(q)args}} --resume $id)" >/dev/null
@@ -134,4 +138,11 @@ for line in "${panes[@]}"; do
   else
     echo "$label: exited but did not come back; resume it with: claude --resume $id" >&2
   fi
+}
+
+# An array rather than a pipe into the loop, so nothing in it reads the list.
+panes=("${(@f)$("$herdr" pane list | jq -r '.result.panes[] | select(.agent == "claude") | "\(.pane_id) \(.agent_status)"')}")
+for line in "${panes[@]}"; do
+  restart_pane "$line" &
 done
+wait
