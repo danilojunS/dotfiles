@@ -15,7 +15,7 @@
 # background counts: exiting would kill it), when its prompt holds a
 # draft (the /exit would be sent along with it), or when it is the pane this
 # runs in. A session in a worktree keeps it: ccupdate answers "Keep worktree"
-# on the way out.
+# on the way out. Background sessions (claude --bg) are respawned too.
 #
 # The session id comes from Claude Code's own ~/.claude/sessions/<pid>.json,
 # not from herdr: herdr's agent_session can lag behind a pane that resumed or
@@ -34,7 +34,6 @@ herdr=${HERDR_BIN_PATH:-$(whence -p herdr)}
 
 (( dry )) || claude update || exit 1
 
-[ -n "$HERDR_SOCKET_PATH" ] || { echo "ccupdate: not inside herdr, no sessions to restart" >&2; exit 0; }
 
 latest=$(readlink -f "$(whence -p claude)")
 latest=${latest:t}
@@ -146,8 +145,43 @@ restart_pane() {
 }
 
 # An array rather than a pipe into the loop, so nothing in it reads the list.
-panes=("${(@f)$("$herdr" pane list | jq -r '.result.panes[] | select(.agent == "claude") | "\(.pane_id) \(.agent_status)"')}")
+# Outside herdr only the background sessions below.
+panes=()
+if [ -n "$HERDR_SOCKET_PATH" ]; then
+  panes=("${(@f)$("$herdr" pane list | jq -r '.result.panes[] | select(.agent == "claude") | "\(.pane_id) \(.agent_status)"')}")
+else
+  echo "not inside herdr: its panes are left alone"
+fi
 for line in "${panes[@]}"; do
+  [ -n "$line" ] || continue
   restart_pane "$line" &
+done
+
+# Background sessions (claude --bg, `claude agents`) run under Claude Code's
+# daemon, not in a pane: `claude respawn <id>` restarts one on the installed
+# version, the conversation kept. The same rules as for the panes.
+respawn_bg() {
+  local id=$1 pid=$2 name=$3 reg version label
+  reg=~/.claude/sessions/$pid.json
+  [ -f "$reg" ] || return
+  version=$(jq -r .version "$reg")
+  label="bg $id ($name)"
+  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; return; }
+  [ "$(jq -r .status "$reg")" = shell ] &&
+    { echo "$label: skipped, a background shell is still running"; return; }
+  [ "$(jq -r .status "$reg")" = idle ] || { echo "$label: skipped, working"; return; }
+  if (( dry )); then
+    echo "$label: would respawn $version -> $latest"
+  elif claude respawn "$id" >/dev/null 2>&1; then
+    echo "$label: respawned $version -> $latest"
+  else
+    echo "$label: respawn failed; try: claude respawn $id" >&2
+  fi
+}
+bgs=("${(@f)$(claude agents --json 2>/dev/null |
+  jq -r '.[] | select(.kind == "background" and .pid) | "\(.id) \(.pid) \(.name // .id)"')}")
+for line in "${bgs[@]}"; do
+  [ -n "$line" ] || continue
+  respawn_bg ${line%% *} ${${line#* }%% *} "${line#* * }" &
 done
 wait
