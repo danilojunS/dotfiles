@@ -67,18 +67,22 @@ if [ -f "$transcript" ] && grep -qE '"name":"(CronCreate|ScheduleWakeup)"' "$tra
   [ -n "$cron_txt" ] && out+="  %F{cyan}$cron_txt%f"
 fi
 
-# herdr's sidebar: the loop and crons above, and how many shells the session
-# has running (a Bash call in the background, mostly), as $loop, $cron and $bg
-# tokens on this pane for the claude rows in shell/_tools/herdr/config.toml.
+# herdr's sidebar: an icon each for shells running (a Bash call in the
+# background, mostly), a /loop and cron jobs as above, joined by spaces into one
+# $flags token on this pane for the claude rows in shell/_tools/herdr/config.toml
+# (one token, because herdr puts a "·" between tokens and has no setting for
+# it). Icons only: times and counts stay here, the sidebar only flags them.
 # Those shells are Claude Code's children sourcing its shell snapshot. An empty
-# value clears a token; the TTL clears them all when the session goes away
-# without another refresh (install.sh sets refreshInterval to 30s). Sent in the
+# value clears the token; the TTL clears it when the session goes away without
+# another refresh (install.sh sets refreshInterval to 30s). Sent in the
 # background so the status line does not wait on herdr.
 if [ -n "$HERDR_PANE_ID" ]; then
-  shells=$(pgrep -P $PPID -f shell-snapshots | wc -l)
-  (( shells )) && bg_txt=" $(( shells ))"
+  flags=()
+  pgrep -qP $PPID -f shell-snapshots && flags+=()
+  [ -n "$loop_txt" ] && flags+=()
+  [ -n "$cron_txt" ] && flags+=()
   "${HERDR_BIN_PATH:-herdr}" pane report-metadata "$HERDR_PANE_ID" --source claude-statusline \
-    --token "loop=$loop_txt" --token "cron=$cron_txt" --token "bg=$bg_txt" \
+    --token "flags=${(j: :)flags}" --clear-token loop --clear-token cron --clear-token bg \
     --ttl-ms 90000 >/dev/null 2>&1 &!
 fi
 
