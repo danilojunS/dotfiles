@@ -159,6 +159,11 @@ alias hd='herdr'
 # See shell/_tools/claude/ccupdate.sh.
 alias ccupdate='zsh ~/.dotfiles/shell/_tools/claude/ccupdate.sh'
 
+# Bring every herdr pane up to date: idle shells reload this dotfiles, Claude
+# Code and Codex update and restart, anything else is left alone. See
+# shell/_tools/herdr/hdupdate.sh.
+alias hdupdate='zsh ~/.dotfiles/shell/_tools/herdr/hdupdate.sh'
+
 # import packages and tools
 
 # antigen

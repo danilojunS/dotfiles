@@ -17,27 +17,12 @@
 # runs in. A session in a worktree keeps it: ccupdate answers "Keep worktree"
 # on the way out. Background sessions (claude --bg) are respawned too.
 #
+# hdupdate (shell/_tools/herdr/hdupdate.sh) sources this file for its Claude
+# Code panes; sourced, it only defines the functions.
+#
 # The session id comes from Claude Code's own ~/.claude/sessions/<pid>.json,
 # not from herdr: herdr's agent_session can lag behind a pane that resumed or
 # switched sessions, and resuming that id brings back the wrong conversation.
-
-dry=0 all=0
-for arg; do
-  case $arg in
-    -n) dry=1 ;;
-    -a) all=1 ;;
-    *) echo "usage: ccupdate [-n] [-a]" >&2; exit 2 ;;
-  esac
-done
-
-herdr=${HERDR_BIN_PATH:-$(whence -p herdr)}
-
-(( dry )) || claude update || exit 1
-
-
-latest=$(readlink -f "$(whence -p claude)")
-latest=${latest:t}
-echo "installed Claude Code: $latest"
 
 # The prompt is empty when the line after the last "❯" is the box's bottom rule.
 prompt_is_empty() {
@@ -69,7 +54,7 @@ wait_until() {
 # One pane, start to end. Each runs in the background, all at once: the slow
 # part is waiting for a session to exit and come back, and the sessions do not
 # wait on each other.
-restart_pane() {
+claude_restart_pane() {
   local line=$1 pane state pid reg id cwd transcript started now version name label i
   local -a args argv
   pane=${line%% *} state=${line#* }
@@ -101,7 +86,7 @@ restart_pane() {
   name=$(jq -r '.name // .sessionId' "$reg")
   label="$pane ($name)"
 
-  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; return; }
+  (( all )) || [ "$version" != "$claude_latest" ] || { echo "$label: already on $version"; return; }
   # Claude Code says "shell" while a shell it started in the background still
   # runs (a monitor, a dev server); exiting would kill it, -a or not.
   [ "$(jq -r .status "$reg")" = shell ] &&
@@ -124,7 +109,7 @@ restart_pane() {
   done
 
   if (( dry )); then
-    echo "$label: would restart $version -> $latest in ${cwd/#$HOME/~}"
+    echo "$label: would restart $version -> $claude_latest in ${cwd/#$HOME/~}"
     return
   fi
 
@@ -136,13 +121,66 @@ restart_pane() {
   wait_until "! kill -0 $pid 2>/dev/null" || { echo "$label: did not exit, left as it was"; return; }
 
   # A subshell, so the pane's shell stays in its own folder.
-  "$herdr" pane run "$pane" "(cd ${(q)cwd} && claude ${(j: :)${(q)args}} --resume $id)" >/dev/null
+  "$herdr" pane run "$pane" "(cd ${(q)cwd} && claude ${(j: :)${(@q)args}} --resume $id)" >/dev/null
   if wait_until '[ "$(jq -r .sessionId ~/.claude/sessions/$(claude_pid $pane).json 2>/dev/null)" = "$id" ]'; then
-    echo "$label: restarted $version -> $latest"
+    echo "$label: restarted $version -> $claude_latest"
   else
     echo "$label: exited but did not come back; resume it with: claude --resume $id" >&2
   fi
 }
+
+# Background sessions (claude --bg, `claude agents`) run under Claude Code's
+# daemon, not in a pane: `claude respawn <id>` restarts one on the installed
+# version, the conversation kept. The same rules as for the panes.
+claude_respawn_bg() {
+  local id=$1 pid=$2 name=$3 reg version label
+  reg=~/.claude/sessions/$pid.json
+  [ -f "$reg" ] || return
+  version=$(jq -r .version "$reg")
+  label="bg $id ($name)"
+  (( all )) || [ "$version" != "$claude_latest" ] || { echo "$label: already on $version"; return; }
+  [ "$(jq -r .status "$reg")" = shell ] &&
+    { echo "$label: skipped, a background shell is still running"; return; }
+  [ "$(jq -r .status "$reg")" = idle ] || { echo "$label: skipped, working"; return; }
+  if (( dry )); then
+    echo "$label: would respawn $version -> $claude_latest"
+  elif claude respawn "$id" >/dev/null 2>&1; then
+    echo "$label: respawned $version -> $claude_latest"
+  else
+    echo "$label: respawn failed; try: claude respawn $id" >&2
+  fi
+}
+
+# Every background session, each in the background; the caller waits.
+claude_respawn_all_bg() {
+  local line
+  local -a bgs
+  bgs=("${(@f)$(claude agents --json 2>/dev/null |
+    jq -r '.[] | select(.kind == "background" and .pid) | "\(.id) \(.pid) \(.name // .id)"')}")
+  for line in "${bgs[@]}"; do
+    [ -n "$line" ] || continue
+    claude_respawn_bg ${line%% *} ${${line#* }%% *} "${line#* * }" &
+  done
+}
+
+[[ $ZSH_EVAL_CONTEXT == toplevel ]] || return 0
+
+dry=0 all=0
+for arg; do
+  case $arg in
+    -n) dry=1 ;;
+    -a) all=1 ;;
+    *) echo "usage: ccupdate [-n] [-a]" >&2; exit 2 ;;
+  esac
+done
+
+herdr=${HERDR_BIN_PATH:-$(whence -p herdr)}
+
+(( dry )) || claude update || exit 1
+
+claude_latest=$(readlink -f "$(whence -p claude)")
+claude_latest=${claude_latest:t}
+echo "installed Claude Code: $claude_latest"
 
 # An array rather than a pipe into the loop, so nothing in it reads the list.
 # Outside herdr only the background sessions below.
@@ -154,34 +192,8 @@ else
 fi
 for line in "${panes[@]}"; do
   [ -n "$line" ] || continue
-  restart_pane "$line" &
+  claude_restart_pane "$line" &
 done
 
-# Background sessions (claude --bg, `claude agents`) run under Claude Code's
-# daemon, not in a pane: `claude respawn <id>` restarts one on the installed
-# version, the conversation kept. The same rules as for the panes.
-respawn_bg() {
-  local id=$1 pid=$2 name=$3 reg version label
-  reg=~/.claude/sessions/$pid.json
-  [ -f "$reg" ] || return
-  version=$(jq -r .version "$reg")
-  label="bg $id ($name)"
-  (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; return; }
-  [ "$(jq -r .status "$reg")" = shell ] &&
-    { echo "$label: skipped, a background shell is still running"; return; }
-  [ "$(jq -r .status "$reg")" = idle ] || { echo "$label: skipped, working"; return; }
-  if (( dry )); then
-    echo "$label: would respawn $version -> $latest"
-  elif claude respawn "$id" >/dev/null 2>&1; then
-    echo "$label: respawned $version -> $latest"
-  else
-    echo "$label: respawn failed; try: claude respawn $id" >&2
-  fi
-}
-bgs=("${(@f)$(claude agents --json 2>/dev/null |
-  jq -r '.[] | select(.kind == "background" and .pid) | "\(.id) \(.pid) \(.name // .id)"')}")
-for line in "${bgs[@]}"; do
-  [ -n "$line" ] || continue
-  respawn_bg ${line%% *} ${${line#* }%% *} "${line#* * }" &
-done
+claude_respawn_all_bg
 wait
