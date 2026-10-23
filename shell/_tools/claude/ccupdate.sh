@@ -11,7 +11,8 @@
 #         pick up hooks changed in ~/.claude/settings.json
 #
 # A session is left alone when it is already on the installed version (unless
-# -a), when herdr or Claude Code says it is not idle, when its prompt holds a
+# -a), when herdr or Claude Code says it is not idle (a shell it started in the
+# background counts: exiting would kill it), when its prompt holds a
 # draft (the /exit would be sent along with it), or when it is the pane this
 # runs in. A session in a worktree keeps it: ccupdate answers "Keep worktree"
 # on the way out.
@@ -102,6 +103,10 @@ restart_pane() {
   label="$pane ($name)"
 
   (( all )) || [ "$version" != "$latest" ] || { echo "$label: already on $version"; return; }
+  # Claude Code says "shell" while a shell it started in the background still
+  # runs (a monitor, a dev server); exiting would kill it, -a or not.
+  [ "$(jq -r .status "$reg")" = shell ] &&
+    { echo "$label: skipped, a background shell is still running"; return; }
   [ "$state" = idle ] && [ "$(jq -r .status "$reg")" = idle ] ||
     { echo "$label: skipped, working"; return; }
   prompt_is_empty "$pane" || { echo "$label: skipped, prompt has a draft"; return; }
