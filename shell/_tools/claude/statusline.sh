@@ -43,7 +43,8 @@ fi
 # Loop and crons: when a /loop wakes next ( HH:MM), and when the next cron
 # job runs ( HH:MM, with how many there are when more than one). Claude Code
 # keeps both in memory and sends neither here; statusline-jobs.py works them
-# out from the transcript, since this process started.
+# out from the transcript: the crons since they were created (a resume brings
+# them back), the loop only since this process started (a resume does not).
 transcript=$(jq -r '.transcript_path // empty' <<<"$input")
 session=$(jq -r '.session_id // empty' <<<"$input")
 if [ -f "$transcript" ] && grep -qE '"name":"(CronCreate|ScheduleWakeup)"' "$transcript"; then

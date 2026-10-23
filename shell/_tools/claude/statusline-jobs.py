@@ -7,8 +7,10 @@
 #
 # Prints "<loop> <cron> <jobs>": the epoch seconds of the loop's next wakeup
 # and of the next cron run (0 when there is none), and how many cron jobs are
-# live. Only results since <started_ms>, when this process started, count: a
-# resumed session lost the jobs of the run before.
+# live. Cron jobs count from when they were created: a resumed session gets
+# them back (claude --resume/--continue restores CronCreate jobs, short of the
+# expired ones below). A /loop does not come back, so a wakeup counts only when
+# scheduled after <started_ms>, when this process started.
 #
 # One-shot jobs end at their run; recurring ones expire 7 days after they were
 # created. The scheduler moves each job by a fixed offset of its own, which
@@ -104,9 +106,11 @@ def main(path, started):
 
     jobs, wake = {}, 0
     for t, use_id, r in sorted(results, key=lambda x: x[0]):
-        if t < started or use_id not in uses or not isinstance(r, dict):
+        if use_id not in uses or not isinstance(r, dict):
             continue
         name, args = uses[use_id]
+        if name == "ScheduleWakeup" and t < started:
+            continue
         if name == "CronCreate" and r.get("id"):
             jobs[r["id"]] = (args.get("cron", ""), r.get("recurring", True), r.get("nextFireAt", 0) / 1000, t)
         elif name == "CronDelete":
