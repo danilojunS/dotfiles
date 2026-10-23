@@ -72,9 +72,15 @@ delivery = "terminal"
 # herdr has no per-agent icon, and an override replaces the whole layout, so
 # each agent repeats it with only the colour changed.
 [ui.sidebar.agents.rows_by_agent]
+# Claude's second row leads with what the session has going besides the turn
+# itself: shells running ($bg, a Bash call in the background), the next /loop
+# wakeup ($loop) and the next cron job ($cron). Its status line reports them
+# (shell/_tools/claude/statusline.sh); a token not reported takes no room.
+# Their icons tell them apart, with no colour of their own: colour stays with
+# the state icon, and the row's default follows each machine's theme.
 claude = [
   ["state_icon", { token = "agent", fg = "#d97757" }, "workspace", "tab"],
-  ["terminal_title_stripped"],
+  ["$bg", "$loop", "$cron", "terminal_title_stripped"],
 ]
 codex = [
   ["state_icon", { token = "agent", fg = "#10a37f" }, "workspace", "tab"],
