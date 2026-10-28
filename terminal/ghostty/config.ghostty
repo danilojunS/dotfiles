@@ -44,7 +44,7 @@ palette = 15=#f8f8f2
 
 # --- Window --------------------------------------------------------------------
 
-background-opacity = 0.9
+background-opacity = 0.95
 background-blur = true
 # The background a program sets (ssh-theme.sh, OSC 11) see-through as well.
 background-opacity-cells = true
