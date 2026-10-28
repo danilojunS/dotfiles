@@ -9,7 +9,7 @@
 
 font-family = MesloLGS Nerd Font Mono
 font-size = 12
-font-thicken = false
+font-thicken = true
 adjust-cell-height = 2%
 
 # --- Colours: manjuu, the iTerm profile's ---------------------------------------
