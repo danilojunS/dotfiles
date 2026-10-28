@@ -46,6 +46,8 @@ palette = 15=#f8f8f2
 
 background-opacity = 0.9
 background-blur = true
+# The background a program sets (ssh-theme.sh, OSC 11) see-through as well.
+background-opacity-cells = true
 macos-titlebar-style = transparent
 window-padding-x = 8
 window-padding-y = 6

@@ -446,7 +446,10 @@ _ssh_theme_announce() {
   [ -n "$_SSH_THEME_SELF" ] && return 0
   [ -n "$DOTFILES_NO_SSH_THEME" ] && return 0
   [ -n "$TERM" ] && [ "$TERM" != dumb ] || return 0
-  [ -t 1 ] || return 0
+  # While .zshrc runs under powerlevel10k's instant prompt, stdout is a file of
+  # its own and stdin /dev/null; the terminal is kept in $__p9k_fd_1 until the
+  # prompt is up. _ssh_theme_send writes to /dev/tty either way.
+  [ -t 1 ] || { [ -n "$__p9k_fd_1" ] && [ -t "$__p9k_fd_1" ]; } || return 0
 
   if [ -n "$SSH_CONNECTION" ]; then
     # The client has an entry for this host and has already painted the window
