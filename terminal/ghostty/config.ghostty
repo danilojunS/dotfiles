@@ -1,0 +1,94 @@
+# Ghostty, set up after the iTerm profile it replaces ("manjuu", New Bookmarks[0]
+# in terminal/iterm/com.googlecode.iterm2.plist): its colours, font and keys.
+# install.sh links ~/.config/ghostty/config.ghostty here; anything for this
+# machine alone goes in ~/.config/ghostty/config.local, read last.
+#
+# Reload with cmd+shift+, ; a few options apply to new windows only.
+
+# --- Font ----------------------------------------------------------------------
+
+font-family = MesloLGS Nerd Font Mono
+font-size = 12
+font-thicken = false
+adjust-cell-height = 2%
+
+# --- Colours: manjuu, the iTerm profile's ---------------------------------------
+# ssh-theme.sh paints over the background for a host over SSH (OSC 11) and puts
+# it back with OSC 111, which comes back to these.
+
+background = #121212
+foreground = #a0a0a0
+cursor-color = #bbbbbb
+cursor-text = #121212
+selection-background = #453b39
+selection-foreground = #b6bbc0
+bold-is-bright = true
+
+palette = 0=#1b1d1e
+palette = 1=#f92672
+palette = 2=#a6e22e
+palette = 3=#fd971f
+palette = 4=#66d9ef
+palette = 5=#9e6ffe
+palette = 6=#5e7175
+palette = 7=#ccccc6
+palette = 8=#505354
+palette = 9=#ff669d
+palette = 10=#beed5f
+palette = 11=#e6db74
+palette = 12=#66d9ef
+palette = 13=#9e6ffe
+palette = 14=#a3babf
+palette = 15=#f8f8f2
+
+# --- Window --------------------------------------------------------------------
+
+background-opacity = 0.94
+background-blur = true
+macos-titlebar-style = transparent
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-padding-color = extend
+window-save-state = always
+# herdr keeps the tabs and splits; Ghostty's own dim like iTerm's did.
+unfocused-split-opacity = 0.6
+
+cursor-style = block
+cursor-style-blink = true
+
+# Text, as iTerm: the scrollback is bytes here, there is no unlimited.
+scrollback-limit = 100000000
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+
+# OSC 52 from the shell (rtcopy in shell/clip.sh): writes go through, a program
+# reading the clipboard asks first.
+clipboard-write = allow
+clipboard-read = ask
+
+# The block cursor stays at the prompt too; over ssh, a host that lacks
+# xterm-ghostty's terminfo gets it, and the environment says what this is.
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
+
+# --- Keys ----------------------------------------------------------------------
+
+# Both Option keys are Meta, as in iTerm.
+macos-option-as-alt = true
+
+# Ctrl+Tab shows or hides Ghostty from anywhere, iTerm's hotkey. A global key
+# needs Accessibility (System Settings > Privacy & Security > Accessibility).
+keybind = global:ctrl+tab=toggle_visibility
+
+# The iTerm profile's own key map: line and word moves the shell and Claude
+# Code read the readline way.
+keybind = super+backspace=text:\x15
+keybind = alt+backspace=text:\x17
+keybind = super+left=text:\x01
+keybind = super+right=text:\x05
+keybind = alt+left=esc:b
+keybind = alt+right=esc:f
+keybind = alt+up=text:\x1b\x1b[A
+keybind = alt+down=text:\x1b\x1b[B
+
+config-file = ?~/.config/ghostty/config.local
